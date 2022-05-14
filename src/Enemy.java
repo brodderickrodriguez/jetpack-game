@@ -1,10 +1,10 @@
 import java.awt.*;
 
-public class Enemy extends Sprite {
+public class Enemy extends Actor {
     int life = 100;
 
     Enemy(int x, int y) {
-        super(new Rectangle(x, y, 25, 50), true, true);
+        super(new Rectangle(x, y, 25, 50));
         this.setBackground(Color.orange);
     }
 

@@ -8,7 +8,7 @@ public class Bullet extends Sprite {
     static int prevDirection = 1;
 
     Bullet(int x, int y, int initialVel, int direction) {
-        super(new Rectangle(x, y, 10, 2), false, false);
+        super(new Rectangle(x, y, 10, 2));
         this.setBackground(Color.green);
         this.initialVel = initialVel;
         this.direction = direction;

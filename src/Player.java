@@ -1,13 +1,13 @@
 import java.awt.*;
 
 
-class Player extends Sprite {
+class Player extends Actor {
     long timeOfLastBullet;
 
     JetPack jetPack;
 
     Player(int x, int y) {
-        super(new Rectangle(x, y, 25, 50), true, true);
+        super(new Rectangle(x, y, 25, 50));
         this.timeOfLastBullet = System.currentTimeMillis();
 
         this.jetPack = new JetPack(this);

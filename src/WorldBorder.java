@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class WorldBorder extends Sprite {
     WorldBorder(Rectangle bounds) {
-        super(bounds, false, false);
+        super(bounds);
         this.setBackground(Color.black);
     }
 

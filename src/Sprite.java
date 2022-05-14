@@ -57,44 +57,27 @@ interface SpriteManager {
 
 class Sprite extends JLabel implements SpriteManager, Comparable<Sprite> {
     public double[] vel = {0, 0};
-    public Boolean usesGravity;
-    boolean decayVel;
+
     int direction = 1;
 
 
-    Sprite(Rectangle bounds, Boolean usesGravity, Boolean decayVel) {
-        this.usesGravity = usesGravity;
+    Sprite(Rectangle bounds) {
         this.setBounds(bounds);
         this.setBackground(Color.blue);
         this.setOpaque(true);
 
-        this.decayVel = decayVel;
 
         SpriteManager.addSprite(this);
     }
 
     void update() {
-        if (this.usesGravity) {
-            this.vel[1] += Const.GRAVITY;
-        }
-
-        double velDecay = this.decayVel ? 1 : 0;
-
-        if (this.vel[0] > 0) {
-            this.vel[0] -= Const.PLAYER_HORIZONTAL_ACC_DECAY * velDecay;
-            this.direction = 1;
-        }
-        if (this.vel[0] < 0) {
-            this.vel[0] += Const.PLAYER_HORIZONTAL_ACC_DECAY * velDecay;
-            this.direction = -1;
-        }
+        this.direction = this.vel[0] > 0 ? 1: -1;
 
         this.vel[0] = Util.clamp(this.vel[0], -Const.ACC_HORIZONTAL_MAX, Const.ACC_HORIZONTAL_MAX);
         this.vel[1] = Util.clamp(this.vel[1], -Const.ACC_VERTICAL_MAX, Const.ACC_VERTICAL_MAX);
 
         if (!(this instanceof Player))
             this.moveSprite((int)this.vel[0], (int)this.vel[1]);
-
 
     }
 

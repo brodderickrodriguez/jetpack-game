@@ -2,7 +2,7 @@ import java.awt.*;
 
 class Platform extends Sprite {
     Platform(int x, int y) {
-        super(new Rectangle(x, y, 500, 40), false, false);
+        super(new Rectangle(x, y, 500, 40));
         this.setBackground(Color.gray);
     }
 

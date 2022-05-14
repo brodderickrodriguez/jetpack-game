@@ -8,7 +8,7 @@ class Particle extends Sprite {
     Color color;
 
     Particle(int x, int y, int size, double[] vel, Color color) {
-        super(new Rectangle(x, y, size, size), true, false);
+        super(new Rectangle(x, y, size, size));
         this.setBackground(color);
         this.vel = vel;
         this.size = size;
@@ -34,7 +34,6 @@ class Particle extends Sprite {
         }
 
         this.setBounds(bounds);
-//        this.moveSprite((int)this.vel[0], (int)this.vel[1]);
         this.setBackground(new Color(this.color.getRed(), this.color.getGreen(), this.color.getBlue(), this.alpha));
     }
 }

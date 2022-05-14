@@ -3,7 +3,7 @@ import java.awt.*;
 public class JetPack extends Sprite {
     Player player;
     JetPack(Player player) {
-        super(new Rectangle(0, 0, 10, 20), false, false);
+        super(new Rectangle(0, 0, 10, 20));
         this.setBackground(Color.gray);
         this.player = player;
     }
@@ -11,9 +11,7 @@ public class JetPack extends Sprite {
     @Override
     void update() {
         super.update();
-
         Rectangle playerBounds = this.player.getBounds();
-
         Rectangle jetPackBounds = this.getBounds();
 
         int xLoc;

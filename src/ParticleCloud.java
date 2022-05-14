@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 class Particle extends Sprite {
@@ -39,6 +40,7 @@ class Particle extends Sprite {
 }
 
 public class ParticleCloud {
+    ArrayList<Particle> particles = new ArrayList<>();
     ParticleCloud(int x, int y, Color color) {
         Random rn = new Random();
 
@@ -47,7 +49,8 @@ public class ParticleCloud {
 
             double[] vel = {ParticleCloud.velComp(), Math.abs(ParticleCloud.velComp())};
 
-            new Particle(x, y, iSize, vel, color);
+            Particle particle = new Particle(x, y, iSize, vel, color);
+            this.particles.add(particle);
         }
     }
     static double velComp() {

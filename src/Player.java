@@ -14,16 +14,6 @@ class Player extends Sprite {
 
     }
 
-    @Override
-    void update() {
-        super.update();
-
-
-
-
-
-    }
-
     void fireBullet() {
         long currentTime = System.currentTimeMillis();
 

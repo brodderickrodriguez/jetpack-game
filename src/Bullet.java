@@ -14,6 +14,8 @@ public class Bullet extends Sprite {
         this.direction = direction;
         Bullet.prevDirection = this.direction;
 
+        System.out.println(initialVel);
+
         this.vel[0] = (this.direction * Const.MAX_BULLET_VEL) + this.initialVel;
     }
 
@@ -23,7 +25,6 @@ public class Bullet extends Sprite {
             this.power = 0;
             SpriteManager.removeSprite(this);
         }
-
     }
 
 }

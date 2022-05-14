@@ -25,14 +25,15 @@ interface SpriteManager {
         SpriteManager.spriteAddQueue.add(sprite);
     }
 
-    static void addSprites(Iterable<Sprite> sprites) {
-        for (Sprite sprite: sprites) {
-            SpriteManager.addSprite(sprite);
-        }
-    }
-
     static void removeSprite(Sprite sprite) {
         SpriteManager.spriteRemoveQueue.add(sprite);
+    }
+
+    static void removeAllSprites() {
+        for (Sprite sprite: SpriteManager.getEverySprite()) {
+            SpriteManager.removeSprite(sprite);
+        }
+
     }
 
     static void update() {
@@ -42,13 +43,13 @@ interface SpriteManager {
 
         while (SpriteManager.spriteRemoveQueue.size() > 0) {
             Sprite sprite = SpriteManager.spriteRemoveQueue.poll();
-            Game.currentGame.remove(sprite);
+            Game.getCurrentGame().remove(sprite);
             SpriteManager.allSprites.remove(sprite);
         }
 
         while (SpriteManager.spriteAddQueue.size() > 0) {
             Sprite sprite = SpriteManager.spriteAddQueue.poll();
-            Game.currentGame.add(sprite, 0);
+            Game.getCurrentGame().add(sprite, 0);
             SpriteManager.allSprites.add(sprite);
         }
     }
@@ -102,7 +103,7 @@ class Sprite extends JLabel implements SpriteManager, Comparable<Sprite> {
         return new Point(bounds.x + (bounds.width / 2), bounds.y + (bounds.height / 2));
     }
 
-    void moveSprite(int x, int y) {
+    public void moveSprite(int x, int y) {
         Rectangle bounds = this.getBounds();
         bounds.x += x;
         bounds.y += y;

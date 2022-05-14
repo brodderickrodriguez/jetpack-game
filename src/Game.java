@@ -10,20 +10,42 @@ import java.util.*;
 - level design
 - enemy design
 
-
-
+- refactor border
+- refactor actor
+- refactor center player
+- find way to test game elements
+- repaint on init
+- fix bullet speed - being clamped
  */
 
-public class Game extends JFrame implements ActionListener, KeyListener {
-    private Timer timer = new Timer(Const.KEY_DELAY, this);
-    final Player player;
-    private final HashSet<Integer> currentKeys;
+interface KeySetManager extends KeyListener {
+    HashSet<Integer> currentKeys = new HashSet<>();
 
-    public static Game currentGame;
+    @Override
+    default void keyTyped(KeyEvent event) { }
 
-    public static Boolean isRunning = false;
+    @Override
+    default void keyPressed(KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.VK_ESCAPE)
+            Game.getCurrentGame().playPause();
+        else
+            this.currentKeys.add(event.getKeyCode());
+    }
 
-    Game() throws Exception {
+    @Override
+    default void keyReleased(KeyEvent event) {
+        this.currentKeys.remove(event.getKeyCode());
+    }
+}
+
+public class Game extends JFrame implements ActionListener, KeySetManager {
+    private Timer timer = null;
+    private Player player;
+    private static Game currentGame;
+
+
+
+    Game() {
         Game.currentGame = this;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
@@ -34,34 +56,44 @@ public class Game extends JFrame implements ActionListener, KeyListener {
         this.setLocationRelativeTo(null);
         this.addKeyListener(this);
 
-        this.currentKeys = new HashSet<>();
+        this.setGame(Levels.LEVEL_0);
+    }
 
+    public static Game getCurrentGame() {
+        return Game.currentGame;
+    }
+
+    public Player getPlayer() {
+        return this.player;
+    }
+
+    public void setGame(Levels level) {
+        if (this.isRunning())
+            this.playPause();
+
+        SpriteManager.removeAllSprites();
         WorldBorder.makeBorders();
-        this.player = GameLevelFactory.buildLevel(Levels.LEVEL_0);
+        this.player = GameLevelFactory.buildLevel(level);
         this.centerPlayer();
+        this.playPause();
+    }
 
-        
+    public Boolean isRunning() {
+        if (Objects.isNull(this.timer))
+            return false;
 
-        this.start();
+        return this.timer.isRunning();
     }
 
     void playPause() {
-        if (isRunning)
-            this.stop();
-        else
-            this.start();
+        if (this.isRunning()) {
+            this.timer.stop();
+        } else {
+            this.timer = new Timer(Const.KEY_DELAY, this);
+            this.timer.start();
+        }
     }
 
-    void start() {
-        timer = new Timer(Const.KEY_DELAY, this);
-        timer.start();
-        isRunning = true;
-    }
-
-    void stop() {
-        timer.stop();
-        isRunning = false;
-    }
 
     void panWorld(Boolean x, Boolean y) {
         int xMove = x ? 1: 0;
@@ -81,7 +113,7 @@ public class Game extends JFrame implements ActionListener, KeyListener {
         int deltaY = destinationY - this.player.getBounds().y;
 
         for (Sprite sprite: SpriteManager.getEverySprite()) {
-            sprite.moveSprite((int)(deltaX * 1), (int)(deltaY * 1));
+            sprite.moveSprite(deltaX, deltaY);
         }
 
     }
@@ -122,7 +154,6 @@ public class Game extends JFrame implements ActionListener, KeyListener {
                 this.player.intersectedWith(sprites.get(i));
                 sprites.get(i).intersectedWith(this.player);
             }
-
         }
     }
 
@@ -134,7 +165,6 @@ public class Game extends JFrame implements ActionListener, KeyListener {
                 case KeyEvent.VK_RIGHT -> this.player.vel[0] += Const.PLAYER_HORIZONTAL_ACC;
                 case KeyEvent.VK_UP ->  this.player.vel[1] -= Const.PLAYER_VERTICAL_ACC;
                 case KeyEvent.VK_SPACE -> this.player.fireBullet();
-                case KeyEvent.VK_P -> this.playPause();
             }
         }
 
@@ -143,16 +173,4 @@ public class Game extends JFrame implements ActionListener, KeyListener {
         SpriteManager.update();
     }
 
-    @Override
-    public void keyTyped(KeyEvent event) { }
-
-    @Override
-    public synchronized void keyPressed(KeyEvent event) {
-        this.currentKeys.add(event.getKeyCode());
-    }
-
-    @Override
-    public synchronized void keyReleased(KeyEvent event) {
-        this.currentKeys.remove(event.getKeyCode());
-    }
 }

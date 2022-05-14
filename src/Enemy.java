@@ -24,10 +24,10 @@ public class Enemy extends Sprite {
             SpriteManager.removeSprite(this);
         }
 
-        double playerDistance = this.distanceTo(Game.currentGame.player);
+        double playerDistance = this.distanceTo(Game.getCurrentGame().getPlayer());
 
         if (playerDistance < 150 && playerDistance > 25) {
-            this.track(Game.currentGame.player, 0.5);
+            this.track(Game.getCurrentGame().getPlayer(), 0.5);
         }
 
 

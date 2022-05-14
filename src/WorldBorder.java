@@ -1,7 +1,7 @@
 import java.awt.*;
 
 
-class WorldBorder extends Sprite {
+public class WorldBorder extends Sprite {
     WorldBorder(Rectangle bounds) {
         super(bounds, false, false);
         this.setBackground(Color.black);

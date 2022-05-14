@@ -13,19 +13,20 @@ public class GameLevelFactory {
             Levels.LEVEL_0, GameLevelFactory::buildLevel0
         );
 
-    static Player buildLevel(Levels level) throws Exception {
+    static Player buildLevel(Levels level) {
         Callable<Player> builder = GameLevelFactory.levelMap.get(level);
-        return builder.call();
+        try {
+            return builder.call();
+        }
+        catch (Exception e) {
+            return null;
+        }
     }
 
     private static Player buildLevel0() {
-        GameLevel level = new GameLevel(Const.WORLD_WIDTH, Const.WORLD_HEIGHT);
-
-
         Player player = new Player(100, 00);
 
-
-        new Enemy(200, 100);
+//        new Enemy(200, 100);
         new Platform(0, 150);
 
 

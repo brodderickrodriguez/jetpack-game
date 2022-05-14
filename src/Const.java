@@ -9,7 +9,7 @@ public class Const {
     public static final double ACC_HORIZONTAL_MAX = 6;
     public static final double ACC_VERTICAL_MAX = 10;
 
-    public static final double GRAVITY = 0.15;
+    public static final double GRAVITY = 0.2;
 
 
     public static final int WORLD_WIDTH = (int)(WINDOW_WIDTH * 2);

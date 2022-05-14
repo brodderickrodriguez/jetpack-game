@@ -16,6 +16,7 @@ import java.util.*;
 - find way to test game elements
 - repaint on init
 - fix bullet speed - being clamped
+- add actor being pushed backwards when a bullet hits
  */
 
 interface KeySetManager extends KeyListener {

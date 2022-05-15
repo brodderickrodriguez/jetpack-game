@@ -113,6 +113,12 @@ class Sprite extends JLabel implements SpriteManager, Comparable<Sprite> {
         return Math.sqrt(dx + dy);
     }
 
+    public int getDirectionTo(Sprite other) {
+        if (other.getX() < this.getX())
+            return -1;
+        return 1;
+    }
+
     public float angleBetween(Sprite other) {
         Rectangle otherBounds = other.getBounds();
         Rectangle thisBounds = this.getBounds();

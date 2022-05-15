@@ -1,6 +1,4 @@
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Arc2D;
 
 public class LifeIndicator extends Sprite {
     private final Actor actor;

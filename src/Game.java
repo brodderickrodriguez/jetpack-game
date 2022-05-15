@@ -6,53 +6,26 @@ import java.util.*;
 
 
 /*
-- player rotation
+- player rotation: need a container for player which gets rotated
 - level design
 - enemy design
+- enemy hive mind design
+- update consts names; update magic numbers
 
 - refactor border
 - refactor center player
 - bullet impact roates player to other direction
+
  */
 
-interface KeySetManager extends KeyListener {
-    HashSet<Integer> currentKeys = new HashSet<>();
 
-    @Override
-    default void keyTyped(KeyEvent event) { }
-
-    @Override
-    default void keyPressed(KeyEvent event) {
-        if (event.getKeyCode() == KeyEvent.VK_ESCAPE)
-            Game.getCurrentGame().playPause();
-        else
-            this.currentKeys.add(event.getKeyCode());
-    }
-
-    @Override
-    default void keyReleased(KeyEvent event) {
-        this.currentKeys.remove(event.getKeyCode());
-    }
-}
-
-public class Game extends JFrame implements ActionListener, KeySetManager {
+public class Game extends GameWindow implements ActionListener {
     private Timer timer = null;
     private Player player;
     private static Game currentGame;
 
-
-
     Game() {
         Game.currentGame = this;
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLayout(null);
-        this.setVisible(true);
-        this.setResizable(false);
-        this.setTitle("game time");
-        this.setSize(Const.WINDOW_WIDTH, Const.WINDOW_HEIGHT);
-        this.setLocationRelativeTo(null);
-        this.addKeyListener(this);
-
         this.setGame(Levels.LEVEL_0);
     }
 

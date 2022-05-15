@@ -12,6 +12,7 @@ import java.util.*;
 
 - refactor border
 - refactor center player
+- bullet impact roates player to other direction
  */
 
 interface KeySetManager extends KeyListener {

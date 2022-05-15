@@ -1,10 +1,12 @@
 import java.awt.*;
 
 public class Enemy extends Actor {
+    int bulletDecay = 400;
 
     Enemy(int x, int y) {
         super(new Rectangle(x, y, 25, 50));
         this.setBackground(Color.orange);
+        new LifeIndicator(this);
     }
 
 
@@ -19,8 +21,9 @@ public class Enemy extends Actor {
 
         double playerDistance = this.distanceTo(Game.getCurrentGame().getPlayer());
 
-        if (playerDistance < 250 && playerDistance > 50) {
-            this.trackX(Game.getCurrentGame().getPlayer(), 0.5);
+        if (playerDistance < 350) {
+            if (playerDistance > 100)
+                this.trackX(Game.getCurrentGame().getPlayer(), 0.5);
 
             this.fireBullet(Color.red);
         }

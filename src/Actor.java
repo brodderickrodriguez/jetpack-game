@@ -1,14 +1,15 @@
 import java.awt.*;
 
 public class Actor extends Sprite {
-    int life = 50;
+    int life = Const.MAX_ACTOR_LIFE;
     long timeOfLastBullet;
-
+    long timeOfLastLifeIncrease;
+    int bulletDelay = 200;
 
     Actor(Rectangle bounds) {
         super(bounds);
         this.timeOfLastBullet = System.currentTimeMillis();
-
+        this.timeOfLastLifeIncrease = System.currentTimeMillis();
     }
 
     @Override
@@ -20,7 +21,7 @@ public class Actor extends Sprite {
                 new ParticleCloud(other.getX(), other.getY(), Color.red);
                 this.life -= ((Bullet)other).power;
 
-                this.vel[0] += (int)(0.2 * bullet.vel[0]);
+//                this.vel[0] += (int)(0.2 * bullet.vel[0]);
 
             }
         }
@@ -42,6 +43,21 @@ public class Actor extends Sprite {
         this.vel[0] = Util.clamp(this.vel[0], -Const.ACC_HORIZONTAL_MAX, Const.ACC_HORIZONTAL_MAX);
         this.vel[1] = Util.clamp(this.vel[1], -Const.ACC_VERTICAL_MAX, Const.ACC_VERTICAL_MAX);
 
+        long currentTime = System.currentTimeMillis();
+
+        if (currentTime > this.timeOfLastLifeIncrease +  Const.LIFE_INCREASE_DELAY) {
+            if (this.life < Const.MAX_ACTOR_LIFE) {
+                this.life++;
+                this.timeOfLastLifeIncrease = currentTime;
+            }
+
+
+        }
+
+        if (this.life < 1) {
+            SpriteManager.removeSprite(this);
+        }
+
     }
 
     public void trackX(Sprite other, double speed) {
@@ -54,7 +70,7 @@ public class Actor extends Sprite {
     void fireBullet(Color color) {
         long currentTime = System.currentTimeMillis();
 
-        if (currentTime > this.timeOfLastBullet + Const.BULLET_DELAY) {
+        if (currentTime > this.timeOfLastBullet + this.bulletDelay) {
             this.timeOfLastBullet = currentTime;
             Point center = this.center();
             center.x += direction * this.getBounds().width;

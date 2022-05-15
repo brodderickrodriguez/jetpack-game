@@ -98,7 +98,6 @@ class Sprite extends JLabel implements SpriteManager, Comparable<Sprite> {
     }
 
 
-
     public float angleBetween(Sprite other) {
         Rectangle otherBounds = other.getBounds();
         Rectangle thisBounds = this.getBounds();

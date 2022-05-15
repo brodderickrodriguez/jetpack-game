@@ -1,10 +1,10 @@
 import java.awt.*;
 
 public class Enemy extends Actor {
-    int bulletDecay = 400;
 
     Enemy(int x, int y) {
         super(new Rectangle(x, y, 25, 50));
+        this.bulletDelay = 800;
         this.setBackground(Color.orange);
         new LifeIndicator(this);
     }

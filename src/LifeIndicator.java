@@ -3,11 +3,12 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Arc2D;
 
 public class LifeIndicator extends Sprite {
-    private Actor actor;
+    private final Actor actor;
 
     LifeIndicator(Actor actor) {
         super(new Rectangle(actor.getX(), actor.getY() - actor.getWidth(), actor.getWidth(), actor.getWidth()));
         this.actor = actor;
+        this.setStickyTo(this.actor, 0, -actor.getWidth());
         this.setBackground(null);
     }
 
@@ -26,19 +27,4 @@ public class LifeIndicator extends Sprite {
         g.setColor(Color.gray);
         g.fillArc(0, 0, this.getWidth(), this.getHeight(), 90, -(int)angle);
     }
-
-    @Override
-    void update() {
-        super.update();
-
-        Rectangle bounds = this.getBounds();
-        bounds.x = actor.getX();
-        bounds.y = actor.getY() - actor.getWidth();
-        this.setBounds(bounds);
-
-
-
-
-    }
-
 }

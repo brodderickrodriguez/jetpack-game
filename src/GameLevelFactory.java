@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.logging.Level;
 
@@ -26,8 +27,18 @@ public class GameLevelFactory {
     private static Player buildLevel0() {
         Player player = new Player(100, 00);
 
-//        new Enemy(200, 100);
+        new Enemy(200, 100);
         new Platform(0, 150);
+
+        Random rn = new Random();
+
+        for (int i = 0; i < 10; i++) {
+            double x = rn.nextDouble() * Const.WORLD_WIDTH;
+            double y = rn.nextDouble() * Const.WORLD_HEIGHT;
+
+            new Enemy((int)x, (int)y);
+
+        }
 
 
 

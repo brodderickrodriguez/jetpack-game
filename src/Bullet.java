@@ -2,26 +2,25 @@ import java.awt.*;
 
 
 public class Bullet extends Sprite {
-    final int direction;
-    final int initialVel;
+    final Sprite originator;
     int power = 3;
     static int prevDirection = 1;
 
-    Bullet(int x, int y, int initialVel, int direction) {
-        super(new Rectangle(x, y, 10, 2));
-        this.setBackground(Color.green);
-        this.initialVel = initialVel;
-        this.direction = direction;
-        Bullet.prevDirection = this.direction;
+    Bullet(int x, int y, Sprite originator, Color color) {
+        super(new Rectangle(x, y, 10, 3));
+        this.setBackground(color);
 
-        System.out.println(initialVel);
+        this.originator = originator;
+        int direction = this.originator.direction;
+        int initialVel = (int) this.originator.vel[0];
+        this.vel[0] = (direction * Const.MAX_BULLET_VEL) + initialVel;
 
-        this.vel[0] = (this.direction * Const.MAX_BULLET_VEL) + this.initialVel;
+        Bullet.prevDirection = direction;
     }
 
     @Override
     public void intersectedWith(Sprite other) {
-        if (!(other instanceof Player)) {
+        if (other != this.originator) {
             this.power = 0;
             SpriteManager.removeSprite(this);
         }

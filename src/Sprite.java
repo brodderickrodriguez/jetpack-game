@@ -51,30 +51,28 @@ interface SpriteManager {
             Sprite sprite = SpriteManager.spriteAddQueue.poll();
             Game.getCurrentGame().add(sprite, 0);
             SpriteManager.allSprites.add(sprite);
+            sprite.repaint();
         }
     }
 }
 
 class Sprite extends JLabel implements SpriteManager, Comparable<Sprite> {
     public double[] vel = {0, 0};
-
     int direction = 1;
-
 
     Sprite(Rectangle bounds) {
         this.setBounds(bounds);
         this.setBackground(Color.blue);
         this.setOpaque(true);
 
-
         SpriteManager.addSprite(this);
     }
 
     void update() {
-        this.direction = this.vel[0] > 0 ? 1: -1;
-
-        this.vel[0] = Util.clamp(this.vel[0], -Const.ACC_HORIZONTAL_MAX, Const.ACC_HORIZONTAL_MAX);
-        this.vel[1] = Util.clamp(this.vel[1], -Const.ACC_VERTICAL_MAX, Const.ACC_VERTICAL_MAX);
+        if (this.vel[0] > 0)
+            this.direction = 1;
+        else if (this.vel[0] < 0)
+            this.direction = -1;
 
         if (!(this instanceof Player))
             this.moveSprite((int)this.vel[0], (int)this.vel[1]);
@@ -99,19 +97,7 @@ class Sprite extends JLabel implements SpriteManager, Comparable<Sprite> {
         return Math.sqrt(dx + dy);
     }
 
-    public void track(Sprite other, double speed) {
-        double dx = other.getX() - this.getX();
-        double dy = other.getY() - this.getY();
 
-        dx = Util.clamp(dx, -speed, speed);
-        dy = Util.clamp(dy, -speed, speed);
-
-
-        this.vel[0] += dx;
-        this.vel[1] += dy;
-
-
-    }
 
     public float angleBetween(Sprite other) {
         Rectangle otherBounds = other.getBounds();

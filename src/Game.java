@@ -11,12 +11,7 @@ import java.util.*;
 - enemy design
 
 - refactor border
-- refactor actor
 - refactor center player
-- find way to test game elements
-- repaint on init
-- fix bullet speed - being clamped
-- add actor being pushed backwards when a bullet hits
  */
 
 interface KeySetManager extends KeyListener {
@@ -165,7 +160,7 @@ public class Game extends JFrame implements ActionListener, KeySetManager {
                 case KeyEvent.VK_LEFT -> this.player.vel[0] -= Const.PLAYER_HORIZONTAL_ACC;
                 case KeyEvent.VK_RIGHT -> this.player.vel[0] += Const.PLAYER_HORIZONTAL_ACC;
                 case KeyEvent.VK_UP ->  this.player.vel[1] -= Const.PLAYER_VERTICAL_ACC;
-                case KeyEvent.VK_SPACE -> this.player.fireBullet();
+                case KeyEvent.VK_SPACE -> this.player.fireBullet(Color.green);
             }
         }
 

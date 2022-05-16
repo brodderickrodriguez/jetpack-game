@@ -74,7 +74,6 @@ public class Actor extends Sprite {
     Actor(int x, int y, Color bodyColor) {
         super(new Rectangle(x, y, 42, 74));
         this.bodyColor = bodyColor;
-//        this.setBackground(Color.green);
 
         this.lifeIndicator = new LifeIndicator(this, bodyColor);
         this.add(lifeIndicator, 0);
@@ -87,13 +86,11 @@ public class Actor extends Sprite {
 
     @Override
     public void intersectedWith(Sprite other) {
-        if (other instanceof Bullet) {
-            Bullet bullet = (Bullet) other;
-
+        if (other instanceof Bullet bullet) {
             if (bullet.originator != this) {
                 new ParticleCloud(other.getX(), other.getY(), Color.red);
                 this.life -= ((Bullet)other).power;
-//                this.vel[0] += (int)(0.2 * bullet.vel[0]);
+                this.moveSprite((int)(0.2 * bullet.vel[0]), 0);
             }
         }
     }

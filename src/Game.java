@@ -12,7 +12,6 @@ import java.util.*;
 
 - refactor border
 - refactor center player
-- bullet impact rotates player to other direction
  */
 
 

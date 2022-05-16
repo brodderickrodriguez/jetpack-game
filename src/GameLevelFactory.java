@@ -27,7 +27,7 @@ public class GameLevelFactory {
     private static Player buildLevel0() {
         Player player = new Player(100, 0);
 
-        new Enemy(100, 0);
+        new Enemy(200, 0);
         new Platform(0, 150);
 
         Random rn = new Random();

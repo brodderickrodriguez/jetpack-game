@@ -32,11 +32,11 @@ public class GameLevelFactory {
 
         Random rn = new Random();
 
-//        for (int i = 0; i < 10; i++) {
-//            double x = rn.nextDouble() * Const.WORLD_WIDTH;
-//            double y = rn.nextDouble() * Const.WORLD_HEIGHT;
-//            new Enemy((int)x, (int)y);
-//        }
+        for (int i = 0; i < 10; i++) {
+            double x = rn.nextDouble() * Const.WORLD_WIDTH;
+            double y = rn.nextDouble() * Const.WORLD_HEIGHT;
+            new Enemy((int)x, (int)y);
+        }
 
         return player;
     }

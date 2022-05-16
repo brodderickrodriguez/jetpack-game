@@ -15,7 +15,7 @@ import java.util.*;
 
 
 public class Game extends GameWindow implements ActionListener {
-    private Timer timer = null;
+    private Timer timer;
     private Player player;
     private static Game currentGame;
 

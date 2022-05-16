@@ -32,7 +32,6 @@ class LifeIndicator extends BodyPart {
     private final Actor actor;
     private Color color;
 
-
     LifeIndicator(Actor actor, Color color) {
         super(actor);
         this.setBounds(new Rectangle(9, 0, 24, 24));

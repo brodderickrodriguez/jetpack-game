@@ -45,11 +45,8 @@ public class ParticleCloud {
 
         for (int i = 0; i < 10; i++) {
             int iSize = rn.nextInt(5) + 5;
-
             double[] vel = {ParticleCloud.velComp(), Math.abs(ParticleCloud.velComp())};
-
-            Particle particle = new Particle(x, y, iSize, vel, color);
-            this.particles.add(particle);
+            this.particles.add(new Particle(x, y, iSize, vel, color));
         }
     }
     static double velComp() {

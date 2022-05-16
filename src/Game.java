@@ -1,4 +1,3 @@
-import javax.swing.*;
 import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.*;
@@ -6,7 +5,6 @@ import java.util.*;
 
 
 /*
-- player rotation: need a container for player which gets rotated
 - level design
 - enemy design
 - enemy hive mind design
@@ -15,7 +13,6 @@ import java.util.*;
 - refactor border
 - refactor center player
 - bullet impact rotates player to other direction
-
  */
 
 

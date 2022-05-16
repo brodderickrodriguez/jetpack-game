@@ -66,7 +66,6 @@ class Sprite extends JLabel implements SpriteManager, Comparable<Sprite> {
 
     Sprite(Rectangle bounds) {
         this.setBounds(bounds);
-        this.setBackground(Color.blue);
         this.setOpaque(true);
 
         SpriteManager.addSprite(this);
@@ -88,7 +87,6 @@ class Sprite extends JLabel implements SpriteManager, Comparable<Sprite> {
             this.setBounds(bounds);
         }
 
-        this.paintComponent(this.getGraphics());
     }
 
     void setStickyTo(Sprite sprite, int xOffset, int yOffset) {

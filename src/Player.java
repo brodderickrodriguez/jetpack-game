@@ -1,65 +1,47 @@
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 
 
-class Player extends Actor {
-
-    Player(int x, int y) {
-        super(new Rectangle(x, y, 25, 50));
-
-        this.bulletDelay = 200;
-        new JetPack(this);
-
-        new LifeIndicator(this);
-    }
-
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        double maxAbsTheta = 0.5;
-        double theta = (this.vel[0] / Const.ACC_HORIZONTAL_MAX) * maxAbsTheta;
-
-        AffineTransform transform = new AffineTransform();
-        transform.rotate(theta);
-//        ((Graphics2D) g).transform(transform);
-
-        super.paintComponent(g);
-    }
-
-}
-
-
-class JetPack extends Sprite {
-    Player player;
+class JetPack extends BodyPart {
     JetPack(Player player) {
-        super(new Rectangle(0, 0, 10, 20));
+        super(player);
         this.setBackground(Color.gray);
-        this.player = player;
+        this.setBounds(new Rectangle(3, 30, 7, 20));
     }
 
     @Override
     void update() {
         super.update();
-        Rectangle playerBounds = this.player.getBounds();
         Rectangle jetPackBounds = this.getBounds();
+        Color color = new Color(226, 88, 34);
 
-        int xLoc;
+        if (this.actor.direction == 1)
+            jetPackBounds.x = 3;
+        else
+            jetPackBounds.x = 32;
 
-        if (this.player.direction == 1) {
-            xLoc = playerBounds.x - jetPackBounds.width;
-        }
-        else {
-            xLoc = playerBounds.x + playerBounds.width;
-        }
-
-        jetPackBounds.x = xLoc;
-        jetPackBounds.y = playerBounds.y + (int)(playerBounds.width / 2.5);
+        int pcX = (int)(this.actor.getX() + this.getX());
+        int pcY = (int)(this.actor.getY() + this.getY() + this.getHeight() - 2);
 
         this.setBounds(jetPackBounds);
-
-        Color color = new Color(226, 88, 34);
-        new ParticleCloud(jetPackBounds.x + (jetPackBounds.width / 2) - 2, jetPackBounds.y + jetPackBounds.height, color);
-
-
+        new ParticleCloud(pcX, pcY, color);
     }
 }
+
+
+
+class Player extends Actor {
+    JetPack jetPack;
+
+    Player(int x, int y) {
+        super(x, y, Color.blue);
+        this.jetPack = new JetPack(this);
+        this.add(jetPack, 0);
+    }
+
+    @Override
+    void update() {
+        super.update();
+        this.jetPack.update();
+    }
+}
+

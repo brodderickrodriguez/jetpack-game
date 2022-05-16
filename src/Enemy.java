@@ -21,10 +21,9 @@ interface EnemyHiveMind {
 public class Enemy extends Actor {
 
     Enemy(int x, int y) {
-        super(new Rectangle(x, y, 25, 50));
+        super(x, y, Color.orange);
         this.bulletDelay = 800;
-        this.setBackground(Color.orange);
-        new LifeIndicator(this);
+        new LifeIndicator(this, Color.orange);
     }
 
 

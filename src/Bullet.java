@@ -2,11 +2,11 @@ import java.awt.*;
 
 
 public class Bullet extends Sprite {
-    final Sprite originator;
+    final Actor originator;
     int power = 3;
     static int prevDirection = 1;
 
-    Bullet(int x, int y, Sprite originator, Color color) {
+    Bullet(int x, int y, Actor originator, Color color) {
         super(new Rectangle(x, y, 10, 3));
         this.setBackground(color);
 

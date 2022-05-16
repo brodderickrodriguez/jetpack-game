@@ -32,6 +32,7 @@ class LifeIndicator extends BodyPart {
     private final Actor actor;
     private Color color;
 
+
     LifeIndicator(Actor actor, Color color) {
         super(actor);
         this.setBounds(new Rectangle(9, 0, 24, 24));
@@ -64,6 +65,7 @@ class LifeIndicator extends BodyPart {
 
 
 public class Actor extends Sprite {
+    int direction = 1;
     int life = Const.MAX_ACTOR_LIFE;
     int bulletDelay = 200;
     long timeOfLastBullet;
@@ -116,9 +118,11 @@ public class Actor extends Sprite {
         this.vel[1] += Const.GRAVITY;
 
         if (this.vel[0] > 0) {
+            this.direction = 1;
             this.vel[0] -= Const.PLAYER_HORIZONTAL_ACC_DECAY;
         }
         if (this.vel[0] < 0) {
+            this.direction = -1;
             this.vel[0] += Const.PLAYER_HORIZONTAL_ACC_DECAY;
         }
 

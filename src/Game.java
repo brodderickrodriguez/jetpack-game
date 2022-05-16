@@ -9,7 +9,6 @@ import java.util.*;
 - enemy design
 - enemy hive mind design
 - update consts names; update magic numbers
-
 - refactor border
 - refactor center player
  */

@@ -61,7 +61,6 @@ record Sticky(Sprite sprite, int xOffset, int yOffset) { }
 
 class Sprite extends JLabel implements SpriteManager, Comparable<Sprite> {
     public double[] vel = {0, 0};
-    int direction = 1;
     Sticky stickyTo;
 
     Sprite(Rectangle bounds) {
@@ -72,11 +71,6 @@ class Sprite extends JLabel implements SpriteManager, Comparable<Sprite> {
     }
 
     void update() {
-        if (this.vel[0] > 0)
-            this.direction = 1;
-        else if (this.vel[0] < 0)
-            this.direction = -1;
-
         if (!(this instanceof Player))
             this.moveSprite((int)this.vel[0], (int)this.vel[1]);
 

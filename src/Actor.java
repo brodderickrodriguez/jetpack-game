@@ -30,7 +30,7 @@ class LegSeperator extends BodyPart {
 
 class LifeIndicator extends BodyPart {
     private final Actor actor;
-    private Color color;
+    private final Color color;
 
     LifeIndicator(Actor actor, Color color) {
         super(actor);
@@ -142,10 +142,9 @@ public class Actor extends Sprite {
         }
     }
 
-    public void trackX(Sprite other, double speed) {
-        double dx = other.getX() - this.getX();
-        dx = Util.clamp(dx, -speed, speed);
-        this.vel[0] += dx;
+    public void headInDirection(int direction) {
+        double dx = direction * Const.PLAYER_HORIZONTAL_ACC;
+        this.vel[0] += dx * 0.8;
     }
 
     void fireBullet(Color color) {

@@ -66,7 +66,6 @@ class Sprite extends JLabel implements SpriteManager, Comparable<Sprite> {
     Sprite(Rectangle bounds) {
         this.setBounds(bounds);
         this.setOpaque(true);
-
         SpriteManager.addSprite(this);
     }
 

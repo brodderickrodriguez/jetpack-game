@@ -1,10 +1,9 @@
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.OptionalDouble;
+
 
 interface EnemyHiveMind {
     static final int VISION_RADIUS = 350;
-    // BOIDS flocking
 
     static ArrayList<Enemy> getAllEnemies() {
         ArrayList<Enemy> enemies = new ArrayList<>();
@@ -23,7 +22,6 @@ interface EnemyHiveMind {
             if (((Enemy)this).distanceTo(other) < EnemyHiveMind.VISION_RADIUS)
                 flockmates.add(other);
         }
-
         return flockmates;
     }
 
@@ -42,7 +40,6 @@ interface EnemyHiveMind {
                 nearestEnemy = other;
             }
         }
-
         return nearestEnemy;
     }
 
@@ -54,13 +51,12 @@ interface EnemyHiveMind {
         Enemy bestFlockmate = (Enemy)this;
         long bestFlockmateTime = ((Enemy)this).timeOfLastPlayerContact;
 
-        for (Enemy other: this.getFlockmates()) {
+        for (Enemy other: list) {
             if (other.timeOfLastPlayerContact < bestFlockmateTime) {
                 bestFlockmateTime = other.timeOfLastPlayerContact;
                 bestFlockmate = other;
             }
         }
-
         return bestFlockmate;
     }
 
@@ -69,13 +65,20 @@ interface EnemyHiveMind {
     }
 
     default void updatePolicy() {
-        int minSep = 50;
+        int minSep = 100;
         int giveUpElapse = 1000;
         boolean couldFireBullet = false;
         Enemy thisEnemy = (Enemy) this;
+        Player player = Game.getCurrentGame().getPlayer();
 
         if ((System.currentTimeMillis() - thisEnemy.timeOfLastPlayerContact) < giveUpElapse) {
-            thisEnemy.headInDirection(thisEnemy.playerDirectionAtTimeOfLastContact);
+            if (thisEnemy.distanceTo(player) > minSep) {
+                thisEnemy.headInDirection(thisEnemy.playerDirectionAtTimeOfLastContact);
+            } else {
+                int newDirection = thisEnemy.getDirectionTo(player);
+                thisEnemy.setDirection(newDirection);
+            }
+
             couldFireBullet = true;
         } else {
             ArrayList<Enemy> flockmates = this.getFlockmates();
@@ -94,7 +97,7 @@ interface EnemyHiveMind {
         Enemy nearestFlockmate = this.getNearestFlockmate();
 
         if (nearestFlockmate != null) {
-            if (thisEnemy.distanceTo(nearestFlockmate) < 50) {
+            if (thisEnemy.distanceTo(nearestFlockmate) < minSep) {
                 int newDirection = -thisEnemy.getDirectionTo(nearestFlockmate);
                 thisEnemy.headInDirection(newDirection);
             }
@@ -103,9 +106,7 @@ interface EnemyHiveMind {
         if (couldFireBullet) {
             thisEnemy.fireBullet(Color.red);
         }
-
     }
-
 }
 
 public class Enemy extends Actor implements EnemyHiveMind {
@@ -121,62 +122,18 @@ public class Enemy extends Actor implements EnemyHiveMind {
     @Override
     void update() {
         super.update();
+        this.updatePolicy();
 
         if (life <= 0) {
             SpriteManager.removeSprite(this);
         }
 
-        this.updatePolicy();
-
         double playerDistance = this.distanceTo(Game.getCurrentGame().getPlayer());
 
         if (playerDistance < 350) {
             this.timeOfLastPlayerContact = System.currentTimeMillis();
-            this.playerDirectionAtTimeOfLastContact = this.getDirectionTo(Game.getCurrentGame().getPlayer());
+             this.playerDirectionAtTimeOfLastContact = this.getDirectionTo(Game.getCurrentGame().getPlayer());
         }
-
 
     }
 }
-
-
-/*
-
-    default void align() {
-        Enemy bestFlockmate = this.getBestFlockmate();
-
-        if (bestFlockmate == null)
-            return;
-
-        ((Enemy)this).headInDirection(bestFlockmate.direction);
-    }
-
-    default void separate() {
-        Enemy nearestFlockmate = this.getNearestFlockmate();
-
-        if (nearestFlockmate == null)
-            return;
-
-        int oppositeDirection = nearestFlockmate.direction == 1 ? -1: 1;
-        ((Enemy)this).headInDirection(oppositeDirection);
-    }
-
-    default void cohere() {
-        ArrayList<Integer> directions = new ArrayList<Integer>();
-
-        for (Enemy enemy: this.getFlockmates()) {
-            if (enemy == this)
-                continue;
-
-            directions.add(enemy.direction);
-        }
-
-        OptionalDouble meanDirection = directions.stream().mapToDouble(a -> a).average();
-
-        if (meanDirection.isEmpty())
-            return;
-
-        int newDirection = meanDirection.getAsDouble() >= 0 ? 1: -1;
-        ((Enemy)this).headInDirection(newDirection);
-    }
- */

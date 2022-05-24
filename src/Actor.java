@@ -64,7 +64,7 @@ class LifeIndicator extends BodyPart {
 
 
 public class Actor extends Sprite {
-    int direction = 1;
+    private int direction = 1;
     int life = Const.MAX_ACTOR_LIFE;
     int bulletDelay = 200;
     long timeOfLastBullet;
@@ -145,6 +145,14 @@ public class Actor extends Sprite {
     public void headInDirection(int direction) {
         double dx = direction * Const.PLAYER_HORIZONTAL_ACC;
         this.vel[0] += dx * 0.8;
+    }
+
+    public void setDirection(int direction) {
+        this.direction = direction;
+    }
+
+    public int getDirection() {
+        return this.direction;
     }
 
     void fireBullet(Color color) {

@@ -11,6 +11,7 @@ import java.util.*;
 - update consts names; update magic numbers
 - refactor border
 - refactor center player
+- add fuel to jetpack
  */
 
 

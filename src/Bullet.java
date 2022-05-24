@@ -11,7 +11,7 @@ public class Bullet extends Sprite {
         this.setBackground(color);
 
         this.originator = originator;
-        int direction = this.originator.direction;
+        int direction = this.originator.getDirection();
         int initialVel = (int) this.originator.vel[0];
         this.vel[0] = (direction * Const.MAX_BULLET_VEL) + initialVel;
 

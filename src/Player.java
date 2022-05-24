@@ -14,7 +14,7 @@ class JetPack extends BodyPart {
         Rectangle jetPackBounds = this.getBounds();
         Color color = new Color(226, 88, 34);
 
-        if (this.actor.direction == 1)
+        if (this.actor.getDirection() == 1)
             jetPackBounds.x = 3;
         else
             jetPackBounds.x = 32;

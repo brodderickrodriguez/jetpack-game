@@ -55,13 +55,8 @@ interface SpriteManager {
     }
 }
 
-
-record Sticky(Sprite sprite, int xOffset, int yOffset) { }
-
-
 class Sprite extends JLabel implements SpriteManager, Comparable<Sprite> {
     public double[] vel = {0, 0};
-    Sticky stickyTo;
 
     Sprite(Rectangle bounds) {
         this.setBounds(bounds);
@@ -73,17 +68,6 @@ class Sprite extends JLabel implements SpriteManager, Comparable<Sprite> {
         if (!(this instanceof Player))
             this.moveSprite((int)this.vel[0], (int)this.vel[1]);
 
-        if (this.stickyTo != null) {
-            Rectangle bounds = this.getBounds();
-            bounds.x = this.stickyTo.sprite().getX() + this.stickyTo.xOffset();
-            bounds.y = this.stickyTo.sprite().getY() + this.stickyTo.yOffset();
-            this.setBounds(bounds);
-        }
-
-    }
-
-    void setStickyTo(Sprite sprite, int xOffset, int yOffset) {
-        this.stickyTo = new Sticky(sprite, xOffset, yOffset);
     }
 
     Point center() {

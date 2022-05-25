@@ -1,66 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-
-class BodyPart extends JLabel {
-    Actor actor;
-    BodyPart(Actor actor) {
-        this.actor = actor;
-        this.setOpaque(true);
-    }
-
-    void update() { }
-}
-
-class ActorBody extends BodyPart {
-    ActorBody(Actor actor, Color color) {
-        super(actor);
-        this.setBackground(color);
-        this.setBounds(new Rectangle(9, 24, 24, 50));
-    }
-}
-
-class LegSeperator extends BodyPart {
-    LegSeperator(Actor actor) {
-        super(actor);
-        this.setBounds(new Rectangle(20, 54, 2, 20));
-        this.setBackground(Color.white);
-    }
-}
-
-
-class LifeIndicator extends BodyPart {
-    private final Actor actor;
-    private final Color color;
-
-    LifeIndicator(Actor actor, Color color) {
-        super(actor);
-        this.setBounds(new Rectangle(9, 0, 24, 24));
-        this.setBackground(null);
-        this.color = color;
-        this.actor = actor;
-    }
-
-    @Override
-    void update() {
-        this.paintComponent(this.getGraphics());
-    }
-
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
-        if (this.actor.life <= 0)
-            return;
-
-        double angle = (1 - ((double)this.actor.life / (double)Const.MAX_ACTOR_LIFE)) * 360;
-
-        g.setColor(this.color);
-        g.fillArc(0, 0, this.getWidth(), this.getHeight(), 0, 360);
-
-        g.setColor(Color.gray);
-        g.fillArc(0, 0, this.getWidth(), this.getHeight(), 90, -(int)angle);
-    }
-}
+import java.util.ArrayList;
 
 
 public class Actor extends Sprite {
@@ -69,20 +9,26 @@ public class Actor extends Sprite {
     int bulletDelay = 200;
     long timeOfLastBullet;
     long timeOfLastLifeIncrease;
-    LifeIndicator lifeIndicator;
     Color bodyColor;
+
+    private final ArrayList<ActorExtremity> extremities = new ArrayList<>();
+
 
     Actor(int x, int y, Color bodyColor) {
         super(new Rectangle(x, y, 42, 74));
         this.bodyColor = bodyColor;
 
-        this.lifeIndicator = new LifeIndicator(this, bodyColor);
-        this.add(lifeIndicator, 0);
-        this.add(new ActorBody(this, this.bodyColor), 0);
-        this.add(new LegSeperator(this), 0);
+        this.addExtremity(new LifeIndicator(this, bodyColor));
+        this.addExtremity(new ActorBody(this, this.bodyColor));
+        this.addExtremity(new LegSeperator(this));
 
         this.timeOfLastBullet = System.currentTimeMillis();
         this.timeOfLastLifeIncrease = System.currentTimeMillis();
+    }
+
+    public void addExtremity(ActorExtremity extremity) {
+        this.extremities.add(extremity);
+        this.add(extremity, 0);
     }
 
     @Override
@@ -112,10 +58,13 @@ public class Actor extends Sprite {
     @Override
     void update() {
         super.update();
-        this.lifeIndicator.update();
-        this.modifyVelY(Const.GRAVITY);
+
+        for (ActorExtremity extremity: this.extremities) {
+            extremity.update();
+        }
 
         double[] thisVel = this.getVel();
+        this.modifyVelY(Const.GRAVITY);
 
         if (thisVel[0] > 0) {
             this.direction = 1;

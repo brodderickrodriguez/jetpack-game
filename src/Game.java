@@ -130,8 +130,8 @@ public class Game extends GameWindow implements ActionListener {
             switch (keyCode) {
                 case KeyEvent.VK_LEFT -> this.player.modifyVelX(-Const.PLAYER_HORIZONTAL_ACC);
                 case KeyEvent.VK_RIGHT -> this.player.modifyVelX(Const.PLAYER_HORIZONTAL_ACC);
-                case KeyEvent.VK_UP ->  this.player.modifyVelY(-Const.PLAYER_VERTICAL_ACC);
-                case KeyEvent.VK_SPACE -> this.player.fireBullet(Color.green);
+                case KeyEvent.VK_UP ->  this.player.goUp();
+                case KeyEvent.VK_SPACE -> this.player.fireBullet();
             }
         }
 

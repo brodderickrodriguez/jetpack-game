@@ -26,4 +26,8 @@ public class Const {
 
     public static final int MAX_BULLET_VEL = 10;
 
+
+
+    public static final double JETPACK_IDLE = 5e-2;
+    public static final double JETPACK_FUEL_USAGE = 1e-1;
 }

@@ -104,7 +104,7 @@ interface EnemyHiveMind {
         }
 
         if (couldFireBullet) {
-            thisEnemy.fireBullet(Color.red);
+            thisEnemy.fireBullet(Color.black);
         }
     }
 }
@@ -114,7 +114,7 @@ public class Enemy extends Actor implements EnemyHiveMind {
     int playerDirectionAtTimeOfLastContact;
 
     Enemy(int x, int y) {
-        super(x, y, Color.orange);
+        super(x, y, Color.black);
         this.bulletDelay = 800;
         this.timeOfLastPlayerContact = System.currentTimeMillis();
     }

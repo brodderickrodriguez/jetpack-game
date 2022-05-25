@@ -40,15 +40,22 @@ class Particle extends Sprite {
 
 public class ParticleCloud {
     ArrayList<Particle> particles = new ArrayList<>();
-    ParticleCloud(int x, int y, Color color) {
+    ParticleCloud(int x, int y, Color[] colors) {
         Random rn = new Random();
 
         for (int i = 0; i < 10; i++) {
             int iSize = rn.nextInt(5) + 5;
+            int colorIdx = rn.nextInt(colors.length);
+
             double[] vel = {ParticleCloud.velComp(), Math.abs(ParticleCloud.velComp())};
-            this.particles.add(new Particle(x, y, iSize, vel, color));
+            this.particles.add(new Particle(x, y, iSize, vel, colors[colorIdx]));
         }
     }
+
+    ParticleCloud(int x, int y, Color color) {
+        this(x, y, new Color[]{color});
+    }
+
     static double velComp() {
         Random rn = new Random();
         return ((rn.nextDouble() * 2) - 1) * 4;

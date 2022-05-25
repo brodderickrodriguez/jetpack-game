@@ -65,17 +65,65 @@ class LifeIndicator extends ActorExtremity {
 
 
 class JetPack extends ActorExtremity {
+    private final JLabel fuelIndicator = new JLabel();
+    private double fuelLevel = 100;
+
     JetPack(Player player) {
         super(player);
         this.setBackground(Color.gray);
         this.setBounds(new Rectangle(3, 30, 7, 20));
+        this.addFuelIndicator();
+    }
+
+    void addFuelIndicator() {
+        this.fuelIndicator.setBounds(new Rectangle(0, 0, this.getWidth(), this.getHeight()));
+        this.fuelIndicator.setBackground(Color.orange);
+        this.fuelIndicator.setOpaque(true);
+        this.add(this.fuelIndicator, 0);
+    }
+
+    void updateFuelIndicator() {
+        this.fuelLevel -= Const.JETPACK_IDLE;
+
+        if (this.fuelLevel <= 0) {
+            return;
+        }
+
+        int maxHeight = this.getHeight();
+        double fuelPercent = this.fuelLevel / 100.0;
+        int newHeight = (int)(maxHeight * fuelPercent);
+
+        Rectangle bounds = this.fuelIndicator.getBounds();
+        bounds.height = newHeight;
+        bounds.y = this.getHeight() - newHeight;
+        this.fuelIndicator.setBounds(bounds);
+
+        int colorRed, colorGreen = 0;
+
+        if (fuelPercent > 0.50) {
+            colorGreen = 255;
+            colorRed = (int)((1 - fuelPercent) * 255.0) * 2;
+        } else {
+            colorRed = 255;
+            colorGreen = (int)(fuelPercent * 255.0) * 2;
+        }
+
+        this.fuelIndicator.setBackground(new Color(colorRed, colorGreen, 0));
     }
 
     @Override
     void update() {
         super.update();
+        this.updateFuelIndicator();
         Rectangle jetPackBounds = this.getBounds();
-        Color color = new Color(226, 88, 34);
+
+        Color[] colors = {
+                new Color(255, 100, 52),
+                new Color(238, 115, 52),
+                new Color(238, 145, 55),
+                new Color(245, 187, 72),
+                new Color(249, 222, 100),
+        };
 
         if (this.actor.getDirection() == 1)
             jetPackBounds.x = 3;
@@ -86,6 +134,18 @@ class JetPack extends ActorExtremity {
         int pcY = this.actor.getY() + this.getY() + this.getHeight() - 2;
 
         this.setBounds(jetPackBounds);
-        new ParticleCloud(pcX, pcY, color);
+
+        if (this.fuelLevel > 0) {
+            new ParticleCloud(pcX, pcY, colors);
+        }
     }
+
+    void goUp() {
+        if (this.fuelLevel > 0) {
+            Game.getCurrentGame().getPlayer().modifyVelY(-Const.PLAYER_VERTICAL_ACC);
+            this.fuelLevel -= Const.JETPACK_FUEL_USAGE;
+        }
+
+    }
+
 }

@@ -10,7 +10,7 @@ class Particle extends Sprite {
     Particle(int x, int y, int size, double[] vel, Color color) {
         super(new Rectangle(x, y, size, size));
         this.setBackground(color);
-        this.vel = vel;
+        this.setVel(vel);
         this.size = size;
         this.color = color;
     }

@@ -9,18 +9,18 @@ public class Bullet extends Sprite {
     Bullet(int x, int y, Actor originator, Color color) {
         super(new Rectangle(x, y, 10, 3));
         this.setBackground(color);
-
         this.originator = originator;
+
         int direction = this.originator.getDirection();
-        int initialVel = (int) this.originator.vel[0];
-        this.vel[0] = (direction * Const.MAX_BULLET_VEL) + initialVel;
+        double newVel = (direction * Const.MAX_BULLET_VEL) + this.originator.getVel()[0];
+        this.setVelX(newVel);
 
         Bullet.prevDirection = direction;
     }
 
     @Override
     public void intersectedWith(Sprite other) {
-        if (other != this.originator) {
+        if (other != this.originator && !(other instanceof Bullet)) {
             this.power = 0;
             SpriteManager.removeSprite(this);
         }

@@ -19,8 +19,8 @@ class JetPack extends BodyPart {
         else
             jetPackBounds.x = 32;
 
-        int pcX = (int)(this.actor.getX() + this.getX());
-        int pcY = (int)(this.actor.getY() + this.getY() + this.getHeight() - 2);
+        int pcX = this.actor.getX() + this.getX();
+        int pcY = this.actor.getY() + this.getY() + this.getHeight() - 2;
 
         this.setBounds(jetPackBounds);
         new ParticleCloud(pcX, pcY, color);

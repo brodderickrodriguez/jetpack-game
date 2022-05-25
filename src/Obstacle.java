@@ -11,19 +11,19 @@ public class Obstacle extends Sprite {
         Rectangle intersection = this.getBounds().intersection(other.getBounds());
 
         if (this.intersectedBelow(other)) {
-            other.vel[1] = 0;
+            other.setVelY(0);
             other.moveSprite(0, intersection.height);
         }
         if (this.intersectedAbove(other)) {
-            other.vel[1] = 0;
+            other.setVelY(0);
             other.moveSprite(0, -intersection.height);
         }
         if (this.intersectedLeft(other)) {
-            other.vel[0] = 0;
+            other.setVelX(0);
             other.moveSprite(-intersection.width, 0);
         }
         if (this.intersectedRight(other)) {
-            other.vel[0] = 0;
+            other.setVelX(0);
             other.moveSprite(intersection.width, 0);
         }
     }

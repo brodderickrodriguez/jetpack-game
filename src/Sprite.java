@@ -56,7 +56,7 @@ interface SpriteManager {
 }
 
 class Sprite extends JLabel implements SpriteManager, Comparable<Sprite> {
-    public double[] vel = {0, 0};
+    private double[] vel = {0, 0};
 
     Sprite(Rectangle bounds) {
         this.setBounds(bounds);
@@ -65,9 +65,35 @@ class Sprite extends JLabel implements SpriteManager, Comparable<Sprite> {
     }
 
     void update() {
-        if (!(this instanceof Player))
-            this.moveSprite((int)this.vel[0], (int)this.vel[1]);
+        if (!(this instanceof Player)) {
+            double[] vel = this.getVel();
+            this.moveSprite((int)vel[0], (int)vel[1]);
+        }
+    }
 
+    double[] getVel() {
+        return this.vel;
+    }
+
+    void modifyVelX(double x) {
+        this.vel[0] += x;
+    }
+
+    void modifyVelY(double y) {
+        this.vel[1] += y;
+    }
+
+    void setVel(double[] vel) {
+        this.vel[0] = vel[0];
+        this.vel[1] = vel[1];
+    }
+
+    void setVelX(double x) {
+        this.vel[0] = x;
+    }
+
+    void  setVelY(double y) {
+        this.vel[1] = y;
     }
 
     Point center() {
@@ -81,6 +107,11 @@ class Sprite extends JLabel implements SpriteManager, Comparable<Sprite> {
         bounds.y += y;
         this.setBounds(bounds);
     }
+
+    public void moveSprite(double x, double y) {
+        this.moveSprite((int)x, (int)y);
+    }
+
 
     public double distanceTo(Sprite other) {
         double dx = Math.pow((other.getX() - this.getX()), 2);
@@ -109,22 +140,22 @@ class Sprite extends JLabel implements SpriteManager, Comparable<Sprite> {
 
     public boolean intersectedAbove(Sprite other) {
         Rectangle otherBounds = other.getBounds();
-        return other.vel[1] > 0 && this.getBounds().y > otherBounds.y + otherBounds.height - (Const.ACC_VERTICAL_MAX * 2);
+        return other.getVel()[1] > 0 && this.getBounds().y > otherBounds.y + otherBounds.height - (Const.ACC_VERTICAL_MAX * 2);
     }
 
     public boolean intersectedBelow(Sprite other) {
         Rectangle thisBounds = this.getBounds();
-        return other.vel[1] < 0 && other.getBounds().y > thisBounds.y + thisBounds.height - (Const.ACC_VERTICAL_MAX * 2);
+        return other.getVel()[1] < 0 && other.getBounds().y > thisBounds.y + thisBounds.height - (Const.ACC_VERTICAL_MAX * 2);
     }
 
     public boolean intersectedLeft(Sprite other) {
         Rectangle otherBounds = other.getBounds();
-        return other.vel[0] > 0 && this.getBounds().x > otherBounds.x + otherBounds.width - (Const.ACC_HORIZONTAL_MAX * 2);
+        return other.getVel()[0] > 0 && this.getBounds().x > otherBounds.x + otherBounds.width - (Const.ACC_HORIZONTAL_MAX * 2);
     }
 
     public boolean intersectedRight(Sprite other) {
         Rectangle thisBounds = this.getBounds();
-        return other.vel[0] < 0 && other.getBounds().x > thisBounds.x + thisBounds.width - (Const.ACC_HORIZONTAL_MAX * 2);
+        return other.getVel()[0] < 0 && other.getBounds().x > thisBounds.x + thisBounds.width - (Const.ACC_HORIZONTAL_MAX * 2);
     }
 
     @Override

@@ -91,7 +91,7 @@ public class Actor extends Sprite {
             if (bullet.originator != this) {
                 new ParticleCloud(other.getX(), other.getY(), Color.red);
                 this.life -= ((Bullet)other).power;
-                this.moveSprite((int)(0.2 * bullet.vel[0]), 0);
+                this.moveSprite(0.2 * bullet.getVel()[0], 0);
             }
         }
     }
@@ -101,7 +101,7 @@ public class Actor extends Sprite {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         double maxAbsTheta = 0.15;
-        double theta = (this.vel[0] / Const.ACC_HORIZONTAL_MAX) * maxAbsTheta;
+        double theta = (this.getVel()[0] / Const.ACC_HORIZONTAL_MAX) * maxAbsTheta;
 
         int halfWidth = this.getWidth() / 2;
         int halfHeight = this.getHeight() / 2;
@@ -113,20 +113,21 @@ public class Actor extends Sprite {
     void update() {
         super.update();
         this.lifeIndicator.update();
+        this.modifyVelY(Const.GRAVITY);
 
-        this.vel[1] += Const.GRAVITY;
+        double[] thisVel = this.getVel();
 
-        if (this.vel[0] > 0) {
+        if (thisVel[0] > 0) {
             this.direction = 1;
-            this.vel[0] -= Const.PLAYER_HORIZONTAL_ACC_DECAY;
+            this.modifyVelX(-Const.PLAYER_HORIZONTAL_ACC_DECAY);
         }
-        if (this.vel[0] < 0) {
+        if (thisVel[0] < 0) {
             this.direction = -1;
-            this.vel[0] += Const.PLAYER_HORIZONTAL_ACC_DECAY;
+            this.modifyVelX(Const.PLAYER_HORIZONTAL_ACC_DECAY);
         }
 
-        this.vel[0] = Util.clamp(this.vel[0], -Const.ACC_HORIZONTAL_MAX, Const.ACC_HORIZONTAL_MAX);
-        this.vel[1] = Util.clamp(this.vel[1], -Const.ACC_VERTICAL_MAX, Const.ACC_VERTICAL_MAX);
+        this.setVelX(Util.clamp(thisVel[0], -Const.ACC_HORIZONTAL_MAX, Const.ACC_HORIZONTAL_MAX));
+        this.setVelY(Util.clamp(thisVel[1], -Const.ACC_VERTICAL_MAX, Const.ACC_VERTICAL_MAX));
 
         long currentTime = System.currentTimeMillis();
 
@@ -144,7 +145,8 @@ public class Actor extends Sprite {
 
     public void headInDirection(int direction) {
         double dx = direction * Const.PLAYER_HORIZONTAL_ACC;
-        this.vel[0] += dx * 0.8;
+        this.modifyVelX(dx * 0.8);
+
     }
 
     public void setDirection(int direction) {

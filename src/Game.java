@@ -66,7 +66,8 @@ public class Game extends GameWindow implements ActionListener {
         int yMove = y ? 1: 0;
         for (Sprite sprite: SpriteManager.getSprites()) {
             if (!(sprite instanceof Player)) {
-                sprite.moveSprite((int)-this.player.vel[0] * xMove, (int)-this.player.vel[1] * yMove);
+                double[] playerVel = this.player.getVel();
+                sprite.moveSprite(-playerVel[0] * xMove, -playerVel[1] * yMove);
             }
         }
     }
@@ -86,22 +87,22 @@ public class Game extends GameWindow implements ActionListener {
 
     void updatePlayerLocation() {
         Rectangle playerRect = this.player.getBounds();
+        double[] playerVel = this.player.getVel();
 
-        if ((playerRect.x > Const.WINDOW_WIDTH * 0.8 && this.player.vel[0] > 0) ||
-                playerRect.x < Const.WINDOW_WIDTH * 0.2 && this.player.vel[0] < 0) {
+        if ((playerRect.x > Const.WINDOW_WIDTH * 0.8 && playerVel[0] > 0) ||
+                playerRect.x < Const.WINDOW_WIDTH * 0.2 && playerVel[0] < 0) {
             this.panWorld(true, false);
         }
-
         else {
-            this.player.moveSprite((int)this.player.vel[0], 0);
+            this.player.moveSprite((int)playerVel[0], 0);
         }
 
-        if ((playerRect.y > Const.WINDOW_HEIGHT * 0.8 && this.player.vel[1] > 0) ||
-                playerRect.y < Const.WINDOW_HEIGHT * 0.2 && this.player.vel[1] < 0) {
+        if ((playerRect.y > Const.WINDOW_HEIGHT * 0.8 && playerVel[1] > 0) ||
+                playerRect.y < Const.WINDOW_HEIGHT * 0.2 && playerVel[1] < 0) {
             this.panWorld(false, true);
         }
         else {
-            this.player.moveSprite(0, (int)this.player.vel[1]);
+            this.player.moveSprite(0, (int)playerVel[1]);
         }
     }
 
@@ -127,9 +128,9 @@ public class Game extends GameWindow implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         for (int keyCode: this.currentKeys) {
             switch (keyCode) {
-                case KeyEvent.VK_LEFT -> this.player.vel[0] -= Const.PLAYER_HORIZONTAL_ACC;
-                case KeyEvent.VK_RIGHT -> this.player.vel[0] += Const.PLAYER_HORIZONTAL_ACC;
-                case KeyEvent.VK_UP ->  this.player.vel[1] -= Const.PLAYER_VERTICAL_ACC;
+                case KeyEvent.VK_LEFT -> this.player.modifyVelX(-Const.PLAYER_HORIZONTAL_ACC);
+                case KeyEvent.VK_RIGHT -> this.player.modifyVelX(Const.PLAYER_HORIZONTAL_ACC);
+                case KeyEvent.VK_UP ->  this.player.modifyVelY(-Const.PLAYER_VERTICAL_ACC);
                 case KeyEvent.VK_SPACE -> this.player.fireBullet(Color.green);
             }
         }

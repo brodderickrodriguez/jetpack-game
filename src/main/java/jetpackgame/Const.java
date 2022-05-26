@@ -1,3 +1,5 @@
+package main.java.jetpackgame;
+
 public class Const {
     public static final int KEY_DELAY = 20;
     public static final int WINDOW_WIDTH = 1200;

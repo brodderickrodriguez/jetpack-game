@@ -1,3 +1,5 @@
+package main.java.jetpackgame;
+
 import java.awt.*;
 
 public class Obstacle extends Sprite {

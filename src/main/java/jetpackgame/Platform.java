@@ -1,3 +1,5 @@
+package main.java.jetpackgame;
+
 import java.awt.*;
 
 class Platform extends Obstacle {

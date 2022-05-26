@@ -1,6 +1,9 @@
+package main.java.jetpackgame;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 
 interface SpriteManager {
@@ -8,11 +11,11 @@ interface SpriteManager {
     PriorityQueue<Sprite> spriteAddQueue = new PriorityQueue<>();
     PriorityQueue<Sprite> spriteRemoveQueue = new PriorityQueue<>();
 
-    static ArrayList<Sprite> getSprites() {
+    static List<Sprite> getSprites() {
         return SpriteManager.allSprites;
     }
 
-    static  ArrayList<Sprite> getEverySprite() {
+    static List<Sprite> getEverySprite() {
         ArrayList<Sprite> all = new ArrayList<>();
         all.addAll(SpriteManager.allSprites);
         all.addAll(SpriteManager.spriteAddQueue);
@@ -72,7 +75,7 @@ class Sprite extends JLabel implements SpriteManager, Comparable<Sprite> {
     }
 
     double[] getVel() {
-        return this.vel;
+        return this.vel.clone();
     }
 
     void modifyVelX(double x) {

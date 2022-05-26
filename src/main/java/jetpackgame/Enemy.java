@@ -1,3 +1,5 @@
+package main.java.jetpackgame;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -83,7 +85,7 @@ interface EnemyHiveMind {
         } else {
             ArrayList<Enemy> flockmates = this.getFlockmates();
 
-            if (flockmates.size() > 0) {
+            if (!flockmates.isEmpty()) {
                 Enemy bestFlockmate = this.getBestFlockmate(flockmates);
 
                 if ((System.currentTimeMillis() - bestFlockmate.timeOfLastPlayerContact) < giveUpElapse) {

@@ -1,9 +1,7 @@
-import java.util.ArrayList;
-import java.util.HashMap;
+package main.java.jetpackgame;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Callable;
-import java.util.logging.Level;
 
 enum Levels {
     LEVEL_0;

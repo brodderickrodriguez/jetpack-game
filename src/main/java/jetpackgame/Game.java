@@ -1,7 +1,10 @@
+package main.java.jetpackgame;
+
 import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import java.util.List;
 
 
 /*
@@ -109,7 +112,7 @@ public class Game extends GameWindow implements ActionListener {
     }
 
     void collisionDetection() {
-        ArrayList<Sprite> sprites = SpriteManager.getSprites();
+        List<Sprite> sprites = SpriteManager.getSprites();
 
         for (int i = 0; i < sprites.size(); i++) {
             for (int j = i + 1; j < sprites.size(); j++) {

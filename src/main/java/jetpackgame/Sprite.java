@@ -75,7 +75,7 @@ class Sprite extends JLabel implements SpriteManager, Comparable<Sprite> {
     }
 
     double[] getVel() {
-        return this.vel.clone();
+        return this.vel;
     }
 
     void modifyVelX(double x) {

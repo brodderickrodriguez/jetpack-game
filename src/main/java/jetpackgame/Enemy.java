@@ -109,7 +109,7 @@ public class Enemy extends Actor implements EnemyHiveMind {
 
     Enemy(int x, int y) {
         super(x, y, Const.ENEMY_COLOR);
-        this.bulletDelay = Const.ENEMY_BULLET_DELAY;
+        this.setBulletDelay(Const.ENEMY_BULLET_DELAY);
         this.timeOfLastPlayerContact = System.currentTimeMillis();
     }
 
@@ -118,7 +118,7 @@ public class Enemy extends Actor implements EnemyHiveMind {
         super.update();
         this.updatePolicy();
 
-        if (life <= 0) {
+        if (this.getLife() <= 0) {
             SpriteManager.removeSprite(this);
         }
 

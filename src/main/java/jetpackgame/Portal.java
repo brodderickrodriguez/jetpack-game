@@ -34,16 +34,6 @@ class PortalEntrance extends Sprite {
         return checker;
     }
 
-    void performPlayerCollisionAnimation() {
-        Rectangle playerBounds = Game.getCurrentGame().getPlayer().getBounds();
-        int deltaY = playerBounds.height / 3;
-        int x = playerBounds.x + (playerBounds.width / 2);
-
-        for (int i = playerBounds.y; i < playerBounds.y + playerBounds.height; i += deltaY) {
-            new ParticleCloud(x, i, Const.PLAYER_COLOR);
-        }
-    }
-
     @Override
     public void intersectedWith(Sprite other) {
         if (!(other instanceof Player)) {
@@ -89,7 +79,7 @@ public class Portal {
 
         player.setXY(x, y);
         Game.getCurrentGame().centerPlayer();
-        destination.performPlayerCollisionAnimation();
+        player.poofAnimation();
         destination.canTransport = false;
     }
 }

@@ -5,14 +5,12 @@ import java.util.ArrayList;
 
 public class Actor extends Sprite {
     private int direction = 1;
-    int life = Const.MAX_ACTOR_LIFE;
-    int bulletDelay;
-    long timeOfLastBullet;
-    long timeOfLastLifeIncrease;
-    Color bodyColor;
-
+    private int life = Const.MAX_ACTOR_LIFE;
+    private int bulletDelay;
+    private long timeOfLastBullet;
+    private long timeOfLastLifeIncrease;
+    private final Color bodyColor;
     private final ArrayList<ActorExtremity> extremities = new ArrayList<>();
-
 
     Actor(int x, int y, Color bodyColor) {
         super(new Rectangle(x, y, 42, 74));
@@ -26,9 +24,56 @@ public class Actor extends Sprite {
         this.timeOfLastLifeIncrease = System.currentTimeMillis();
     }
 
+    public int getLife() {
+        return this.life;
+    }
+
+    public int getBulletDelay() {
+        return this.bulletDelay;
+    }
+
+    public void setBulletDelay(int bulletDelay) {
+        this.bulletDelay = bulletDelay;
+    }
+
+    public void setDirection(int direction) {
+        this.direction = direction;
+    }
+
+    public int getDirection() {
+        return this.direction;
+    }
+
     public void addExtremity(ActorExtremity extremity) {
         this.extremities.add(extremity);
         this.add(extremity, 0);
+    }
+
+    public void headInDirection(int direction) {
+        double dx = direction * Const.PLAYER_HORIZONTAL_ACC;
+        this.modifyVelX(dx);
+
+    }
+
+    void fireBullet(Color color) {
+        long currentTime = System.currentTimeMillis();
+
+        if (currentTime > this.timeOfLastBullet + this.getBulletDelay()) {
+            this.timeOfLastBullet = currentTime;
+            Point center = this.getCenter();
+            center.x += direction * this.getBounds().width;
+            new Bullet(center.x, center.y, this, color);
+        }
+    }
+
+    void poofAnimation() {
+        Rectangle bounds = this.getBounds();
+        int deltaY = bounds.height / 3;
+        int x = bounds.x + (bounds.width / 2);
+
+        for (int i = bounds.y; i < bounds.y + bounds.height; i += deltaY) {
+            new ParticleCloud(x, i, this.bodyColor);
+        }
     }
 
     @Override
@@ -41,7 +86,6 @@ public class Actor extends Sprite {
             }
         }
     }
-
 
     @Override
     public void paintComponent(Graphics g) {
@@ -88,32 +132,8 @@ public class Actor extends Sprite {
         }
 
         if (this.life < 1) {
+            this.poofAnimation();
             SpriteManager.removeSprite(this);
-        }
-    }
-
-    public void headInDirection(int direction) {
-        double dx = direction * Const.PLAYER_HORIZONTAL_ACC;
-        this.modifyVelX(dx);
-
-    }
-
-    public void setDirection(int direction) {
-        this.direction = direction;
-    }
-
-    public int getDirection() {
-        return this.direction;
-    }
-
-    void fireBullet(Color color) {
-        long currentTime = System.currentTimeMillis();
-
-        if (currentTime > this.timeOfLastBullet + this.bulletDelay) {
-            this.timeOfLastBullet = currentTime;
-            Point center = this.getCenter();
-            center.x += direction * this.getBounds().width;
-            new Bullet(center.x, center.y, this, color);
         }
     }
 }

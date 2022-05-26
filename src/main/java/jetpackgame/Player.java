@@ -5,7 +5,7 @@ class Player extends Actor {
     private final JetPack jetpack;
     Player(int x, int y) {
         super(x, y, Const.PLAYER_COLOR);
-        this.bulletDelay = Const.PLAYER_BULLET_DELAY;
+        this.setBulletDelay(Const.PLAYER_BULLET_DELAY);
         this.jetpack = new JetPack(this);
         this.addExtremity(this.jetpack);
     }

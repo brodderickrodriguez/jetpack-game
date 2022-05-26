@@ -52,10 +52,10 @@ class LifeIndicator extends ActorExtremity {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        if (this.actor.life <= 0)
+        if (this.actor.getLife() <= 0)
             return;
 
-        double angle = (1 - ((double)this.actor.life / (double)Const.MAX_ACTOR_LIFE)) * 360;
+        double angle = (1 - ((double)this.actor.getLife() / (double)Const.MAX_ACTOR_LIFE)) * 360;
 
         g.setColor(this.color);
         g.fillArc(0, 0, this.getWidth(), this.getHeight(), 0, 360);

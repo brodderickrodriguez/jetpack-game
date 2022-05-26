@@ -29,13 +29,15 @@ public class GameLevelFactory {
         new Enemy(250, 200);
         new Platform(0, 150);
 
+        new GasCan(50, 100);
+
         Random rn = new Random();
 
-        for (int i = 0; i < 50; i++) {
-            double x = rn.nextDouble() * Const.WORLD_WIDTH;
-            double y = rn.nextDouble() * Const.WORLD_HEIGHT;
-            new Enemy((int)x, (int)y);
-        }
+//        for (int i = 0; i < 50; i++) {
+//            double x = rn.nextDouble() * Const.WORLD_WIDTH;
+//            double y = rn.nextDouble() * Const.WORLD_HEIGHT;
+//            new Enemy((int)x, (int)y);
+//        }
 
         return player;
     }

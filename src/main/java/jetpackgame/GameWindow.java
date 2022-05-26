@@ -1,6 +1,7 @@
 package main.java.jetpackgame;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashSet;
@@ -35,7 +36,6 @@ public class GameWindow extends JFrame implements KeySetManager {
         this.setTitle("jetpack-game");
         this.setSize(Const.WINDOW_WIDTH, Const.WINDOW_HEIGHT);
         this.setLocationRelativeTo(null);
-
         this.addKeyListener(this);
     }
 }

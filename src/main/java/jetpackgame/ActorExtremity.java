@@ -68,7 +68,8 @@ class LifeIndicator extends ActorExtremity {
 
 class JetPack extends ActorExtremity {
     private final JLabel fuelIndicator = new JLabel();
-    private double fuelLevel = 100;
+    private final double MAX_FUEL = 100;
+    private double fuelLevel = MAX_FUEL;
 
     JetPack(Player player) {
         super(player);
@@ -82,6 +83,10 @@ class JetPack extends ActorExtremity {
         this.fuelIndicator.setBackground(Color.orange);
         this.fuelIndicator.setOpaque(true);
         this.add(this.fuelIndicator, 0);
+    }
+
+    void refillFuel() {
+        this.fuelLevel = this.MAX_FUEL;
     }
 
     void updateFuelIndicator() {
@@ -104,7 +109,7 @@ class JetPack extends ActorExtremity {
 
         if (fuelPercent > 0.50) {
             int colorRed = (int)((1 - fuelPercent) * 255.0) * 2;
-            color = new Color(255, colorRed, 0);
+            color = new Color(colorRed, 255, 0);
         } else {
             int colorGreen = (int)(fuelPercent * 255.0) * 2;
             color = new Color(255, colorGreen, 0);

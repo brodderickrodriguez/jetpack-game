@@ -19,5 +19,10 @@ class Player extends Actor {
     void fireBullet() {
         this.fireBullet(Color.blue);
     }
+
+    void refillFuel() {
+        this.jetpack.refillFuel();
+    }
+
 }
 

@@ -99,7 +99,7 @@ class Sprite extends JLabel implements SpriteManager, Comparable<Sprite> {
         this.vel[1] = y;
     }
 
-    Point center() {
+    Point getCenter() {
         Rectangle bounds = this.getBounds();
         return new Point(bounds.x + (bounds.width / 2), bounds.y + (bounds.height / 2));
     }
@@ -108,6 +108,13 @@ class Sprite extends JLabel implements SpriteManager, Comparable<Sprite> {
         Rectangle bounds = this.getBounds();
         bounds.x += x;
         bounds.y += y;
+        this.setBounds(bounds);
+    }
+
+    public void setXY(int x, int y) {
+        Rectangle bounds = this.getBounds();
+        bounds.x = x;
+        bounds.y = y;
         this.setBounds(bounds);
     }
 
@@ -160,6 +167,23 @@ class Sprite extends JLabel implements SpriteManager, Comparable<Sprite> {
         Rectangle thisBounds = this.getBounds();
         return other.getVel()[0] < 0 && other.getBounds().x > thisBounds.x + thisBounds.width - (Const.ACC_HORIZONTAL_MAX * 2);
     }
+
+    public boolean otherSpriteConfinedWithinThisBounds(Sprite other) {
+        boolean leftWithin = other.getX() >= this.getX();
+        boolean rightWithin = other.getRightMostPoint() <= this.getRightMostPoint();
+        boolean topWithin = other.getY() >= this.getY();
+        boolean bottomWithin = other.getBottomMostPoint() <= this.getBottomMostPoint();
+        return leftWithin && rightWithin && topWithin && bottomWithin;
+    }
+
+    public int getRightMostPoint() {
+        return this.getX() + this.getWidth();
+    }
+
+    public int getBottomMostPoint() {
+        return this.getY() + this.getHeight();
+    }
+
 
     @Override
     public int compareTo(Sprite o) {

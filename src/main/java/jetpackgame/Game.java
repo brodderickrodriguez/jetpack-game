@@ -8,7 +8,6 @@ import java.util.List;
 
 
 /*
-- implement gas cans
 - implement portals
 - refactor center player
 - update consts names; update magic numbers

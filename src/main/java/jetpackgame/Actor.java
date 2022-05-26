@@ -111,7 +111,7 @@ public class Actor extends Sprite {
 
         if (currentTime > this.timeOfLastBullet + this.bulletDelay) {
             this.timeOfLastBullet = currentTime;
-            Point center = this.center();
+            Point center = this.getCenter();
             center.x += direction * this.getBounds().width;
             new Bullet(center.x, center.y, this, color);
         }

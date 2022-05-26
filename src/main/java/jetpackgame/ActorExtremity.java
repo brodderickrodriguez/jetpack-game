@@ -138,7 +138,7 @@ class JetPack extends ActorExtremity {
             jetPackBounds.x = 32;
 
         int pcX = this.actor.getX() + this.getX();
-        int pcY = this.actor.getY() + this.getY() + this.getHeight() - 2;
+        int pcY = this.actor.getY() + this.getY() + this.getHeight() + 5;
 
         this.setBounds(jetPackBounds);
 

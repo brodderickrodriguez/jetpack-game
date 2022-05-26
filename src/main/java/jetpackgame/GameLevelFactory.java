@@ -31,6 +31,9 @@ public class GameLevelFactory {
 
         new GasCan(50, 100);
 
+
+        new Portal(250, 30, 550, 880);
+
         Random rn = new Random();
 
 //        for (int i = 0; i < 50; i++) {

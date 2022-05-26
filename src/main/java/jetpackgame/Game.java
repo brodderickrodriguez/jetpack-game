@@ -8,14 +8,11 @@ import java.util.List;
 
 
 /*
-- implement portals
 - refactor center player
 - update consts names; update magic numbers
 - refactor border
-- packageize
 - implement level design engine
 - level design
-
  */
 
 

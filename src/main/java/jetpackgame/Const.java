@@ -1,5 +1,7 @@
 package main.java.jetpackgame;
 
+import java.awt.*;
+
 public class Const {
     public static final int KEY_DELAY = 20;
     public static final int WINDOW_WIDTH = 1200;
@@ -32,4 +34,14 @@ public class Const {
 
     public static final double JETPACK_IDLE = 5e-2;
     public static final double JETPACK_FUEL_USAGE = 1e-1;
+
+    public static final Color PLAYER_COLOR = Color.blue;
+    public static final Color ENEMY_COLOR = Color.black;
+
+    public static final int PLAYER_BULLET_DELAY = 200;
+    public static final int ENEMY_BULLET_DELAY = 800;
+
+    public static final double ACTOR_BULLET_RECOIL = 0.2;
+    public static final double ACTOR_MAX_ABS_ROTATION = 0.15;
+
 }

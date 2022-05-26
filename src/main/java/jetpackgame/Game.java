@@ -8,8 +8,8 @@ import java.util.List;
 
 
 /*
-- refactor center player
 - update consts names; update magic numbers
+- make all members private
 - refactor border
 - implement level design engine
 - level design

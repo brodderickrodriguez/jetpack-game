@@ -23,7 +23,7 @@ public class GameLevelFactory {
     }
 
     private static Player buildLevel0() {
-        Player player = new Player(100, 0);
+        Player player = new Player(100, 200);
 
         new Enemy(200, 200);
         new Enemy(250, 200);

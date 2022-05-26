@@ -40,7 +40,7 @@ class PortalEntrance extends Sprite {
         int x = playerBounds.x + (playerBounds.width / 2);
 
         for (int i = playerBounds.y; i < playerBounds.y + playerBounds.height; i += deltaY) {
-            new ParticleCloud(x, i, Color.magenta);
+            new ParticleCloud(x, i, Const.PLAYER_COLOR);
         }
     }
 
@@ -89,6 +89,7 @@ public class Portal {
 
         player.setXY(x, y);
         Game.getCurrentGame().centerPlayer();
+        destination.performPlayerCollisionAnimation();
         destination.canTransport = false;
     }
 }

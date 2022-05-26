@@ -1,13 +1,11 @@
 package main.java.jetpackgame;
 
-import java.awt.*;
-
 
 class Player extends Actor {
     private final JetPack jetpack;
     Player(int x, int y) {
-        super(x, y, Color.blue);
-
+        super(x, y, Const.PLAYER_COLOR);
+        this.bulletDelay = Const.PLAYER_BULLET_DELAY;
         this.jetpack = new JetPack(this);
         this.addExtremity(this.jetpack);
     }
@@ -17,7 +15,7 @@ class Player extends Actor {
     }
 
     void fireBullet() {
-        this.fireBullet(Color.blue);
+        this.fireBullet(Const.PLAYER_COLOR);
     }
 
     void refillFuel() {

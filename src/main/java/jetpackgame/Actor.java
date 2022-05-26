@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Actor extends Sprite {
     private int direction = 1;
     int life = Const.MAX_ACTOR_LIFE;
-    int bulletDelay = 200;
+    int bulletDelay;
     long timeOfLastBullet;
     long timeOfLastLifeIncrease;
     Color bodyColor;
@@ -37,7 +37,7 @@ public class Actor extends Sprite {
             if (bullet.originator != this) {
                 new ParticleCloud(other.getX(), other.getY(), Color.red);
                 this.life -= ((Bullet)other).power;
-                this.moveSprite(0.2 * bullet.getVel()[0], 0);
+                this.moveSprite(bullet.getVel()[0] * Const.ACTOR_BULLET_RECOIL, 0);
             }
         }
     }
@@ -46,7 +46,7 @@ public class Actor extends Sprite {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        double maxAbsTheta = 0.15;
+        double maxAbsTheta = Const.ACTOR_MAX_ABS_ROTATION;
         double theta = (this.getVel()[0] / Const.ACC_HORIZONTAL_MAX) * maxAbsTheta;
 
         int halfWidth = this.getWidth() / 2;
@@ -94,7 +94,7 @@ public class Actor extends Sprite {
 
     public void headInDirection(int direction) {
         double dx = direction * Const.PLAYER_HORIZONTAL_ACC;
-        this.modifyVelX(dx * 0.8);
+        this.modifyVelX(dx);
 
     }
 

@@ -28,7 +28,7 @@ class Particle extends Sprite {
         }
 
         if (this.alpha > 0) {
-            this.alpha -= Math.min(3, this.alpha);
+            this.alpha -= Math.min(Const.PARTICLE_ALPHA_DELAY, this.alpha);
         }
         if (bounds.width > 0) {
             bounds.width -= 1;
@@ -36,7 +36,11 @@ class Particle extends Sprite {
         }
 
         this.setBounds(bounds);
-        this.setBackground(new Color(this.color.getRed(), this.color.getGreen(), this.color.getBlue(), this.alpha));
+        this.setBackground(new Color(
+                this.color.getRed(),
+                this.color.getGreen(),
+                this.color.getBlue(),
+                this.alpha));
     }
 }
 
@@ -44,13 +48,16 @@ public class ParticleCloud {
     ArrayList<Particle> particles = new ArrayList<>();
     ParticleCloud(int x, int y, Color[] colors) {
         Random rn = new Random();
+        int halfParticleSize = (int)(Const.PARTICLE_MAX_SIZE / 2);
 
         for (int i = 0; i < 10; i++) {
-            int iSize = rn.nextInt(5) + 5;
+            int size = rn.nextInt(halfParticleSize) + halfParticleSize;
             int colorIdx = rn.nextInt(colors.length);
-
-            double[] vel = {ParticleCloud.velComp(), ParticleCloud.velComp()};
-            this.particles.add(new Particle(x, y, iSize, vel, colors[colorIdx]));
+            double[] vel = {
+                    Util.randNorm() * Const.PARTICLE_MAX_VEL,
+                    Util.randNorm() * Const.PARTICLE_MAX_VEL
+            };
+            this.particles.add(new Particle(x, y, size, vel, colors[colorIdx]));
         }
     }
 
@@ -58,8 +65,4 @@ public class ParticleCloud {
         this(x, y, new Color[]{color});
     }
 
-    static double velComp() {
-        Random rn = new Random();
-        return ((rn.nextDouble() * 2) - 1) * 4;
-    }
 }

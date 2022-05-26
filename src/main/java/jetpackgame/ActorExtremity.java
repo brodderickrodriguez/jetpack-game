@@ -68,8 +68,7 @@ class LifeIndicator extends ActorExtremity {
 
 class JetPack extends ActorExtremity {
     private final JLabel fuelIndicator = new JLabel();
-    private final double MAX_FUEL = 100;
-    private double fuelLevel = MAX_FUEL;
+    private double fuelLevel = Const.JETPACK_MAX_FUEL;
 
     JetPack(Player player) {
         super(player);
@@ -86,7 +85,7 @@ class JetPack extends ActorExtremity {
     }
 
     void refillFuel() {
-        this.fuelLevel = this.MAX_FUEL;
+        this.fuelLevel = Const.JETPACK_MAX_FUEL;
     }
 
     void updateFuelIndicator() {

@@ -1,12 +1,9 @@
 package main.java.jetpackgame;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 
 interface EnemyHiveMind {
-    static final int VISION_RADIUS = 350;
-
     static ArrayList<Enemy> getAllEnemies() {
         ArrayList<Enemy> enemies = new ArrayList<>();
 
@@ -21,8 +18,9 @@ interface EnemyHiveMind {
         ArrayList<Enemy> flockmates = new ArrayList<>();
 
         for (Enemy other: EnemyHiveMind.getAllEnemies()) {
-            if (((Enemy)this).distanceTo(other) < EnemyHiveMind.VISION_RADIUS)
+            if (((Enemy)this).distanceTo(other) < Const.ENEMY_VISION_RADIUS) {
                 flockmates.add(other);
+            }
         }
         return flockmates;
     }
@@ -62,19 +60,13 @@ interface EnemyHiveMind {
         return bestFlockmate;
     }
 
-    default Enemy getBestFlockmate() {
-        return this.getBestFlockmate(this.getFlockmates());
-    }
-
     default void updatePolicy() {
-        int minSep = 100;
-        int giveUpElapse = 1000;
         boolean couldFireBullet = false;
         Enemy thisEnemy = (Enemy) this;
         Player player = Game.getCurrentGame().getPlayer();
 
-        if ((System.currentTimeMillis() - thisEnemy.timeOfLastPlayerContact) < giveUpElapse) {
-            if (thisEnemy.distanceTo(player) > minSep) {
+        if ((System.currentTimeMillis() - thisEnemy.timeOfLastPlayerContact) < Const.ENEMY_GIVE_UP_AFTER) {
+            if (thisEnemy.distanceTo(player) > Const.ENEMY_MIN_SEPARATION) {
                 thisEnemy.headInDirection(thisEnemy.playerDirectionAtTimeOfLastContact);
             } else {
                 int newDirection = thisEnemy.getDirectionTo(player);
@@ -88,7 +80,7 @@ interface EnemyHiveMind {
             if (!flockmates.isEmpty()) {
                 Enemy bestFlockmate = this.getBestFlockmate(flockmates);
 
-                if ((System.currentTimeMillis() - bestFlockmate.timeOfLastPlayerContact) < giveUpElapse) {
+                if ((System.currentTimeMillis() - bestFlockmate.timeOfLastPlayerContact) < Const.ENEMY_GIVE_UP_AFTER) {
                     int newDirection = thisEnemy.getDirectionTo(bestFlockmate);
                     thisEnemy.headInDirection(newDirection);
                     couldFireBullet = true;
@@ -99,7 +91,7 @@ interface EnemyHiveMind {
         Enemy nearestFlockmate = this.getNearestFlockmate();
 
         if (nearestFlockmate != null) {
-            if (thisEnemy.distanceTo(nearestFlockmate) < minSep) {
+            if (thisEnemy.distanceTo(nearestFlockmate) < Const.ENEMY_MIN_SEPARATION) {
                 int newDirection = -thisEnemy.getDirectionTo(nearestFlockmate);
                 thisEnemy.headInDirection(newDirection);
             }
@@ -132,7 +124,7 @@ public class Enemy extends Actor implements EnemyHiveMind {
 
         double playerDistance = this.distanceTo(Game.getCurrentGame().getPlayer());
 
-        if (playerDistance < 350) {
+        if (playerDistance < Const.ENEMY_VISION_RADIUS) {
             this.timeOfLastPlayerContact = System.currentTimeMillis();
              this.playerDirectionAtTimeOfLastContact = this.getDirectionTo(Game.getCurrentGame().getPlayer());
         }

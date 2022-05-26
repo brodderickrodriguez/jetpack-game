@@ -9,13 +9,20 @@ public class WorldBorder extends Obstacle {
         this.setBackground(Color.black);
     }
 
-    public static WorldBorder[] makeBorders() {
+    public static void makeBorders() {
         int leftLoc = Const.MAX_LEFT - Const.BORDER_DIM;
-        WorldBorder left = new WorldBorder(new Rectangle(leftLoc, Const.MAX_TOP, Const.BORDER_DIM, Const.WORLD_HEIGHT));
-        WorldBorder right = new WorldBorder(new Rectangle(Const.MAX_RIGHT, Const.MAX_TOP, Const.BORDER_DIM, Const.WORLD_HEIGHT));
-        WorldBorder top = new WorldBorder(new Rectangle(leftLoc, Const.MAX_TOP - Const.BORDER_DIM, Const.WORLD_WIDTH + (Const.BORDER_DIM * 2), Const.BORDER_DIM));
-        WorldBorder bottom = new WorldBorder(new Rectangle(leftLoc, Const.MAX_BOTTOM, Const.WORLD_WIDTH + (Const.BORDER_DIM * 2), Const.BORDER_DIM));
-        return new WorldBorder[]{left, right, top, bottom};
+
+        // left
+        new WorldBorder(new Rectangle(leftLoc, Const.MAX_TOP, Const.BORDER_DIM, Const.WORLD_HEIGHT));
+
+        // right
+        new WorldBorder(new Rectangle(Const.MAX_RIGHT, Const.MAX_TOP, Const.BORDER_DIM, Const.WORLD_HEIGHT));
+
+        // top
+        new WorldBorder(new Rectangle(leftLoc, Const.MAX_TOP - Const.BORDER_DIM, Const.WORLD_WIDTH + (Const.BORDER_DIM * 2), Const.BORDER_DIM));
+
+        // bottom
+        new WorldBorder(new Rectangle(leftLoc, Const.MAX_BOTTOM, Const.WORLD_WIDTH + (Const.BORDER_DIM * 2), Const.BORDER_DIM));
     }
 
 }

@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class Bullet extends Sprite {
     final Actor originator;
-    int power = 3;
+    int power = Const.BULLET_POWER;
     static int prevDirection = 1;
 
     Bullet(int x, int y, Actor originator, Color color) {

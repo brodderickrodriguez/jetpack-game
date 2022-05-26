@@ -8,7 +8,6 @@ import java.util.List;
 
 
 /*
-- update consts names; update magic numbers
 - make all members private
 - refactor border
 - implement level design engine
@@ -90,16 +89,16 @@ public class Game extends GameWindow implements ActionListener {
         Rectangle playerRect = this.player.getBounds();
         double[] playerVel = this.player.getVel();
 
-        if ((playerRect.x > Const.WINDOW_WIDTH * 0.8 && playerVel[0] > 0) ||
-                playerRect.x < Const.WINDOW_WIDTH * 0.2 && playerVel[0] < 0) {
+        if ((playerRect.x > Const.WINDOW_WIDTH * (1 - Const.PAN_WORLD_FRAC) && playerVel[0] > 0) ||
+                playerRect.x < Const.WINDOW_WIDTH * Const.PAN_WORLD_FRAC && playerVel[0] < 0) {
             this.panWorld(true, false);
         }
         else {
             this.player.moveSprite((int)playerVel[0], 0);
         }
 
-        if ((playerRect.y > Const.WINDOW_HEIGHT * 0.8 && playerVel[1] > 0) ||
-                playerRect.y < Const.WINDOW_HEIGHT * 0.2 && playerVel[1] < 0) {
+        if ((playerRect.y > Const.WINDOW_HEIGHT * (1 - Const.PAN_WORLD_FRAC) && playerVel[1] > 0) ||
+                playerRect.y < Const.WINDOW_HEIGHT * Const.PAN_WORLD_FRAC && playerVel[1] < 0) {
             this.panWorld(false, true);
         }
         else {
@@ -129,8 +128,8 @@ public class Game extends GameWindow implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         for (int keyCode: this.currentKeys) {
             switch (keyCode) {
-                case KeyEvent.VK_LEFT -> this.player.modifyVelX(-Const.PLAYER_HORIZONTAL_ACC);
-                case KeyEvent.VK_RIGHT -> this.player.modifyVelX(Const.PLAYER_HORIZONTAL_ACC);
+                case KeyEvent.VK_LEFT -> this.player.moveLeft();
+                case KeyEvent.VK_RIGHT -> this.player.moveRight();
                 case KeyEvent.VK_UP ->  this.player.goUp();
                 case KeyEvent.VK_SPACE -> this.player.fireBullet();
             }

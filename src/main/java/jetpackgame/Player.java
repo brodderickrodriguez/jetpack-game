@@ -22,5 +22,13 @@ class Player extends Actor {
         this.jetpack.refillFuel();
     }
 
+    void moveLeft() {
+        this.modifyVelX(-Const.PLAYER_HORIZONTAL_ACC);
+    }
+
+    void moveRight() {
+        this.modifyVelX(Const.PLAYER_HORIZONTAL_ACC);
+    }
+
 }
 

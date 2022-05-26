@@ -35,7 +35,6 @@ interface SpriteManager {
         for (Sprite sprite: SpriteManager.getEverySprite()) {
             SpriteManager.removeSprite(sprite);
         }
-
     }
 
     static void update() {
@@ -59,7 +58,7 @@ interface SpriteManager {
 }
 
 class Sprite extends JLabel implements SpriteManager, Comparable<Sprite> {
-    private double[] vel = {0, 0};
+    private final double[] vel = {0, 0};
 
     Sprite(Rectangle bounds) {
         this.setBounds(bounds);

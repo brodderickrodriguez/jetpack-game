@@ -98,17 +98,17 @@ class JetPack extends ActorExtremity {
         bounds.y = this.getHeight() - newHeight;
         this.fuelIndicator.setBounds(bounds);
 
-        int colorRed, colorGreen = 0;
+        Color color;
 
         if (fuelPercent > 0.50) {
-            colorGreen = 255;
-            colorRed = (int)((1 - fuelPercent) * 255.0) * 2;
+            int colorRed = (int)((1 - fuelPercent) * 255.0) * 2;
+            color = new Color(255, colorRed, 0);
         } else {
-            colorRed = 255;
-            colorGreen = (int)(fuelPercent * 255.0) * 2;
+            int colorGreen = (int)(fuelPercent * 255.0) * 2;
+            color = new Color(255, colorGreen, 0);
         }
 
-        this.fuelIndicator.setBackground(new Color(colorRed, colorGreen, 0));
+        this.fuelIndicator.setBackground(color);
     }
 
     @Override

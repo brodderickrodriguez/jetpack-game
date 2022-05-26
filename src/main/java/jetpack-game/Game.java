@@ -5,13 +5,15 @@ import java.util.*;
 
 
 /*
-- level design
-- enemy design
-- enemy hive mind design
+- implement gas cans
+- implement portals
+- refactor center player
 - update consts names; update magic numbers
 - refactor border
-- refactor center player
-- add fuel to jetpack
+- packageize
+- implement level design engine
+- level design
+
  */
 
 

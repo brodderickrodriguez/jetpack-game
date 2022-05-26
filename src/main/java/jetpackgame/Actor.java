@@ -79,9 +79,9 @@ public class Actor extends Sprite {
     @Override
     public void intersectedWith(Sprite other) {
         if (other instanceof Bullet bullet) {
-            if (bullet.originator != this) {
+            if (bullet.getOriginator() != this) {
                 new ParticleCloud(other.getX(), other.getY(), Color.red);
-                this.life -= ((Bullet)other).power;
+                this.life -= ((Bullet)other).getPower();
                 this.moveSprite(bullet.getVel()[0] * Const.ACTOR_BULLET_RECOIL, 0);
             }
         }

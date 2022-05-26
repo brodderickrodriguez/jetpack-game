@@ -4,10 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 
 class ActorExtremity extends JLabel {
-    Actor actor;
+    private final Actor actor;
     ActorExtremity(Actor actor) {
         this.actor = actor;
         this.setOpaque(true);
+    }
+
+    public Actor getActor() {
+        return this.actor;
     }
 
     void update() { }
@@ -123,26 +127,18 @@ class JetPack extends ActorExtremity {
         this.updateFuelIndicator();
         Rectangle jetPackBounds = this.getBounds();
 
-        Color[] colors = {
-                new Color(255, 100, 52),
-                new Color(238, 115, 52),
-                new Color(238, 145, 55),
-                new Color(245, 187, 72),
-                new Color(249, 222, 100),
-        };
-
-        if (this.actor.getDirection() == 1)
+        if (this.getActor().getDirection() == 1)
             jetPackBounds.x = 3;
         else
             jetPackBounds.x = 32;
 
-        int pcX = this.actor.getX() + this.getX();
-        int pcY = this.actor.getY() + this.getY() + this.getHeight() + 5;
+        int pcX = this.getActor().getX() + this.getX();
+        int pcY = this.getActor().getY() + this.getY() + this.getHeight() + 5;
 
         this.setBounds(jetPackBounds);
 
         if (this.fuelLevel > 0) {
-            new ParticleCloud(pcX, pcY, colors);
+            new ParticleCloud(pcX, pcY, Util.flameColors());
         }
     }
 

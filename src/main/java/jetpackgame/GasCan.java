@@ -16,6 +16,12 @@ public class GasCan extends Sprite {
             Game.getCurrentGame().getPlayer().refillFuel();
             SpriteManager.removeSprite(this);
         }
+
+        if (other instanceof Bullet) {
+            new ParticleCloud(this.getCenter().x, this.getCenter().y, Util.flameColors());
+            SpriteManager.removeSprite(this);
+        }
+
     }
 
 }

@@ -4,9 +4,8 @@ import java.awt.*;
 
 
 public class Bullet extends Sprite {
-    final Actor originator;
-    int power = Const.BULLET_POWER;
-    static int prevDirection = 1;
+    private final Actor originator;
+    private int power = Const.BULLET_POWER;
 
     Bullet(int x, int y, Actor originator, Color color) {
         super(new Rectangle(x, y, 10, 3));
@@ -16,8 +15,14 @@ public class Bullet extends Sprite {
         int direction = this.originator.getDirection();
         double newVel = (direction * Const.MAX_BULLET_VEL) + this.originator.getVel()[0];
         this.setVelX(newVel);
+    }
 
-        Bullet.prevDirection = direction;
+    Actor getOriginator() {
+        return this.originator;
+    }
+
+    int getPower() {
+        return this.power;
     }
 
     @Override

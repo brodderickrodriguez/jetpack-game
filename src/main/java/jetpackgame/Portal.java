@@ -6,7 +6,7 @@ import java.awt.*;
 class PortalEntrance extends Sprite {
     private final int CHECKER_SIZE = 20;
     private final Portal parent;
-    boolean canTransport = true;
+    private boolean canTransport = true;
 
     PortalEntrance(int x, int y, Portal parent, Color colorA, Color colorB) {
         super(new Rectangle(x, y, 80, 120));
@@ -24,6 +24,14 @@ class PortalEntrance extends Sprite {
                 this.add(checker, 0);
             }
         }
+    }
+
+    public boolean getCanTransport() {
+        return this.canTransport;
+    }
+
+    public void setCanTransport(boolean canTransport) {
+        this.canTransport = canTransport;
     }
 
     JLabel getNewChecker(int x, int y, Color color) {
@@ -60,7 +68,7 @@ public class Portal {
     }
 
     void playerCollidedWith(PortalEntrance entrance) {
-        if (!entrance.canTransport) {
+        if (!entrance.getCanTransport()) {
             return;
         }
 
@@ -80,6 +88,6 @@ public class Portal {
         player.setXY(x, y);
         Game.getCurrentGame().centerPlayer();
         player.poofAnimation();
-        destination.canTransport = false;
+        destination.setCanTransport(false);
     }
 }

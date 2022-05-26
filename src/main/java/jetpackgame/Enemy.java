@@ -49,11 +49,11 @@ interface EnemyHiveMind {
 
     default Enemy getBestFlockmate(ArrayList<Enemy> list) {
         Enemy bestFlockmate = (Enemy)this;
-        long bestFlockmateTime = ((Enemy)this).timeOfLastPlayerContact;
+        long bestFlockmateTime = ((Enemy)this).getTimeOfLastPlayerContact();
 
         for (Enemy other: list) {
-            if (other.timeOfLastPlayerContact < bestFlockmateTime) {
-                bestFlockmateTime = other.timeOfLastPlayerContact;
+            if (other.getTimeOfLastPlayerContact() < bestFlockmateTime) {
+                bestFlockmateTime = other.getTimeOfLastPlayerContact();
                 bestFlockmate = other;
             }
         }
@@ -65,9 +65,9 @@ interface EnemyHiveMind {
         Enemy thisEnemy = (Enemy) this;
         Player player = Game.getCurrentGame().getPlayer();
 
-        if ((System.currentTimeMillis() - thisEnemy.timeOfLastPlayerContact) < Const.ENEMY_GIVE_UP_AFTER) {
+        if ((System.currentTimeMillis() - thisEnemy.getTimeOfLastPlayerContact()) < Const.ENEMY_GIVE_UP_AFTER) {
             if (thisEnemy.distanceTo(player) > Const.ENEMY_MIN_SEPARATION) {
-                thisEnemy.headInDirection(thisEnemy.playerDirectionAtTimeOfLastContact);
+                thisEnemy.headInDirection(thisEnemy.getPlayerDirectionAtTimeOfLastContact());
             } else {
                 int newDirection = thisEnemy.getDirectionTo(player);
                 thisEnemy.setDirection(newDirection);
@@ -80,7 +80,7 @@ interface EnemyHiveMind {
             if (!flockmates.isEmpty()) {
                 Enemy bestFlockmate = this.getBestFlockmate(flockmates);
 
-                if ((System.currentTimeMillis() - bestFlockmate.timeOfLastPlayerContact) < Const.ENEMY_GIVE_UP_AFTER) {
+                if ((System.currentTimeMillis() - bestFlockmate.getTimeOfLastPlayerContact()) < Const.ENEMY_GIVE_UP_AFTER) {
                     int newDirection = thisEnemy.getDirectionTo(bestFlockmate);
                     thisEnemy.headInDirection(newDirection);
                     couldFireBullet = true;
@@ -104,13 +104,21 @@ interface EnemyHiveMind {
 }
 
 public class Enemy extends Actor implements EnemyHiveMind {
-    long timeOfLastPlayerContact;
-    int playerDirectionAtTimeOfLastContact;
+    private long timeOfLastPlayerContact;
+    private int playerDirectionAtTimeOfLastContact;
 
     Enemy(int x, int y) {
         super(x, y, Const.ENEMY_COLOR);
         this.setBulletDelay(Const.ENEMY_BULLET_DELAY);
         this.timeOfLastPlayerContact = System.currentTimeMillis();
+    }
+
+    public long getTimeOfLastPlayerContact() {
+        return this.timeOfLastPlayerContact;
+    }
+
+    public int getPlayerDirectionAtTimeOfLastContact() {
+        return this.playerDirectionAtTimeOfLastContact;
     }
 
     @Override

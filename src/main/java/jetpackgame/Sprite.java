@@ -57,7 +57,7 @@ interface SpriteManager {
     }
 }
 
-class Sprite extends JLabel implements SpriteManager, Comparable<Sprite> {
+class Sprite extends JLabel implements Comparable<Sprite> {
     private final double[] vel = {0, 0};
 
     Sprite(Rectangle bounds) {

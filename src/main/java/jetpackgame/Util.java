@@ -23,6 +23,17 @@ public class Util {
         return new Color(r, g, b);
     }
 
+    public static Color[] flameColors() {
+        Color[] colors = {
+                new Color(255, 100, 52),
+                new Color(238, 115, 52),
+                new Color(238, 145, 55),
+                new Color(245, 187, 72),
+                new Color(249, 222, 100),
+        };
+        return colors;
+    }
+
     static class WrapAroundGenerator<T> {
         private final T[] items;
         private int current;

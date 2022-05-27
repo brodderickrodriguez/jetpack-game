@@ -18,7 +18,7 @@ public class Const {
     public static final int MAX_ACTOR_LIFE = 30;
     public static final int LIFE_INCREASE_DELAY = 1000;
 
-    public static final int WORLD_WIDTH = (int)(WINDOW_WIDTH * 3.5);
+    public static final int WORLD_WIDTH = (int)(WINDOW_WIDTH * 2.5);
     public static final int WORLD_HEIGHT = (int)(WINDOW_HEIGHT * 5.5);
 
     public static final int BORDER_DIM = 210;

@@ -22,7 +22,7 @@ public class PreviewLevel extends ContentPane implements ActionListener {
 
         double zoomDelta = this.getZoomOutDelta();
         this.zoomOut(zoomDelta);
-        this.centerWorld();
+        this.centerContents();
         this.repaint();
 
         this.lowestSprite = this.getLowestSprite();
@@ -33,23 +33,6 @@ public class PreviewLevel extends ContentPane implements ActionListener {
     double getZoomOutDelta() {
         double denom = (double)Const.WORLD_WIDTH + (2 * Const.BORDER_DIM);
         return (double)Const.WINDOW_WIDTH / denom;
-    }
-
-    void centerWorld() {
-        double minX = Double.POSITIVE_INFINITY;
-        double minY = Double.POSITIVE_INFINITY;
-
-        for (Sprite sprite: SpriteManager.getEverySprite()) {
-            minX = Math.min(minX, sprite.getX());
-            minY = Math.min(minY, sprite.getY());
-        }
-
-        for (Sprite sprite: SpriteManager.getEverySprite()) {
-            Rectangle bounds = sprite.getBounds();
-            bounds.x -= minX;
-            bounds.y -= minY;
-            sprite.setBounds(bounds);
-        }
     }
 
     void updateComponentSize(Component c, double delta) {

@@ -2,6 +2,7 @@ package main.java.jetpackgame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
 
 
 abstract class ContentPane extends JComponent implements Comparable<ContentPane> {
@@ -22,6 +23,17 @@ abstract class ContentPane extends JComponent implements Comparable<ContentPane>
 
     public void dispose() {
         Controller.getCurrentWindow().disposeCurrentContentPane();
+    }
+
+    public void centerContents() {
+        HashMap<String, Double> minMax = SpriteManager.getMinMaxSprites();
+
+        for (Sprite sprite: SpriteManager.getEverySprite()) {
+            Rectangle bounds = sprite.getBounds();
+            bounds.x -= minMax.get("minX");
+            bounds.y -= minMax.get("minY");
+            sprite.setBounds(bounds);
+        }
     }
 
 }

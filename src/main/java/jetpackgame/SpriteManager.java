@@ -1,6 +1,7 @@
 package main.java.jetpackgame;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.PriorityQueue;
 
@@ -61,6 +62,27 @@ public class SpriteManager {
             SpriteManager.allSprites.add(sprite);
             sprite.repaint();
         }
+    }
 
+
+    static HashMap<String, Double> getMinMaxSprites() {
+        double minX = Double.POSITIVE_INFINITY;
+        double minY = Double.POSITIVE_INFINITY;
+        double maxX = Double.NEGATIVE_INFINITY;
+        double maxY = Double.NEGATIVE_INFINITY;
+
+        for (Sprite sprite: SpriteManager.getEverySprite()) {
+            minX = Math.min(minX, sprite.getX());
+            minY = Math.min(minY, sprite.getY());
+            maxX = Math.max(maxX, sprite.getRightMostPoint());
+            maxY = Math.max(maxY, sprite.getBottomMostPoint());
+        }
+
+        HashMap<String, Double> map = new HashMap<>();
+        map.put("minX", minX);
+        map.put("minY", minY);
+        map.put("maxX", maxX);
+        map.put("maxY", maxY);
+        return map;
     }
 }

@@ -51,7 +51,7 @@ public class SpriteManager {
             SpriteManager.allSprites.remove(sprite);
         }
 
-        for (Sprite sprite : SpriteManager.getSprites()) {
+        for (Sprite sprite: SpriteManager.getSprites()) {
             sprite.update();
         }
 

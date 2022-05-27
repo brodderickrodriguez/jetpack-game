@@ -131,7 +131,7 @@ public class Game extends ContentPane implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        for (int keyCode: Window.getCurrentWindow().getCurrentKeys()) {
+        for (int keyCode: Controller.getCurrentWindow().getCurrentKeys()) {
             switch (keyCode) {
                 case KeyEvent.VK_LEFT -> this.player.moveLeft();
                 case KeyEvent.VK_RIGHT -> this.player.moveRight();

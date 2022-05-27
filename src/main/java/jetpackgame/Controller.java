@@ -6,14 +6,14 @@ import java.awt.event.KeyListener;
 import java.util.HashSet;
 import java.util.PriorityQueue;
 
-public class Window extends JFrame implements KeyListener {
-    private static Window currentWindow = null;
+public class Controller extends JFrame implements KeyListener {
+    private static Controller currentWindow = null;
     private final HashSet<Integer> currentKeys = new HashSet<>();
     private final PriorityQueue<ContentPane> contentPanes = new PriorityQueue<>();
     private ContentPane currentContentPane;
 
-    Window() {
-        Window.currentWindow = this;
+    Controller() {
+        Controller.currentWindow = this;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
         this.setVisible(true);
@@ -24,8 +24,8 @@ public class Window extends JFrame implements KeyListener {
         this.addKeyListener(this);
     }
 
-    public static Window getCurrentWindow() {
-        return Window.currentWindow;
+    public static Controller getCurrentWindow() {
+        return Controller.currentWindow;
     }
 
     public HashSet<Integer> getCurrentKeys() {

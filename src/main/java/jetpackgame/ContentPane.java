@@ -21,7 +21,7 @@ abstract class ContentPane extends JComponent implements Comparable<ContentPane>
     }
 
     public void dispose() {
-        Window.getCurrentWindow().disposeCurrentContentPane();
+        Controller.getCurrentWindow().disposeCurrentContentPane();
     }
 
 }

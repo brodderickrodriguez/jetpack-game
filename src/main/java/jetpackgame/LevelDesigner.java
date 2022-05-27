@@ -5,26 +5,22 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PreviewLevel extends ContentPane implements ActionListener {
+public class LevelDesigner extends ContentPane implements ActionListener {
     private Timer timer;
     private Sprite lowestSprite;
-    private final Levels level;
 
-    PreviewLevel(Levels level) {
-        this.level = level;
-    }
-
-    @Override
-    public void init() {
+    LevelDesigner(Levels level) {
         WorldBorder.makeBorders();
         GameLevelFactory.buildLevel(level);
-        SpriteManager.update();
 
         double zoomDelta = this.getZoomOutDelta();
         this.zoomOut(zoomDelta);
         this.centerWorld();
         this.repaint();
+    }
 
+    @Override
+    public void init() {
         this.lowestSprite = this.getLowestSprite();
         this.timer = new Timer(Const.KEY_DELAY, this);
         this.timer.start();

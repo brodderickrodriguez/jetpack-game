@@ -8,19 +8,21 @@ import java.util.List;
 
 
 /*
-- make all members private
-- refactor border
 - implement level design engine
 - level design
  */
 
 
 public class Game extends Window implements ActionListener {
-    private Timer timer;
     private Player player;
     private static Game currentGame;
 
     Game() {
+        super();
+    }
+
+    @Override
+    void init() {
         Game.currentGame = this;
         SpriteManager.setCurrentWindow(this);
         this.setGame(Levels.LEVEL_0);

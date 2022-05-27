@@ -1,6 +1,7 @@
 package main.java.jetpackgame;
 
 import javax.swing.*;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashSet;
@@ -26,7 +27,9 @@ interface KeySetManager extends KeyListener {
     }
 }
 
-public class Window extends JFrame implements KeySetManager {
+public abstract class Window extends JFrame implements KeySetManager, ActionListener {
+    protected Timer timer;
+
     Window() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
@@ -37,4 +40,7 @@ public class Window extends JFrame implements KeySetManager {
         this.setLocationRelativeTo(null);
         this.addKeyListener(this);
     }
+
+    abstract void init();
+
 }

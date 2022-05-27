@@ -22,6 +22,7 @@ public class Game extends Window implements ActionListener {
 
     Game() {
         Game.currentGame = this;
+        SpriteManager.setCurrentWindow(this);
         this.setGame(Levels.LEVEL_0);
     }
 

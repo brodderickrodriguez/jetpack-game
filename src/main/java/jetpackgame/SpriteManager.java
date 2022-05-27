@@ -5,9 +5,18 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 public class SpriteManager {
+    private static Window currentWindow = null;
     private static final ArrayList<Sprite> allSprites = new ArrayList<>();
     private static final PriorityQueue<Sprite> spriteAddQueue = new PriorityQueue<>();
     private static final PriorityQueue<Sprite> spriteRemoveQueue = new PriorityQueue<>();
+
+    public static void setCurrentWindow(Window window) {
+        SpriteManager.currentWindow = window;
+    }
+
+    public static Window getCurrentWindow() {
+        return SpriteManager.currentWindow;
+    }
 
     static List<Sprite> getSprites() {
         return SpriteManager.allSprites;
@@ -42,13 +51,13 @@ public class SpriteManager {
 
         while (SpriteManager.spriteRemoveQueue.size() > 0) {
             Sprite sprite = SpriteManager.spriteRemoveQueue.poll();
-            Game.getCurrentGame().remove(sprite);
+            SpriteManager.getCurrentWindow().remove(sprite);
             SpriteManager.allSprites.remove(sprite);
         }
 
         while (SpriteManager.spriteAddQueue.size() > 0) {
             Sprite sprite = SpriteManager.spriteAddQueue.poll();
-            Game.getCurrentGame().add(sprite, 0);
+            SpriteManager.getCurrentWindow().add(sprite, 0);
             SpriteManager.allSprites.add(sprite);
             sprite.repaint();
         }

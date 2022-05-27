@@ -17,7 +17,7 @@ public class Game extends ContentPane implements ActionListener {
     private Timer timer;
     private Player player;
     private static Game currentGame;
-    private Levels level;
+    private final Levels level;
 
     Game(Levels level) {
         super();
@@ -27,7 +27,10 @@ public class Game extends ContentPane implements ActionListener {
     @Override
     public void init() {
         Game.currentGame = this;
-        this.setGame(this.level);
+        WorldBorder.makeBorders();
+        this.player = GameLevelFactory.buildLevel(level);
+        this.centerPlayer();
+        this.playPause();
     }
 
     public static Game getCurrentGame() {
@@ -38,16 +41,6 @@ public class Game extends ContentPane implements ActionListener {
         return this.player;
     }
 
-    public void setGame(Levels level) {
-        if (this.isRunning())
-            this.playPause();
-
-        SpriteManager.removeAllSprites();
-        WorldBorder.makeBorders();
-        this.player = GameLevelFactory.buildLevel(level);
-        this.centerPlayer();
-        this.playPause();
-    }
 
     public Boolean isRunning() {
         if (Objects.isNull(this.timer))
@@ -64,7 +57,6 @@ public class Game extends ContentPane implements ActionListener {
             this.timer.start();
         }
     }
-
 
     void panWorld(Boolean x, Boolean y) {
         int xMove = x ? 1: 0;

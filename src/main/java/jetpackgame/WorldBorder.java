@@ -10,19 +10,22 @@ public class WorldBorder extends Obstacle {
     }
 
     public static void makeBorders() {
-        int leftLoc = Const.MAX_LEFT - Const.BORDER_DIM;
+        int left = Const.MAX_LEFT - Const.BORDER_DIM;
+        int top = Const.MAX_TOP - Const.BORDER_DIM;
+        int height = Const.WORLD_HEIGHT + (2 * Const.BORDER_DIM);
+        int width = Const.WORLD_WIDTH + (2 * Const.BORDER_DIM);
 
         // left
-        new WorldBorder(new Rectangle(leftLoc, Const.MAX_TOP, Const.BORDER_DIM, Const.WORLD_HEIGHT));
+        new WorldBorder(new Rectangle(left, top, Const.BORDER_DIM, height));
 
         // right
-        new WorldBorder(new Rectangle(Const.MAX_RIGHT, Const.MAX_TOP, Const.BORDER_DIM, Const.WORLD_HEIGHT));
+        new WorldBorder(new Rectangle(Const.MAX_RIGHT, top, Const.BORDER_DIM, height));
 
         // top
-        new WorldBorder(new Rectangle(leftLoc, Const.MAX_TOP - Const.BORDER_DIM, Const.WORLD_WIDTH + (Const.BORDER_DIM * 2), Const.BORDER_DIM));
+        new WorldBorder(new Rectangle(left, top, width, Const.BORDER_DIM));
 
         // bottom
-        new WorldBorder(new Rectangle(leftLoc, Const.MAX_BOTTOM, Const.WORLD_WIDTH + (Const.BORDER_DIM * 2), Const.BORDER_DIM));
+        new WorldBorder(new Rectangle(left, Const.MAX_BOTTOM, width, Const.BORDER_DIM));
     }
 
 }

@@ -1,10 +1,12 @@
 package main.java.jetpackgame;
 
-import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        new PreviewLevel();
-//        new Game();
+        Window window = new Window();
+        window.queueContentPane(new PreviewLevel(Levels.LEVEL_0));
+        window.queueContentPane(new Game(Levels.LEVEL_0));
+        window.startNextContentPane();
+
     }
 }

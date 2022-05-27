@@ -13,19 +13,21 @@ import java.util.List;
  */
 
 
-public class Game extends Window implements ActionListener {
+public class Game extends ContentPane implements ActionListener {
+    private Timer timer;
     private Player player;
     private static Game currentGame;
+    private Levels level;
 
-    Game() {
+    Game(Levels level) {
         super();
+        this.level = level;
     }
 
     @Override
-    void init() {
+    public void init() {
         Game.currentGame = this;
-        SpriteManager.setCurrentWindow(this);
-        this.setGame(Levels.LEVEL_0);
+        this.setGame(this.level);
     }
 
     public static Game getCurrentGame() {
@@ -129,7 +131,7 @@ public class Game extends Window implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        for (int keyCode: this.currentKeys) {
+        for (int keyCode: Window.getCurrentWindow().getCurrentKeys()) {
             switch (keyCode) {
                 case KeyEvent.VK_LEFT -> this.player.moveLeft();
                 case KeyEvent.VK_RIGHT -> this.player.moveRight();
@@ -141,6 +143,12 @@ public class Game extends Window implements ActionListener {
         this.updatePlayerLocation();
         this.collisionDetection();
         SpriteManager.update();
+
+        if (this.player.getLife() <= 0) {
+            this.playPause();
+            this.dispose();
+        }
+
     }
 
 }

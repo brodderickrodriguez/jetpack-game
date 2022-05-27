@@ -6,13 +6,6 @@ import java.awt.event.*;
 import java.util.*;
 import java.util.List;
 
-
-/*
-- implement level design engine
-- level design
- */
-
-
 public class Game extends ContentPane implements ActionListener {
     private Timer timer;
     private Player player;

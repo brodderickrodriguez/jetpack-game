@@ -1,7 +1,6 @@
 package main.java.jetpackgame;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashSet;
@@ -27,8 +26,8 @@ interface KeySetManager extends KeyListener {
     }
 }
 
-public class GameWindow extends JFrame implements KeySetManager {
-    GameWindow() {
+public class Window extends JFrame implements KeySetManager {
+    Window() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
         this.setVisible(true);

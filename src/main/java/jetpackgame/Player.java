@@ -10,6 +10,12 @@ class Player extends Actor {
         this.addExtremity(this.jetpack);
     }
 
+    @Override
+    public String getInstantiationAsString(double delta) {
+        String r = super.getInstantiationAsString(delta);
+        return "Player player = " + r;
+    }
+
     void goUp() {
         this.jetpack.goUp();
     }

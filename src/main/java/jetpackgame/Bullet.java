@@ -7,9 +7,9 @@ public class Bullet extends Sprite {
     private final Actor originator;
     private int power = Const.BULLET_POWER;
 
-    Bullet(int x, int y, Actor originator, Color color) {
-        super(new Rectangle(x, y, 10, 3));
-        this.setBackground(color);
+    Bullet(int x, int y, Actor originator) {
+        super(new Rectangle(x, y, 10, 3), originator.getMainColor());
+        this.setBackground(originator.getMainColor());
         this.originator = originator;
 
         int direction = this.originator.getDirection();

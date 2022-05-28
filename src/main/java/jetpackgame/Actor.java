@@ -9,15 +9,13 @@ public class Actor extends Sprite {
     private int bulletDelay;
     private long timeOfLastBullet;
     private long timeOfLastLifeIncrease;
-    private final Color bodyColor;
     private final ArrayList<ActorExtremity> extremities = new ArrayList<>();
 
-    Actor(int x, int y, Color bodyColor) {
-        super(new Rectangle(x, y, 42, 74));
-        this.bodyColor = bodyColor;
+    Actor(int x, int y, Color mainColor) {
+        super(new Rectangle(x, y, 42, 74), mainColor);
 
-        this.addExtremity(new LifeIndicator(this, bodyColor));
-        this.addExtremity(new ActorBody(this, this.bodyColor));
+        this.addExtremity(new LifeIndicator(this, this.getMainColor()));
+        this.addExtremity(new ActorBody(this, this.getMainColor()));
         this.addExtremity(new LegSeperator(this));
 
         this.timeOfLastBullet = System.currentTimeMillis();
@@ -62,7 +60,7 @@ public class Actor extends Sprite {
             this.timeOfLastBullet = currentTime;
             Point center = this.getCenter();
             center.x += direction * this.getBounds().width;
-            new Bullet(center.x, center.y, this, color);
+            new Bullet(center.x, center.y, this);
         }
     }
 
@@ -72,7 +70,7 @@ public class Actor extends Sprite {
         int x = bounds.x + (bounds.width / 2);
 
         for (int i = bounds.y; i < bounds.y + bounds.height; i += deltaY) {
-            new ParticleCloud(x, i, this.bodyColor);
+            new ParticleCloud(x, i, this.getMainColor());
         }
     }
 

@@ -3,10 +3,9 @@ package main.java.jetpackgame;
 import java.awt.*;
 
 public class Obstacle extends Sprite {
-    Obstacle(Rectangle bounds) {
-        super(bounds);
+    Obstacle(Rectangle bounds, Color mainColor) {
+        super(bounds, mainColor);
     }
-
 
     @Override
     public void intersectedWith(Sprite other) {

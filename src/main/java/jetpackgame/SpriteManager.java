@@ -65,7 +65,7 @@ public class SpriteManager {
     }
 
 
-    static HashMap<String, Double> getMinMaxSprites() {
+    static HashMap<String, Double> getMinMaxSpriteLocations() {
         double minX = Double.POSITIVE_INFINITY;
         double minY = Double.POSITIVE_INFINITY;
         double maxX = Double.NEGATIVE_INFINITY;

@@ -5,11 +5,17 @@ import java.awt.*;
 
 class Sprite extends JLabel implements Comparable<Sprite> {
     private final double[] vel = {0, 0};
+    private final Color mainColor;
 
-    Sprite(Rectangle bounds) {
+    Sprite(Rectangle bounds, Color mainColor) {
         this.setBounds(bounds);
+        this.mainColor = mainColor;
         this.setOpaque(true);
         SpriteManager.addSprite(this);
+    }
+
+    public Color getMainColor() {
+        return this.mainColor;
     }
 
     void update() {
@@ -17,6 +23,12 @@ class Sprite extends JLabel implements Comparable<Sprite> {
             double[] vel = this.getVel();
             this.moveSprite((int)vel[0], (int)vel[1]);
         }
+    }
+
+    public String getInstantiationAsString(double delta) {
+        int x = (int)(this.getX() * delta);
+        int y = (int)(this.getY() * delta);
+        return "new "+ this.getClass().getSimpleName() + "(" + x + ", " + y + ");";
     }
 
     double[] getVel() {
@@ -50,10 +62,7 @@ class Sprite extends JLabel implements Comparable<Sprite> {
     }
 
     public void moveSprite(int x, int y) {
-        Rectangle bounds = this.getBounds();
-        bounds.x += x;
-        bounds.y += y;
-        this.setBounds(bounds);
+        Util.moveComponent(this, x, y);
     }
 
     public void setXY(int x, int y) {

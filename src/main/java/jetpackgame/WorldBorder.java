@@ -5,8 +5,12 @@ import java.awt.*;
 
 public class WorldBorder extends Obstacle {
     WorldBorder(Rectangle bounds) {
-        super(bounds);
+        super(bounds, Color.black);
         this.setBackground(Color.black);
+    }
+
+    public String getInstantiationAsString(double delta) {
+        return "";
     }
 
     public static void makeBorders() {

@@ -26,7 +26,7 @@ abstract class ContentPane extends JComponent implements Comparable<ContentPane>
     }
 
     public void centerContents() {
-        HashMap<String, Double> minMax = SpriteManager.getMinMaxSprites();
+        HashMap<String, Double> minMax = SpriteManager.getMinMaxSpriteLocations();
 
         for (Sprite sprite: SpriteManager.getEverySprite()) {
             Rectangle bounds = sprite.getBounds();

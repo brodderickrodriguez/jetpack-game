@@ -9,7 +9,7 @@ class PortalEntrance extends Sprite {
     private boolean canTransport = true;
 
     PortalEntrance(int x, int y, Portal parent, Color colorA, Color colorB) {
-        super(new Rectangle(x, y, 80, 120));
+        super(new Rectangle(x, y, 80, 120), colorA);
         this.parent = parent;
         this.setOpaque(true);
         this.setBackground(colorA);

@@ -5,13 +5,11 @@ import java.util.Random;
 
 class Particle extends Sprite {
     private int alpha = 255;
-    private final Color color;
 
-    Particle(int x, int y, int size, double[] vel, Color color) {
-        super(new Rectangle(x, y, size, size));
-        this.setBackground(color);
+    Particle(int x, int y, int size, double[] vel, Color mainColor) {
+        super(new Rectangle(x, y, size, size), mainColor);
+        this.setBackground(mainColor);
         this.setVel(vel);
-        this.color = color;
     }
 
     @Override
@@ -34,9 +32,9 @@ class Particle extends Sprite {
 
         this.setBounds(bounds);
         this.setBackground(new Color(
-                this.color.getRed(),
-                this.color.getGreen(),
-                this.color.getBlue(),
+                this.getMainColor().getRed(),
+                this.getMainColor().getGreen(),
+                this.getMainColor().getBlue(),
                 this.alpha));
     }
 }

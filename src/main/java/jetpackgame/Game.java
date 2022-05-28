@@ -11,10 +11,12 @@ public class Game extends ContentPane implements ActionListener {
     private Player player;
     private static Game currentGame;
     private final Levels level;
+    private MapView mapView;
 
     Game(Levels level) {
         super();
         this.level = level;
+        this.mapView = new MapView();
     }
 
     @Override
@@ -23,6 +25,7 @@ public class Game extends ContentPane implements ActionListener {
         WorldBorder.makeBorders();
         this.player = GameLevelFactory.buildLevel(level);
         this.centerPlayer();
+        this.add(this.mapView, 0);
         this.playPause();
     }
 
@@ -125,6 +128,7 @@ public class Game extends ContentPane implements ActionListener {
             }
         }
 
+        this.mapView.update();
         this.updatePlayerLocation();
         this.collisionDetection();
         SpriteManager.update();

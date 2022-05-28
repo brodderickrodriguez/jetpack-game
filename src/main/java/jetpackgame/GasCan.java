@@ -5,8 +5,8 @@ import java.awt.*;
 
 public class GasCan extends Sprite {
     GasCan(int x, int y) {
-        super(new Rectangle(x, y, 30, 36));
-        this.setIcon(new ImageIcon("/Users/bcr/Documents/projects/code/java/jetpack-game/src/main/resources/gascan.png"));
+        super(new Rectangle(x, y, 30, 36), Color.red);
+        this.setBackground(Color.red);
     }
 
 

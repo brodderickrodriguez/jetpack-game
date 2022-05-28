@@ -49,4 +49,21 @@ public class Util {
             return this.items[idx];
         }
     }
+
+    static Rectangle getModifiedRectSize(Rectangle rect, double delta) {
+        Rectangle newRect = (Rectangle) rect.clone();
+        newRect.x *= delta;
+        newRect.y *= delta;
+        newRect.width *= delta;
+        newRect.height *= delta;
+        return newRect;
+    }
+
+    static void moveComponent(Component c, int x, int y) {
+        Rectangle bounds = c.getBounds();
+        bounds.x += x;
+        bounds.y += y;
+        c.setBounds(bounds);
+    }
+
 }

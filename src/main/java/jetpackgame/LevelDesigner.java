@@ -38,9 +38,9 @@ public class LevelDesigner extends ContentPane implements MouseListener, MouseMo
         SpriteManager.update();
 
         this.zoomDelta = this.getZoomOutDelta();
-        this.zoomOut(zoomDelta);
+        this.zoomOut();
         this.centerContents();
-        this.repaint();
+
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
         Controller.getCurrentController().setKeyPressedCallBack(this::keyEvent);
@@ -60,7 +60,7 @@ public class LevelDesigner extends ContentPane implements MouseListener, MouseMo
         c.setBounds(bounds);
     }
 
-    void zoomOut(double delta) {
+    void zoomOut() {
         for (Sprite sprite: SpriteManager.getEverySprite()) {
             this.updateComponentSize(sprite);
 
@@ -69,6 +69,17 @@ public class LevelDesigner extends ContentPane implements MouseListener, MouseMo
             }
 
         }
+    }
+
+    private void toStd() {
+        System.out.println("private static Player buildLevel--() {");
+        for (Component c: this.getComponents()) {
+            if (c instanceof Sprite) {
+                System.out.println("\t" + ((Sprite)c).getInstantiationAsString(1 / this.zoomDelta));
+
+            }
+        }
+        System.out.println("\treturn player;\n}");
     }
 
     Sprite getSpriteForCurrentModState(int x, int y) {
@@ -88,14 +99,15 @@ public class LevelDesigner extends ContentPane implements MouseListener, MouseMo
     public void mousePressed(MouseEvent e) {
         int x = (int)(e.getX() * (1 / this.zoomDelta));
         int y = (int)(e.getY() * (1 / this.zoomDelta));
+
         this.currentSprite = this.getSpriteForCurrentModState(x, y);
-        this.currentSprite.setXY(e.getX(), e.getY());
-        System.out.println(this.currentSprite.getBounds());
+        this.currentSprite.repaint();
 
         if (this.currentSprite == null) {
             return;
         }
 
+        this.currentSprite.setBackground(this.currentSprite.getMainColor());
         this.updateComponentSize(this.currentSprite);
         this.add(this.currentSprite);
         this.repaint();
@@ -112,6 +124,10 @@ public class LevelDesigner extends ContentPane implements MouseListener, MouseMo
     }
 
     public Void keyEvent(int keyCode) {
+        if (keyCode == KeyEvent.VK_ENTER) {
+            this.toStd();
+            return null;
+        }
         ModState newState = ModState.getModStateFromKeyCode(keyCode);
 
         if (newState != null) {

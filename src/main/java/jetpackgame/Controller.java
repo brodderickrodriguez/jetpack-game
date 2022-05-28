@@ -5,15 +5,17 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashSet;
 import java.util.PriorityQueue;
+import java.util.function.Function;
 
 public class Controller extends JFrame implements KeyListener {
-    private static Controller currentWindow = null;
+    private static Controller currentController = null;
     private final HashSet<Integer> currentKeys = new HashSet<>();
     private final PriorityQueue<ContentPane> contentPanes = new PriorityQueue<>();
     private ContentPane currentContentPane;
+    private Function<Integer, Void> keyPressedCallBack = null;
 
     Controller() {
-        Controller.currentWindow = this;
+        Controller.currentController = this;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
         this.setVisible(true);
@@ -24,12 +26,16 @@ public class Controller extends JFrame implements KeyListener {
         this.addKeyListener(this);
     }
 
-    public static Controller getCurrentWindow() {
-        return Controller.currentWindow;
+    public static Controller getCurrentController() {
+        return Controller.currentController;
     }
 
     public HashSet<Integer> getCurrentKeys() {
         return this.currentKeys;
+    }
+
+    public void setKeyPressedCallBack(Function<Integer, Void> callable) {
+        this.keyPressedCallBack = callable;
     }
 
     public void queueContentPane(ContentPane contentPane) {
@@ -74,6 +80,10 @@ public class Controller extends JFrame implements KeyListener {
             Game.getCurrentGame().playPause();
         } else {
             this.currentKeys.add(e.getKeyCode());
+
+            if (this.keyPressedCallBack != null) {
+                this.keyPressedCallBack.apply(e.getKeyCode());
+            }
         }
     }
 

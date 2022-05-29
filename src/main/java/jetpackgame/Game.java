@@ -12,11 +12,12 @@ public class Game extends ContentPane implements ActionListener {
     private static Game currentGame;
     private final Levels level;
     private MapView mapView;
+    private PausedGameView pausedGameView;
 
     Game(Levels level) {
         super();
         this.level = level;
-        this.mapView = new MapView();
+        this.mapView = new MapView(200);
     }
 
     @Override
@@ -45,10 +46,24 @@ public class Game extends ContentPane implements ActionListener {
         return this.timer.isRunning();
     }
 
+    private void addPauseView() {
+        this.pausedGameView = new PausedGameView();
+        this.add(this.pausedGameView, 0);
+        this.pausedGameView.centerOnParentView();
+        this.repaint();
+    }
+
     void playPause() {
         if (this.isRunning()) {
             this.timer.stop();
+            this.addPauseView();
         } else {
+            if (this.pausedGameView != null) {
+                this.remove(this.pausedGameView);
+                this.pausedGameView = null;
+                this.repaint();
+            }
+
             this.timer = new Timer(Const.KEY_DELAY, this);
             this.timer.start();
         }

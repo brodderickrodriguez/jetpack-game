@@ -124,6 +124,8 @@ public class GameLevelFactory {
         new GasCan(2337, 1030);
         new Enemy(1626, 4169);
         Player player = new Player(2054, 4078);
+//        new Portal(3108, 265, 3120, 4530);
+        new Portal(250, 30, 2050, 4078);
         return player;
     }
 

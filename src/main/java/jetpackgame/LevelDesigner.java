@@ -44,6 +44,8 @@ public class LevelDesigner extends ContentPane implements MouseListener, MouseMo
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
         Controller.getCurrentController().setKeyPressedCallBack(this::keyEvent);
+
+
     }
 
     double getZoomOutDelta() {

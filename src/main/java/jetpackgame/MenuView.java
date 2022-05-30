@@ -2,14 +2,19 @@ package main.java.jetpackgame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
+import java.util.HashMap;
+import java.util.function.Function;
 
-public class MenuView extends JLabel {
+
+public class MenuView extends JLabel implements ActionListener {
     private static final String FONT_NAME = "default";
     private static final int FONT_STYLE = Font.BOLD;
     private static final int TEXT_ALIGNMENT = SwingConstants.CENTER;
     private static final Color PRIMARY_COLOR = Color.darkGray;
     private static final Color SECONDARY_COLOR = Color.white;
     private static final int PERIMETER = 10;
+    private final HashMap<JButton, Function<Void, Void>> buttonActionMap = new HashMap<>();
 
     MenuView() {
         super();
@@ -19,22 +24,24 @@ public class MenuView extends JLabel {
         this.setOpaque(true);
 
         this.addLabel("Test", 48);
-        this.addButton("button", 30);
-        this.addButton("button", 30);
-        this.addButton("button", 30);
-        this.addButton("button", 30);
-        this.addLabel("Test", 48);
-        this.addLabel("Test", 48);
-        this.addButton("button", 30);
+        this.addButton("button", 30, this::buttonAction);
+        this.addButton("button", 30, null);
+        this.addButton("button", 30, null);
+        this.addButton("button", 30, null);
     }
+
+    private Void buttonAction(Void unused) {
+        System.out.println("button touch");
+        return null;
+    }
+
 
     public void init() {
+        this.adjustMenuComponentBounds();
         this.centerOnParentView();
-        this.repaint();
     }
 
-    @Override
-    public void repaint() {
+    private void adjustMenuComponentBounds() {
         int currentY = PERIMETER;
 
         for (Component c: this.getComponents()) {
@@ -53,9 +60,8 @@ public class MenuView extends JLabel {
             thisBounds.height = currentY + PERIMETER;
             this.setBounds(thisBounds);
         }
-
-        super.repaint();
     }
+
 
     public void centerOnParentView() {
         if (this.getParent() == null) {
@@ -85,7 +91,7 @@ public class MenuView extends JLabel {
         this.add(label);
     }
 
-    public void addButton(String text, int fontSize) {
+    public void addButton(String text, int fontSize, Function<Void, Void> action) {
         JButton button = new JButton();
         button.setBounds(new Rectangle(PERIMETER, 50, this.getWidth() - (PERIMETER * 2), fontSize + 5));
         button.setText(text);
@@ -93,7 +99,23 @@ public class MenuView extends JLabel {
         button.setVerticalAlignment(SwingConstants.CENTER);
         button.setForeground(MenuView.PRIMARY_COLOR);
         button.setFont(new Font(MenuView.FONT_NAME, MenuView.FONT_STYLE, fontSize));
+        button.addActionListener(this);
+        this.buttonActionMap.put(button, action);
         this.add(button);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() instanceof JButton) {
+            JButton source = (JButton) e.getSource();
+
+            if (this.buttonActionMap.containsKey(source)) {
+                Function<Void, Void> func = this.buttonActionMap.get(source);
+
+                if (func != null) {
+                    func.apply(null);
+                }
+            }
+        }
+    }
 }

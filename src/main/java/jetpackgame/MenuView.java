@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.HashMap;
+import java.util.concurrent.Callable;
 import java.util.function.Function;
 
 
@@ -14,7 +15,7 @@ public class MenuView extends JLabel implements ActionListener {
     private static final Color PRIMARY_COLOR = Color.darkGray;
     private static final Color SECONDARY_COLOR = Color.white;
     private static final int PERIMETER = 10;
-    private final HashMap<JButton, Function<Void, Void>> buttonActionMap = new HashMap<>();
+    private final HashMap<JButton, Runnable> buttonActionMap = new HashMap<>();
 
     MenuView() {
         super();
@@ -78,7 +79,7 @@ public class MenuView extends JLabel implements ActionListener {
         this.add(label);
     }
 
-    public void addButton(String text, int fontSize, Function<Void, Void> action) {
+    public void addButton(String text, int fontSize, Runnable action) {
         JButton button = new JButton();
         button.setBounds(new Rectangle(PERIMETER, 50, this.getWidth() - (PERIMETER * 2), fontSize + 5));
         button.setText(text);
@@ -98,10 +99,10 @@ public class MenuView extends JLabel implements ActionListener {
             JButton source = (JButton) e.getSource();
 
             if (this.buttonActionMap.containsKey(source)) {
-                Function<Void, Void> func = this.buttonActionMap.get(source);
+                Runnable func = this.buttonActionMap.get(source);
 
                 if (func != null) {
-                    func.apply(null);
+                    func.run();
                 }
 
                 source.setFocusable(false);

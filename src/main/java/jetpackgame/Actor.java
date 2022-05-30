@@ -1,5 +1,4 @@
 package main.java.jetpackgame;
-import main.java.jetpackgame.*;
 
 import java.awt.*;
 import java.util.ArrayList;

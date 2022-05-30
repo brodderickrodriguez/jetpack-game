@@ -52,7 +52,6 @@ public class MapView extends JLabel {
             this.add(miniSprite, 0);
         }
 
-
-
+        this.repaint();
     }
 }

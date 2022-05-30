@@ -17,7 +17,7 @@ public class Game extends ContentPane implements ActionListener {
     Game(Levels level) {
         super();
         this.level = level;
-        this.mapView = new MapView(200);
+        this.mapView = new MapView(150);
     }
 
     private MenuView getPausedGameView() {
@@ -40,11 +40,6 @@ public class Game extends ContentPane implements ActionListener {
         this.pausedGameView.add(mapView);
 
         return this.pausedGameView;
-    }
-
-    private Void playPause(Void unused) {
-        this.playPause();
-        return null;
     }
 
     private void addPauseView() {
@@ -175,6 +170,7 @@ public class Game extends ContentPane implements ActionListener {
         }
 
         this.mapView.update();
+        this.setComponentZOrder(this.mapView, 0);
         this.updatePlayerLocation();
         this.collisionDetection();
         SpriteManager.update();

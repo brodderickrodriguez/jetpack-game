@@ -1,5 +1,6 @@
 package main.java.jetpackgame;
 
+import main.java.jetpackgame.contentpanes.ContentPane;
 import main.java.jetpackgame.sprites.Sprite;
 import java.util.*;
 
@@ -22,7 +23,7 @@ public class SpriteManager {
         return SpriteManager.allSprites;
     }
 
-    static List<Sprite> getEverySprite() {
+    public static List<Sprite> getEverySprite() {
         ArrayList<Sprite> all = new ArrayList<>();
         all.addAll(SpriteManager.allSprites);
         all.addAll(SpriteManager.spriteAddQueue);
@@ -44,7 +45,7 @@ public class SpriteManager {
         }
     }
 
-    static void update() {
+    public static void update() {
         while (SpriteManager.spriteRemoveQueue.size() > 0) {
             Sprite sprite = SpriteManager.spriteRemoveQueue.poll();
             SpriteManager.getCurrentContentPane().remove(sprite);
@@ -64,7 +65,7 @@ public class SpriteManager {
     }
 
 
-    static HashMap<String, Double> getMinMaxSpriteLocations() {
+    public static HashMap<String, Double> getMinMaxSpriteLocations() {
         double minX = Double.POSITIVE_INFINITY;
         double minY = Double.POSITIVE_INFINITY;
         double maxX = Double.NEGATIVE_INFINITY;

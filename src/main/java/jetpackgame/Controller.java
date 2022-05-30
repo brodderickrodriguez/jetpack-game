@@ -1,5 +1,6 @@
 package main.java.jetpackgame;
 
+import main.java.jetpackgame.contentpanes.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.*;

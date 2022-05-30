@@ -1,5 +1,8 @@
-package main.java.jetpackgame;
+package main.java.jetpackgame.contentpanes;
 
+import main.java.jetpackgame.Const;
+import main.java.jetpackgame.Controller;
+import main.java.jetpackgame.SpriteManager;
 import main.java.jetpackgame.sprites.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -50,7 +53,7 @@ public class LevelDesigner extends ContentPane implements MouseListener, MouseMo
     }
 
     double getZoomOutDelta() {
-        double denom = (double)Const.WORLD_HEIGHT + (2 * Const.BORDER_DIM);
+        double denom = (double) Const.WORLD_HEIGHT + (2 * Const.BORDER_DIM);
         return (double)Const.WINDOW_HEIGHT / denom;
     }
 

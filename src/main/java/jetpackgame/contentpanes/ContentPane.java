@@ -1,12 +1,15 @@
-package main.java.jetpackgame;
+package main.java.jetpackgame.contentpanes;
 
+import main.java.jetpackgame.Const;
+import main.java.jetpackgame.Controller;
+import main.java.jetpackgame.SpriteManager;
 import main.java.jetpackgame.sprites.Sprite;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 
 
-abstract class ContentPane extends JComponent implements Comparable<ContentPane> {
+public abstract class ContentPane extends JComponent implements Comparable<ContentPane> {
     ContentPane() {
         this.setBounds(new Rectangle(0, 0, Const.WINDOW_WIDTH, Const.WINDOW_HEIGHT));
         this.setOpaque(true);

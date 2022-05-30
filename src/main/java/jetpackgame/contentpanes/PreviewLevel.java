@@ -1,5 +1,10 @@
-package main.java.jetpackgame;
+package main.java.jetpackgame.contentpanes;
 
+import main.java.jetpackgame.Const;
+import main.java.jetpackgame.SpriteManager;
+import main.java.jetpackgame.contentpanes.ContentPane;
+import main.java.jetpackgame.contentpanes.GameLevelFactory;
+import main.java.jetpackgame.contentpanes.Levels;
 import main.java.jetpackgame.sprites.*;
 import javax.swing.*;
 import java.awt.*;

@@ -1,9 +1,11 @@
-package main.java.jetpackgame;
+package main.java.jetpackgame.contentpanes;
 
+import main.java.jetpackgame.Const;
+import main.java.jetpackgame.contentpanes.subcontentpanes.MenuView;
 import java.awt.event.*;
 import javax.swing.Timer;
 
-public class MenuContentPane extends ContentPane implements ActionListener {
+public abstract class MenuContentPane extends ContentPane implements ActionListener {
     private final MenuView menu = new MenuView();
 //    private final Player player = new Player(Const.WINDOW_WIDTH / 2, Const.WINDOW_HEIGHT / 2);
     private final Timer timer;
@@ -20,6 +22,10 @@ public class MenuContentPane extends ContentPane implements ActionListener {
 
         this.menu.init();
 
+    }
+
+    public MenuView getMenu() {
+        return this.menu;
     }
 
     @Override

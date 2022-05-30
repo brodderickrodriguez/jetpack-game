@@ -1,5 +1,8 @@
-package main.java.jetpackgame;
+package main.java.jetpackgame.contentpanes;
 
+import main.java.jetpackgame.*;
+import main.java.jetpackgame.contentpanes.subcontentpanes.MapView;
+import main.java.jetpackgame.contentpanes.subcontentpanes.MenuView;
 import main.java.jetpackgame.sprites.*;
 import javax.swing.Timer;
 import java.awt.*;
@@ -15,7 +18,7 @@ public class Game extends ContentPane implements ActionListener {
     private MapView mapView;
     private MenuView pausedGameView;
 
-    Game(Levels level) {
+    public Game(Levels level) {
         super();
         this.level = level;
         this.mapView = new MapView(150);
@@ -80,7 +83,7 @@ public class Game extends ContentPane implements ActionListener {
 
 
 
-    void playPause() {
+    public void playPause() {
         if (this.isRunning()) {
             this.timer.stop();
             this.addPauseView();

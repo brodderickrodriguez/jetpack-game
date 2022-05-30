@@ -1,13 +1,8 @@
-package main.java.jetpackgame;
+package main.java.jetpackgame.contentpanes;
 import main.java.jetpackgame.sprites.*;
 
 import java.util.*;
 import java.util.concurrent.Callable;
-
-enum Levels {
-    LEVEL_0,
-    LEVEL_1;
-}
 
 public class GameLevelFactory {
     static final Map<Levels, Callable<Player>> levelMap = Map.of(

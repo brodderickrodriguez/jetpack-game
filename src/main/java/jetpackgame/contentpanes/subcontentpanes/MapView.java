@@ -1,5 +1,7 @@
-package main.java.jetpackgame;
+package main.java.jetpackgame.contentpanes.subcontentpanes;
 
+import main.java.jetpackgame.Const;
+import main.java.jetpackgame.SpriteManager;
 import main.java.jetpackgame.sprites.*;
 import javax.swing.*;
 import java.awt.*;
@@ -19,14 +21,10 @@ class MapViewSprite extends JLabel {
     }
 }
 
-public class MapView extends JLabel {
+public class MapView extends SubContentPane {
     private final int width;
 
-    public double getDeltaSize() {
-        return ((double)this.width / Const.WORLD_WIDTH);
-    }
-
-    MapView(int width) {
+    public MapView(int width) {
         super();
         this.width = width;
         int height = (int)((double)Const.WORLD_HEIGHT / ((double)Const.WORLD_WIDTH) * width);
@@ -35,6 +33,14 @@ public class MapView extends JLabel {
         this.setOpaque(true);
     }
 
+    @Override
+    public void init() { }
+
+    public double getDeltaSize() {
+        return ((double)this.width / Const.WORLD_WIDTH);
+    }
+
+    @Override
     public void update() {
         this.removeAll();
         HashMap<String, Double> minMax = SpriteManager.getMinMaxSpriteLocations();
@@ -48,7 +54,6 @@ public class MapView extends JLabel {
 
             double xOffset = -minMax.get("minX") - Const.BORDER_DIM;
             double yOffset = -minMax.get("minY") - Const.BORDER_DIM;
-
             MapViewSprite miniSprite = new MapViewSprite(sprite, this.getDeltaSize(), xOffset, yOffset);
             this.add(miniSprite, 0);
         }

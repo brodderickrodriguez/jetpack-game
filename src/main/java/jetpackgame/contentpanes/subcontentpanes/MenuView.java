@@ -1,11 +1,11 @@
-package main.java.jetpackgame;
+package main.java.jetpackgame.contentpanes.subcontentpanes;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.HashMap;
 
-public class MenuView extends JLabel implements ActionListener {
+public class MenuView extends SubContentPane {
     private static final String FONT_NAME = "default";
     private static final int FONT_STYLE = Font.BOLD;
     private static final int TEXT_ALIGNMENT = SwingConstants.CENTER;
@@ -14,13 +14,14 @@ public class MenuView extends JLabel implements ActionListener {
     private static final int PERIMETER = 10;
     private final HashMap<JButton, Runnable> buttonActionMap = new HashMap<>();
 
-    MenuView() {
+    public MenuView() {
         super();
         this.setBounds(0, 0, 400, 0);
         this.setBackground(MenuView.PRIMARY_COLOR);
         this.setOpaque(true);
     }
 
+    @Override
     public void init() {
         this.adjustMenuComponentBounds();
         this.centerOnParentView();
@@ -47,7 +48,6 @@ public class MenuView extends JLabel implements ActionListener {
         }
     }
 
-
     public void centerOnParentView() {
         if (this.getParent() == null) {
             return;
@@ -68,7 +68,7 @@ public class MenuView extends JLabel implements ActionListener {
 
     public void addLabel(String text, int fontSize) {
         JLabel label = new JLabel();
-        label.setBounds(new Rectangle(0, 0, this.getWidth(), fontSize));
+        label.setBounds(new Rectangle(0, 0, this.getWidth(), fontSize + 5));
         label.setText(text);
         label.setHorizontalAlignment(MenuView.TEXT_ALIGNMENT);
         label.setForeground(MenuView.SECONDARY_COLOR);
@@ -101,9 +101,6 @@ public class MenuView extends JLabel implements ActionListener {
                 if (func != null) {
                     func.run();
                 }
-
-                source.setFocusable(false);
-
             }
         }
     }

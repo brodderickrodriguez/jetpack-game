@@ -12,13 +12,48 @@ public class Game extends ContentPane implements ActionListener {
     private static Game currentGame;
     private final Levels level;
     private MapView mapView;
-    private PausedGameView pausedGameView;
+    private MenuView pausedGameView;
 
     Game(Levels level) {
         super();
         this.level = level;
         this.mapView = new MapView(200);
     }
+
+    private MenuView getPausedGameView() {
+        if (this.pausedGameView != null) {
+            this.pausedGameView.init();
+            return this.pausedGameView;
+        }
+
+        this.pausedGameView = new MenuView();
+
+        this.pausedGameView.addLabel("paused", 36);
+        this.pausedGameView.addLabel("jetpack-game", 12);
+
+        this.pausedGameView.addButton("resume", 24, this::playPause);
+
+
+        MapView mapView = new MapView(500);
+        mapView.update();
+        this.pausedGameView.add(mapView);
+
+        return this.pausedGameView;
+    }
+
+    private Void playPause(Void unused) {
+        this.playPause();
+        return null;
+    }
+
+    private void addPauseView() {
+        this.pausedGameView = this.getPausedGameView();
+        this.add(this.pausedGameView, 0);
+        this.pausedGameView.init();
+        this.repaint();
+    }
+
+
 
     @Override
     public void init() {
@@ -46,12 +81,7 @@ public class Game extends ContentPane implements ActionListener {
         return this.timer.isRunning();
     }
 
-    private void addPauseView() {
-        this.pausedGameView = new PausedGameView();
-        this.add(this.pausedGameView, 0);
-        this.pausedGameView.centerOnParentView();
-        this.repaint();
-    }
+
 
     void playPause() {
         if (this.isRunning()) {

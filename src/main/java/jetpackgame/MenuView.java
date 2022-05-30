@@ -19,22 +19,9 @@ public class MenuView extends JLabel implements ActionListener {
     MenuView() {
         super();
         this.setBounds(0, 0, 400, 0);
-
         this.setBackground(MenuView.PRIMARY_COLOR);
         this.setOpaque(true);
-
-        this.addLabel("Test", 48);
-        this.addButton("button", 30, this::buttonAction);
-        this.addButton("button", 30, null);
-        this.addButton("button", 30, null);
-        this.addButton("button", 30, null);
     }
-
-    private Void buttonAction(Void unused) {
-        System.out.println("button touch");
-        return null;
-    }
-
 
     public void init() {
         this.adjustMenuComponentBounds();
@@ -101,6 +88,7 @@ public class MenuView extends JLabel implements ActionListener {
         button.setFont(new Font(MenuView.FONT_NAME, MenuView.FONT_STYLE, fontSize));
         button.addActionListener(this);
         this.buttonActionMap.put(button, action);
+        button.setFocusable(false);
         this.add(button);
     }
 
@@ -115,6 +103,9 @@ public class MenuView extends JLabel implements ActionListener {
                 if (func != null) {
                     func.apply(null);
                 }
+
+                source.setFocusable(false);
+
             }
         }
     }

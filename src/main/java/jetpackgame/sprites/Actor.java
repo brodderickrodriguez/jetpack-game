@@ -1,5 +1,6 @@
-package main.java.jetpackgame;
+package main.java.jetpackgame.sprites;
 
+import main.java.jetpackgame.*;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -65,7 +66,7 @@ public class Actor extends Sprite {
         }
     }
 
-    void poofAnimation() {
+    public void poofAnimation() {
         Rectangle bounds = this.getBounds();
         int deltaY = bounds.height / 3;
         int x = bounds.x + (bounds.width / 2);
@@ -99,7 +100,7 @@ public class Actor extends Sprite {
     }
 
     @Override
-    void update() {
+    public void update() {
         super.update();
 
         for (ActorExtremity extremity: this.extremities) {

@@ -1,5 +1,6 @@
-package main.java.jetpackgame;
+package main.java.jetpackgame.sprites;
 
+import main.java.jetpackgame.*;
 import java.util.ArrayList;
 
 
@@ -107,7 +108,7 @@ public class Enemy extends Actor implements EnemyHiveMind {
     private long timeOfLastPlayerContact;
     private int playerDirectionAtTimeOfLastContact;
 
-    Enemy(int x, int y) {
+    public Enemy(int x, int y) {
         super(x, y, Const.ENEMY_COLOR);
         this.setBulletDelay(Const.ENEMY_BULLET_DELAY);
         this.timeOfLastPlayerContact = System.currentTimeMillis();
@@ -122,7 +123,7 @@ public class Enemy extends Actor implements EnemyHiveMind {
     }
 
     @Override
-    void update() {
+    public void update() {
         super.update();
         this.updatePolicy();
 

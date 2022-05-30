@@ -1,5 +1,6 @@
-package main.java.jetpackgame;
+package main.java.jetpackgame.sprites;
 
+import main.java.jetpackgame.*;
 import java.awt.*;
 import java.util.Random;
 
@@ -13,7 +14,7 @@ class Particle extends Sprite {
     }
 
     @Override
-    void update() {
+    public void update() {
         super.update();
         Rectangle bounds = this.getBounds();
 
@@ -40,7 +41,7 @@ class Particle extends Sprite {
 }
 
 public class ParticleCloud {
-    ParticleCloud(int x, int y, Color[] colors) {
+    public ParticleCloud(int x, int y, Color[] colors) {
         Random rn = new Random();
         int halfParticleSize = (int)(Const.PARTICLE_MAX_SIZE / 2);
 
@@ -55,7 +56,7 @@ public class ParticleCloud {
         }
     }
 
-    ParticleCloud(int x, int y, Color color) {
+    public ParticleCloud(int x, int y, Color color) {
         this(x, y, new Color[]{color});
     }
 

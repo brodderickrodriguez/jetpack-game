@@ -1,4 +1,6 @@
-package main.java.jetpackgame;
+package main.java.jetpackgame.sprites;
+
+import main.java.jetpackgame.*;
 import javax.swing.*;
 import java.awt.*;
 
@@ -60,7 +62,7 @@ class PortalEntrance extends Sprite {
 public class Portal {
     private final PortalEntrance portalA, portalB;
 
-    Portal(int portalAX, int portalAY, int portalBX, int portalBY) {
+    public Portal(int portalAX, int portalAY, int portalBX, int portalBY) {
         Color colorA = Util.randomColor();
         Color colorB = Util.randomColor();
         this.portalA = new PortalEntrance(portalAX, portalAY, this, colorA, colorB);

@@ -1,13 +1,14 @@
-package main.java.jetpackgame;
+package main.java.jetpackgame.sprites;
 
+import main.java.jetpackgame.*;
 import javax.swing.*;
 import java.awt.*;
 
-class Sprite extends JLabel implements Comparable<Sprite> {
+public abstract class Sprite extends JLabel implements Comparable<Sprite> {
     private final double[] vel = {0, 0};
     private final Color mainColor;
 
-    Sprite(Rectangle bounds, Color mainColor) {
+    protected Sprite(Rectangle bounds, Color mainColor) {
         this.setBounds(bounds);
         this.mainColor = mainColor;
         this.setOpaque(true);
@@ -18,7 +19,7 @@ class Sprite extends JLabel implements Comparable<Sprite> {
         return this.mainColor;
     }
 
-    void update() {
+    public void update() {
         if (!(this instanceof Player)) {
             double[] vel = this.getVel();
             this.moveSprite((int)vel[0], (int)vel[1]);
@@ -31,15 +32,15 @@ class Sprite extends JLabel implements Comparable<Sprite> {
         return "new "+ this.getClass().getSimpleName() + "(" + x + ", " + y + ");";
     }
 
-    double[] getVel() {
+    public double[] getVel() {
         return this.vel;
     }
 
-    void modifyVelX(double x) {
+    protected void modifyVelX(double x) {
         this.vel[0] += x;
     }
 
-    void modifyVelY(double y) {
+    public void modifyVelY(double y) {
         this.vel[1] += y;
     }
 
@@ -48,15 +49,15 @@ class Sprite extends JLabel implements Comparable<Sprite> {
         this.vel[1] = vel[1];
     }
 
-    void setVelX(double x) {
+    protected void setVelX(double x) {
         this.vel[0] = x;
     }
 
-    void  setVelY(double y) {
+    protected void  setVelY(double y) {
         this.vel[1] = y;
     }
 
-    Point getCenter() {
+    protected Point getCenter() {
         Rectangle bounds = this.getBounds();
         return new Point(bounds.x + (bounds.width / 2), bounds.y + (bounds.height / 2));
     }

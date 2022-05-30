@@ -1,10 +1,11 @@
-package main.java.jetpackgame;
+package main.java.jetpackgame.sprites;
 
+import main.java.jetpackgame.*;
 import java.awt.*;
 
 
 public class GasCan extends Sprite {
-    GasCan(int x, int y) {
+    public GasCan(int x, int y) {
         super(new Rectangle(x, y, 30, 36), Color.red);
         this.setBackground(Color.red);
     }

@@ -1,5 +1,6 @@
 package main.java.jetpackgame;
 
+import main.java.jetpackgame.sprites.*;
 import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.*;
@@ -106,7 +107,7 @@ public class Game extends ContentPane implements ActionListener {
         }
     }
 
-    void centerPlayer() {
+    public void centerPlayer() {
         int destinationX = Const.WINDOW_WIDTH / 2;
         int destinationY = Const.WINDOW_HEIGHT / 2;
 

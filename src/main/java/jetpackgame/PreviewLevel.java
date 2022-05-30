@@ -1,9 +1,9 @@
 package main.java.jetpackgame;
 
+import main.java.jetpackgame.sprites.*;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class PreviewLevel extends ContentPane implements ActionListener {
     private Timer timer;

@@ -1,9 +1,10 @@
-package main.java.jetpackgame;
+package main.java.jetpackgame.sprites;
 
+import main.java.jetpackgame.*;
 
-class Player extends Actor {
+public class Player extends Actor {
     private final JetPack jetpack;
-    Player(int x, int y) {
+    public Player(int x, int y) {
         super(x, y, Const.PLAYER_COLOR);
         this.setBulletDelay(Const.PLAYER_BULLET_DELAY);
         this.jetpack = new JetPack(this);
@@ -16,23 +17,23 @@ class Player extends Actor {
         return "Player player = " + r;
     }
 
-    void goUp() {
+    public void goUp() {
         this.jetpack.goUp();
     }
 
-    void fireBullet() {
+    public void fireBullet() {
         this.fireBullet(Const.PLAYER_COLOR);
     }
 
-    void refillFuel() {
+    public void refillFuel() {
         this.jetpack.refillFuel();
     }
 
-    void moveLeft() {
+    public void moveLeft() {
         this.modifyVelX(-Const.PLAYER_HORIZONTAL_ACC);
     }
 
-    void moveRight() {
+    public void moveRight() {
         this.modifyVelX(Const.PLAYER_HORIZONTAL_ACC);
     }
 

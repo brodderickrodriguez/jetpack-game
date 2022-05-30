@@ -1,5 +1,6 @@
 package main.java.jetpackgame;
 
+import main.java.jetpackgame.sprites.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;

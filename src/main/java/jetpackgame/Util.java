@@ -34,17 +34,17 @@ public class Util {
         return colors;
     }
 
-    static class WrapAroundGenerator<T> {
+    public static class WrapAroundGenerator<T> {
         private final T[] items;
         private int current;
-        WrapAroundGenerator(T[] items, int offset) {
+        public WrapAroundGenerator(T[] items, int offset) {
             this.items = items;
             this.current = offset;
         }
-        WrapAroundGenerator(T[] items) {
+        public WrapAroundGenerator(T[] items) {
             this(items, 0);
         }
-        T getNext() {
+        public T getNext() {
             int idx = this.current++ % this.items.length;
             return this.items[idx];
         }
@@ -59,7 +59,7 @@ public class Util {
         return newRect;
     }
 
-    static void moveComponent(Component c, int x, int y) {
+    public static void moveComponent(Component c, int x, int y) {
         Rectangle bounds = c.getBounds();
         bounds.x += x;
         bounds.y += y;

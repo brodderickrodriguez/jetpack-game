@@ -1,9 +1,8 @@
 package main.java.jetpackgame;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.PriorityQueue;
+import main.java.jetpackgame.sprites.Sprite;
+import java.util.*;
+
 
 public class SpriteManager {
     private static ContentPane currentContentPane = null;
@@ -19,7 +18,7 @@ public class SpriteManager {
         return SpriteManager.currentContentPane;
     }
 
-    static List<Sprite> getSprites() {
+    public static List<Sprite> getSprites() {
         return SpriteManager.allSprites;
     }
 
@@ -31,11 +30,11 @@ public class SpriteManager {
         return all;
     }
 
-    static void addSprite(Sprite sprite) {
+    public static void addSprite(Sprite sprite) {
         SpriteManager.spriteAddQueue.add(sprite);
     }
 
-    static void removeSprite(Sprite sprite) {
+    public static void removeSprite(Sprite sprite) {
         SpriteManager.spriteRemoveQueue.add(sprite);
     }
 

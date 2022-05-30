@@ -1,6 +1,7 @@
 package main.java.jetpackgame;
-import java.util.Map;
-import java.util.Random;
+import main.java.jetpackgame.sprites.*;
+
+import java.util.*;
 import java.util.concurrent.Callable;
 
 enum Levels {

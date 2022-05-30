@@ -4,9 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.HashMap;
-import java.util.concurrent.Callable;
-import java.util.function.Function;
-
 
 public class MenuView extends JLabel implements ActionListener {
     private static final String FONT_NAME = "default";

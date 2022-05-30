@@ -1,4 +1,4 @@
-package main.java.jetpackgame;
+package main.java.jetpackgame.sprites;
 
 import java.awt.*;
 

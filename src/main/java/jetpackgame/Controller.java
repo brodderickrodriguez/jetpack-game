@@ -1,10 +1,8 @@
 package main.java.jetpackgame;
 
 import javax.swing.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.HashSet;
-import java.util.PriorityQueue;
+import java.awt.event.*;
+import java.util.*;
 import java.util.function.Function;
 
 public class Controller extends JFrame implements KeyListener {

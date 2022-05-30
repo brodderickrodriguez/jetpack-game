@@ -14,23 +14,22 @@ class MapViewSprite extends JLabel {
         int y = (int) ((fromSprite.getY() + offsetY) * deltaSize);
         int width = Math.max(2, (int) (deltaSize * fromSprite.getWidth()));
         int height = Math.max(2, (int) (deltaSize * fromSprite.getHeight()));
-
         this.setBounds(new Rectangle(x, y, width, height));
     }
 }
 
 public class MapView extends JLabel {
-    private final int height;
+    private final int width;
 
     public double getDeltaSize() {
-        return ((double)this.height / Const.WORLD_HEIGHT);
+        return ((double)this.width / Const.WORLD_WIDTH);
     }
 
-    MapView(int height) {
+    MapView(int width) {
         super();
-        this.height = height;
-        int width = (int)(((double)Const.WORLD_WIDTH / (double)Const.WORLD_HEIGHT) * height);
-        this.setBounds(new Rectangle(5, 5, width, height));
+        this.width = width;
+        int height = (int)((double)Const.WORLD_HEIGHT / ((double)Const.WORLD_WIDTH) * width);
+        this.setBounds(new Rectangle(10, 10, width, height));
         this.setBackground(new Color(255, 255, 255, 255));
         this.setOpaque(true);
     }

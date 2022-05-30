@@ -32,9 +32,10 @@ public class Game extends ContentPane implements ActionListener {
         this.pausedGameView.addLabel("jetpack-game", 12);
 
         this.pausedGameView.addButton("resume", 24, this::playPause);
+        this.pausedGameView.addButton("main menu", 24, null);
 
 
-        MapView mapView = new MapView(500);
+        MapView mapView = new MapView(380);
         mapView.update();
         this.pausedGameView.add(mapView);
 

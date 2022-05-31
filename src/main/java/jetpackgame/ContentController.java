@@ -9,7 +9,7 @@ import java.util.function.Function;
 public class ContentController extends JFrame implements KeyListener {
     private static ContentController currentController = null;
     private final HashSet<Integer> currentKeys = new HashSet<>();
-    private final PriorityQueue<ContentPane> contentPanes = new PriorityQueue<>();
+    private final ArrayList<ContentPane> contentPanes = new ArrayList<>();
     private ContentPane currentContentPane;
     private Function<Integer, Void> keyPressedCallBack = null;
 
@@ -41,6 +41,13 @@ public class ContentController extends JFrame implements KeyListener {
         this.contentPanes.add(contentPane);
     }
 
+
+    public void setContentPane(ContentPane c) {
+        this.disposeCurrentContentPane();
+        this.contentPanes.add(0, c);
+        this.startNextContentPane();
+    }
+
     public void disposeCurrentContentPane() {
         if (this.currentContentPane == null) {
             return;
@@ -49,7 +56,7 @@ public class ContentController extends JFrame implements KeyListener {
         SpriteManager.removeAllSprites();
         SpriteManager.update();
 
-        this.contentPanes.poll();
+        this.contentPanes.remove(0);
         this.remove(this.currentContentPane);
         this.currentContentPane = null;
 
@@ -62,7 +69,7 @@ public class ContentController extends JFrame implements KeyListener {
             return;
         }
 
-        this.currentContentPane = this.contentPanes.peek();
+        this.currentContentPane = this.contentPanes.get(0);
         this.add(this.currentContentPane);
         SpriteManager.setCurrentContentPane(this.currentContentPane);
         SpriteManager.update();

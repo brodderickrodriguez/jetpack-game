@@ -8,14 +8,23 @@ import java.util.Random;
 import javax.swing.Timer;
 
 public abstract class MenuContentPane extends ContentPane implements ActionListener {
-    private final MenuView menu = new MenuView();
-    private final Player player = new Player(50, Const.WINDOW_HEIGHT / 2);
+    private MenuView menu = new MenuView();
+    private Player player = new Player(50, Const.WINDOW_HEIGHT / 2);
     private GasCan gasCan;
-    private final Timer timer;
+    private Timer timer;
 
     MenuContentPane() {
         this.timer = new Timer(Const.KEY_DELAY, this);
         this.gasCan = this.getNewGasCan();
+    }
+
+    @Override
+    public void dispose() {
+        this.timer.stop();
+        this.timer = null;
+        this.player = null;
+        this.gasCan = null;
+        super.dispose();
     }
 
     private GasCan getNewGasCan() {

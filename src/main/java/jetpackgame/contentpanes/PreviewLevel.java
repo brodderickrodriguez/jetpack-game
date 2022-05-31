@@ -15,7 +15,7 @@ public class PreviewLevel extends ContentPane implements ActionListener {
     private Sprite lowestSprite;
     private final Levels level;
 
-    PreviewLevel(Levels level) {
+    public PreviewLevel(Levels level) {
         this.level = level;
     }
 

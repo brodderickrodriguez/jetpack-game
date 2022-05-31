@@ -33,5 +33,4 @@ public class Bullet extends Sprite {
             SpriteManager.removeSprite(this);
         }
     }
-
 }

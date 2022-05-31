@@ -48,8 +48,6 @@ public class LevelDesigner extends ContentPane implements MouseListener, MouseMo
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
         ContentController.getCurrentController().setKeyPressedCallBack(this::keyEvent);
-
-
     }
 
     double getZoomOutDelta() {
@@ -97,7 +95,6 @@ public class LevelDesigner extends ContentPane implements MouseListener, MouseMo
             case ADD_ENEMY -> result = new Enemy(x, y);
             case ADD_GAS_CAN -> result = new GasCan(x, y);
         }
-
         return result;
     }
 
@@ -134,6 +131,7 @@ public class LevelDesigner extends ContentPane implements MouseListener, MouseMo
             this.toStd();
             return null;
         }
+        
         ModState newState = ModState.getModStateFromKeyCode(keyCode);
 
         if (newState != null) {

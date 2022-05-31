@@ -1,9 +1,7 @@
 package main.java.jetpackgame.contentpanes;
 
 import main.java.jetpackgame.*;
-import main.java.jetpackgame.contentpanes.subcontentpanes.MapView;
-import main.java.jetpackgame.contentpanes.subcontentpanes.MenuView;
-import main.java.jetpackgame.contentpanes.subcontentpanes.PausedGameView;
+import main.java.jetpackgame.contentpanes.subcontentpanes.*;
 import main.java.jetpackgame.sprites.*;
 import javax.swing.Timer;
 import java.awt.*;
@@ -42,8 +40,6 @@ public class Game extends ContentPane implements ActionListener {
         this.repaint();
     }
 
-
-
     @Override
     public void init() {
         Game.currentGame = this;
@@ -62,15 +58,12 @@ public class Game extends ContentPane implements ActionListener {
         return this.player;
     }
 
-
     public Boolean isRunning() {
         if (Objects.isNull(this.timer))
             return false;
 
         return this.timer.isRunning();
     }
-
-
 
     public void playPause() {
         if (this.isRunning()) {
@@ -109,7 +102,6 @@ public class Game extends ContentPane implements ActionListener {
         for (Sprite sprite: SpriteManager.getEverySprite()) {
             sprite.moveSprite(deltaX, deltaY);
         }
-
     }
 
     void updatePlayerLocation() {
@@ -172,7 +164,5 @@ public class Game extends ContentPane implements ActionListener {
             this.playPause();
             this.dispose();
         }
-
     }
-
 }

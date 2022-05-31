@@ -1,15 +1,5 @@
 package main.java.jetpackgame;
 
-
-
-/*
-- implement level design engine
-- level design
- */
-
-
-import main.java.jetpackgame.contentpanes.Game;
-import main.java.jetpackgame.contentpanes.Levels;
 import main.java.jetpackgame.contentpanes.*;
 
 public class Main {

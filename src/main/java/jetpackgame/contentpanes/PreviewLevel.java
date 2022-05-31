@@ -56,10 +56,8 @@ public class PreviewLevel extends ContentPane implements ActionListener {
             for (Component c: sprite.getComponents()) {
                 this.updateComponentSize(c, delta);
             }
-
         }
     }
-
 
     Sprite getLowestSprite() {
         Sprite lowestSprite = null;
@@ -82,7 +80,6 @@ public class PreviewLevel extends ContentPane implements ActionListener {
             Rectangle bounds = sprite.getBounds();
             bounds.y -= 2;
             sprite.setBounds(bounds);
-
         }
     }
 

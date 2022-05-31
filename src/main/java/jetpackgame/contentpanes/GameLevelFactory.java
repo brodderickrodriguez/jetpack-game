@@ -1,6 +1,6 @@
 package main.java.jetpackgame.contentpanes;
-import main.java.jetpackgame.sprites.*;
 
+import main.java.jetpackgame.sprites.*;
 import java.util.*;
 import java.util.concurrent.Callable;
 
@@ -22,14 +22,10 @@ public class GameLevelFactory {
 
     private static Player buildLevel0() {
         Player player = new Player(100, 200);
-
         new Enemy(200, 200);
         new Enemy(250, 200);
         new Platform(0, 150);
-
         new GasCan(50, 100);
-
-
         new Portal(250, 30, 550, 880);
 
         Random rn = new Random();
@@ -44,7 +40,6 @@ public class GameLevelFactory {
     }
 
     private static Player buildLevel1() {
-
         new Platform(367, 379);
         new Platform(2476, 367);
         new Platform(2422, 2271);
@@ -124,5 +119,4 @@ public class GameLevelFactory {
         new Portal(250, 30, 2050, 4078);
         return player;
     }
-
 }

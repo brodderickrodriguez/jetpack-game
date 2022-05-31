@@ -30,9 +30,7 @@ public class Const {
     public static final double PARTICLE_MAX_VEL = 4.0;
     public static final double PARTICLE_MAX_SIZE = 10.0;
 
-
     public static final double PAN_WORLD_FRAC = 0.2;
-
 
     public static final double JETPACK_IDLE = 5e-2;
     public static final double JETPACK_FUEL_USAGE = 1e-1;
@@ -52,7 +50,4 @@ public class Const {
     public static final double JETPACK_MAX_FUEL = 100;
 
     public static final int BULLET_POWER = 3;
-
-
-
 }

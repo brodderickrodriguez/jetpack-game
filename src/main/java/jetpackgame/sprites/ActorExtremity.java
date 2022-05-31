@@ -2,7 +2,6 @@ package main.java.jetpackgame.sprites;
 
 import main.java.jetpackgame.*;
 import main.java.jetpackgame.contentpanes.Game;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -36,7 +35,6 @@ class LegSeperator extends ActorExtremity {
         this.setBackground(Color.white);
     }
 }
-
 
 class LifeIndicator extends ActorExtremity {
     private final Actor actor;
@@ -151,5 +149,4 @@ class JetPack extends ActorExtremity {
             this.fuelLevel -= Const.JETPACK_FUEL_USAGE;
         }
     }
-
 }

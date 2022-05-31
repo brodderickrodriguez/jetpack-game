@@ -30,7 +30,6 @@ public abstract class Sprite extends JLabel implements Comparable<Sprite> {
         this.moveSprite((int)vel[0], (int)vel[1]);
     }
 
-
     public String getInstantiationAsString(double delta) {
         int x = (int)(this.getX() * delta);
         int y = (int)(this.getY() * delta);

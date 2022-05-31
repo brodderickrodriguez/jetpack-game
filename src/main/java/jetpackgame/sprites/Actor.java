@@ -52,7 +52,6 @@ public class Actor extends Sprite {
     public void headInDirection(int direction) {
         double dx = direction * Const.PLAYER_HORIZONTAL_ACC;
         this.modifyVelX(dx);
-
     }
 
     void fireBullet(Color color) {
@@ -114,6 +113,7 @@ public class Actor extends Sprite {
             this.direction = 1;
             this.modifyVelX(-Const.PLAYER_HORIZONTAL_ACC_DECAY);
         }
+        
         if (thisVel[0] < 0) {
             this.direction = -1;
             this.modifyVelX(Const.PLAYER_HORIZONTAL_ACC_DECAY);

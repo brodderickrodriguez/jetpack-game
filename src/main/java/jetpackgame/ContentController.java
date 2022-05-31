@@ -41,7 +41,6 @@ public class ContentController extends JFrame implements KeyListener {
         this.contentPanes.add(contentPane);
     }
 
-
     public void setContentPane(ContentPane c) {
         this.disposeCurrentContentPane();
         this.contentPanes.add(0, c);

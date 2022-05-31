@@ -3,6 +3,7 @@ package main.java.jetpackgame.contentpanes;
 import main.java.jetpackgame.*;
 import main.java.jetpackgame.contentpanes.subcontentpanes.MapView;
 import main.java.jetpackgame.contentpanes.subcontentpanes.MenuView;
+import main.java.jetpackgame.contentpanes.subcontentpanes.PausedGameView;
 import main.java.jetpackgame.sprites.*;
 import javax.swing.Timer;
 import java.awt.*;
@@ -30,19 +31,7 @@ public class Game extends ContentPane implements ActionListener {
             return this.pausedGameView;
         }
 
-        this.pausedGameView = new MenuView();
-
-        this.pausedGameView.addLabel("paused", 36);
-        this.pausedGameView.addLabel("jetpack-game", 12);
-
-        this.pausedGameView.addButton("resume", 24, this::playPause);
-        this.pausedGameView.addButton("main menu", 24, null);
-
-
-        MapView mapView = new MapView(380);
-        mapView.update();
-        this.pausedGameView.add(mapView);
-
+        this.pausedGameView = new PausedGameView();
         return this.pausedGameView;
     }
 

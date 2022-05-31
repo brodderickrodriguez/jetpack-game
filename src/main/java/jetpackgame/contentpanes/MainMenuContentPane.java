@@ -22,13 +22,9 @@ public class MainMenuContentPane extends MenuContentPane {
 
 
     void playButtonAction() {
-//        ContentController.getCurrentController().queueContentPane(new Game(Levels.LEVEL_0));
-
-        Game game = new Game(Levels.LEVEL_0);
-//        ContentController.getCurrentController().setContentPane(game);
-
-        ContentController.getCurrentController().queueContentPane(game);
-        ContentController.getCurrentController().startNextContentPane();
+        ContentController.getCurrentController().queueContentPane(new PreviewLevel(Levels.LEVEL_0));
+        ContentController.getCurrentController().queueContentPane(new Game(Levels.LEVEL_0));
+        ContentController.getCurrentController().disposeCurrentContentPane();
     }
 
     void selectLevelButtonAction() {

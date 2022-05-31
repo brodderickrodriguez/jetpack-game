@@ -8,13 +8,11 @@ package main.java.jetpackgame;
  */
 
 
-import main.java.jetpackgame.contentpanes.Game;
-import main.java.jetpackgame.contentpanes.Levels;
 import main.java.jetpackgame.contentpanes.MainMenuContentPane;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        Controller window = new Controller();
+        ContentController window = new ContentController();
         window.queueContentPane(new MainMenuContentPane());
 
 //        window.queueContentPane(new MenuContentPane());

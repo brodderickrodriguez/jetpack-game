@@ -6,15 +6,15 @@ import java.awt.event.*;
 import java.util.*;
 import java.util.function.Function;
 
-public class Controller extends JFrame implements KeyListener {
-    private static Controller currentController = null;
+public class ContentController extends JFrame implements KeyListener {
+    private static ContentController currentController = null;
     private final HashSet<Integer> currentKeys = new HashSet<>();
     private final PriorityQueue<ContentPane> contentPanes = new PriorityQueue<>();
     private ContentPane currentContentPane;
     private Function<Integer, Void> keyPressedCallBack = null;
 
-    Controller() {
-        Controller.currentController = this;
+    ContentController() {
+        ContentController.currentController = this;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
         this.setVisible(true);
@@ -25,8 +25,8 @@ public class Controller extends JFrame implements KeyListener {
         this.addKeyListener(this);
     }
 
-    public static Controller getCurrentController() {
-        return Controller.currentController;
+    public static ContentController getCurrentController() {
+        return ContentController.currentController;
     }
 
     public HashSet<Integer> getCurrentKeys() {

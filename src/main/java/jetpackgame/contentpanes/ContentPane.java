@@ -1,7 +1,7 @@
 package main.java.jetpackgame.contentpanes;
 
 import main.java.jetpackgame.Const;
-import main.java.jetpackgame.Controller;
+import main.java.jetpackgame.ContentController;
 import main.java.jetpackgame.SpriteManager;
 import main.java.jetpackgame.sprites.Sprite;
 import javax.swing.*;
@@ -26,7 +26,7 @@ public abstract class ContentPane extends JComponent implements Comparable<Conte
     }
 
     public void dispose() {
-        Controller.getCurrentController().disposeCurrentContentPane();
+        ContentController.getCurrentController().disposeCurrentContentPane();
     }
 
     public void centerContents() {

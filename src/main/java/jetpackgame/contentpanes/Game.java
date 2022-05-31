@@ -99,7 +99,7 @@ public class Game extends ContentPane implements ActionListener {
         }
     }
 
-    void panWorld(Boolean x, Boolean y) {
+    public void panWorld(Boolean x, Boolean y) {
         int xMove = x ? 1: 0;
         int yMove = y ? 1: 0;
         for (Sprite sprite: SpriteManager.getSprites()) {
@@ -164,10 +164,10 @@ public class Game extends ContentPane implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        for (int keyCode: Controller.getCurrentController().getCurrentKeys()) {
+        for (int keyCode: ContentController.getCurrentController().getCurrentKeys()) {
             switch (keyCode) {
-                case KeyEvent.VK_LEFT -> this.player.moveLeft();
-                case KeyEvent.VK_RIGHT -> this.player.moveRight();
+                case KeyEvent.VK_LEFT -> this.player.goLeft();
+                case KeyEvent.VK_RIGHT -> this.player.goRight();
                 case KeyEvent.VK_UP ->  this.player.goUp();
                 case KeyEvent.VK_SPACE -> this.player.fireBullet();
             }

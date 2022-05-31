@@ -1,6 +1,7 @@
 package main.java.jetpackgame;
 
 import main.java.jetpackgame.contentpanes.ContentPane;
+import main.java.jetpackgame.sprites.Player;
 import main.java.jetpackgame.sprites.Sprite;
 import java.util.*;
 

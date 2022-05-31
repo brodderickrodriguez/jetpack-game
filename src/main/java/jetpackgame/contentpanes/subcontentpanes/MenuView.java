@@ -68,7 +68,7 @@ public class MenuView extends SubContentPane {
 
     public void addLabel(String text, int fontSize) {
         JLabel label = new JLabel();
-        label.setBounds(new Rectangle(0, 0, this.getWidth(), fontSize + 5));
+        label.setBounds(new Rectangle(0, 0, this.getWidth(), fontSize + 10));
         label.setText(text);
         label.setHorizontalAlignment(MenuView.TEXT_ALIGNMENT);
         label.setForeground(MenuView.SECONDARY_COLOR);
@@ -78,7 +78,7 @@ public class MenuView extends SubContentPane {
 
     public void addButton(String text, int fontSize, Runnable action) {
         JButton button = new JButton();
-        button.setBounds(new Rectangle(PERIMETER, 50, this.getWidth() - (PERIMETER * 2), fontSize + 5));
+        button.setBounds(new Rectangle(PERIMETER, 50, this.getWidth() - (PERIMETER * 2), fontSize + 10));
         button.setText(text);
         button.setHorizontalAlignment(SwingConstants.CENTER);
         button.setVerticalAlignment(SwingConstants.CENTER);

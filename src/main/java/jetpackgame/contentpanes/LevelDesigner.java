@@ -1,7 +1,7 @@
 package main.java.jetpackgame.contentpanes;
 
 import main.java.jetpackgame.Const;
-import main.java.jetpackgame.Controller;
+import main.java.jetpackgame.ContentController;
 import main.java.jetpackgame.SpriteManager;
 import main.java.jetpackgame.sprites.*;
 import java.awt.*;
@@ -47,7 +47,7 @@ public class LevelDesigner extends ContentPane implements MouseListener, MouseMo
 
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
-        Controller.getCurrentController().setKeyPressedCallBack(this::keyEvent);
+        ContentController.getCurrentController().setKeyPressedCallBack(this::keyEvent);
 
 
     }

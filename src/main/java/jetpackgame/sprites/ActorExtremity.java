@@ -147,10 +147,9 @@ class JetPack extends ActorExtremity {
 
     void goUp() {
         if (this.fuelLevel > 0) {
-            Game.getCurrentGame().getPlayer().modifyVelY(-Const.PLAYER_VERTICAL_ACC);
+            this.getActor().modifyVelY(-Const.PLAYER_VERTICAL_ACC);
             this.fuelLevel -= Const.JETPACK_FUEL_USAGE;
         }
-
     }
 
 }

@@ -21,10 +21,15 @@ public abstract class Sprite extends JLabel implements Comparable<Sprite> {
 
     public void update() {
         if (!(this instanceof Player)) {
-            double[] vel = this.getVel();
-            this.moveSprite((int)vel[0], (int)vel[1]);
+            this.updateSpriteVel();
         }
     }
+
+    public void updateSpriteVel() {
+        double[] vel = this.getVel();
+        this.moveSprite((int)vel[0], (int)vel[1]);
+    }
+
 
     public String getInstantiationAsString(double delta) {
         int x = (int)(this.getX() * delta);
@@ -57,7 +62,7 @@ public abstract class Sprite extends JLabel implements Comparable<Sprite> {
         this.vel[1] = y;
     }
 
-    protected Point getCenter() {
+    public Point getCenter() {
         Rectangle bounds = this.getBounds();
         return new Point(bounds.x + (bounds.width / 2), bounds.y + (bounds.height / 2));
     }
@@ -76,7 +81,6 @@ public abstract class Sprite extends JLabel implements Comparable<Sprite> {
     public void moveSprite(double x, double y) {
         this.moveSprite((int)x, (int)y);
     }
-
 
     public double distanceTo(Sprite other) {
         double dx = Math.pow((other.getX() - this.getX()), 2);

@@ -17,6 +17,12 @@ public class Player extends Actor {
         return "Player player = " + r;
     }
 
+    @Override
+    public void update() {
+        super.update();
+    }
+
+
     public void goUp() {
         this.jetpack.goUp();
     }
@@ -29,11 +35,11 @@ public class Player extends Actor {
         this.jetpack.refillFuel();
     }
 
-    public void moveLeft() {
+    public void goLeft() {
         this.modifyVelX(-Const.PLAYER_HORIZONTAL_ACC);
     }
 
-    public void moveRight() {
+    public void goRight() {
         this.modifyVelX(Const.PLAYER_HORIZONTAL_ACC);
     }
 

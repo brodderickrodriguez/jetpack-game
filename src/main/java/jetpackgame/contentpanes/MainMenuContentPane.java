@@ -6,6 +6,7 @@ import main.java.jetpackgame.contentpanes.subcontentpanes.MenuView;
 public class MainMenuContentPane extends MenuContentPane {
     public MainMenuContentPane() {
         this.addComponents();
+        System.out.println("here");
     }
 
     void addComponents() {

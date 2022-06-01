@@ -25,6 +25,7 @@ public class MenuView extends SubContentPane {
     public void init() {
         this.adjustMenuComponentBounds();
         this.centerOnParentView();
+        this.repaint();
     }
 
     private void adjustMenuComponentBounds() {

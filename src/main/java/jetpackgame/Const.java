@@ -21,8 +21,7 @@ public class Const {
     public static final int WORLD_WIDTH = (int)(WINDOW_WIDTH * 2.5);
     public static final int WORLD_HEIGHT = (int)(WINDOW_HEIGHT * 5.5);
 
-    public static final int BORDER_DIM = 210;
-
+    public static final int BORDER_DIM = 128;
 
     public static final int MAX_BULLET_VEL = 10;
 

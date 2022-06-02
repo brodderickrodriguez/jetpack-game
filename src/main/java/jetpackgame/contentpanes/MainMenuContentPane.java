@@ -6,7 +6,6 @@ import main.java.jetpackgame.contentpanes.subcontentpanes.MenuView;
 public class MainMenuContentPane extends MenuContentPane {
     public MainMenuContentPane() {
         this.addComponents();
-        System.out.println("here");
     }
 
     void addComponents() {
@@ -23,9 +22,7 @@ public class MainMenuContentPane extends MenuContentPane {
 
 
     void playButtonAction() {
-        ContentController.getCurrentController().queueContentPane(new PreviewLevel(Levels.LEVEL_0));
-        ContentController.getCurrentController().queueContentPane(new Game(Levels.LEVEL_0));
-        ContentController.getCurrentController().disposeCurrentContentPane();
+        ContentController.setCurrentContentPaneStatic(new PreviewLevel(Levels.LEVEL_1));
     }
 
     void selectLevelButtonAction() {
@@ -33,11 +30,11 @@ public class MainMenuContentPane extends MenuContentPane {
     }
 
     void buildLevelButtonAction() {
-
+        ContentController.setCurrentContentPaneStatic(new LevelDesigner());
     }
 
     void howToButtonAction() {
-
+        ContentController.setCurrentContentPaneStatic(new HowToContentController());
     }
 
     void creditsButtonAction() {

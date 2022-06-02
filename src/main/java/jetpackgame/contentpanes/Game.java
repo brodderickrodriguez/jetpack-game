@@ -23,18 +23,15 @@ public class Game extends ContentPane implements ActionListener {
         this.mapView = new MapView(150);
     }
 
-    private MenuView getPausedGameView() {
-        if (this.pausedGameView != null) {
-            this.pausedGameView.init();
-            return this.pausedGameView;
-        }
-
-        this.pausedGameView = new PausedGameView();
-        return this.pausedGameView;
+    @Override
+    public void dispose() {
+        this.timer.stop();
+        this.timer = null;
+        this.player = null;
     }
 
     private void addPauseView() {
-        this.pausedGameView = this.getPausedGameView();
+        this.pausedGameView = new PausedGameView();
         this.add(this.pausedGameView, 0);
         this.pausedGameView.init();
         this.repaint();
@@ -161,7 +158,6 @@ public class Game extends ContentPane implements ActionListener {
         SpriteManager.update();
 
         if (this.player.getLife() <= 0) {
-            this.playPause();
             this.dispose();
         }
     }

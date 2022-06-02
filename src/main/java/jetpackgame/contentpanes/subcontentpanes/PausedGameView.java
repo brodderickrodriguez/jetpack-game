@@ -18,7 +18,6 @@ public class PausedGameView extends MenuView {
     }
 
     private void mainMenuButtonAction() {
-        ContentController.getCurrentController().queueContentPane(new MainMenuContentPane());
-        ContentController.getCurrentController().disposeCurrentContentPane();
+        ContentController.setCurrentContentPaneStatic(new MainMenuContentPane());
     }
 }

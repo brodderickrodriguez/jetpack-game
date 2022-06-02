@@ -1,6 +1,7 @@
 package main.java.jetpackgame.contentpanes;
 
 import main.java.jetpackgame.Const;
+import main.java.jetpackgame.ContentController;
 import main.java.jetpackgame.SpriteManager;
 import main.java.jetpackgame.contentpanes.ContentPane;
 import main.java.jetpackgame.contentpanes.GameLevelFactory;
@@ -33,6 +34,11 @@ public class PreviewLevel extends ContentPane implements ActionListener {
         this.lowestSprite = this.getLowestSprite();
         this.timer = new Timer(Const.KEY_DELAY, this);
         this.timer.start();
+    }
+
+    @Override
+    public void dispose() {
+        this.timer.stop();
     }
 
     double getZoomOutDelta() {
@@ -88,8 +94,8 @@ public class PreviewLevel extends ContentPane implements ActionListener {
         if (this.lowestSprite.getBottomMostPoint() > Const.WINDOW_HEIGHT) {
             pan();
         } else {
-            this.timer.stop();
             this.dispose();
+            ContentController.setCurrentContentPaneStatic(new Game(Levels.LEVEL_1));
         }
     }
 }

@@ -9,7 +9,6 @@ import java.util.function.Function;
 public class ContentController extends JFrame implements KeyListener {
     private static ContentController currentController = null;
     private final HashSet<Integer> currentKeys = new HashSet<>();
-    private final ArrayList<ContentPane> contentPanes = new ArrayList<>();
     private ContentPane currentContentPane;
     private Function<Integer, Void> keyPressedCallBack = null;
 
@@ -29,51 +28,41 @@ public class ContentController extends JFrame implements KeyListener {
         return ContentController.currentController;
     }
 
+    public static void setCurrentContentPaneStatic(ContentPane c) {
+        ContentController.getCurrentController().setCurrentContentPane(c);
+    }
+
+    public void setCurrentContentPane(ContentPane c) {
+        if (this.currentContentPane != null) {
+            this.disposeCurrentContentPane();
+        }
+
+        this.currentContentPane = c;
+        this.add(this.currentContentPane);
+        SpriteManager.setCurrentContentPane(this.currentContentPane);
+        SpriteManager.update();
+        this.currentContentPane.init();
+        this.repaint();
+    }
+
+    private void disposeCurrentContentPane() {
+        this.currentContentPane.dispose();
+
+        SpriteManager.removeAllSprites();
+        SpriteManager.update();
+
+        this.remove(this.currentContentPane);
+        this.currentContentPane = null;
+
+        this.repaint();
+    }
+
     public HashSet<Integer> getCurrentKeys() {
         return this.currentKeys;
     }
 
     public void setKeyPressedCallBack(Function<Integer, Void> callable) {
         this.keyPressedCallBack = callable;
-    }
-
-    public void queueContentPane(ContentPane contentPane) {
-        this.contentPanes.add(contentPane);
-    }
-
-    public void setContentPane(ContentPane c) {
-        this.disposeCurrentContentPane();
-        this.contentPanes.add(0, c);
-        this.startNextContentPane();
-    }
-
-    public void disposeCurrentContentPane() {
-        if (this.currentContentPane == null) {
-            return;
-        }
-
-        SpriteManager.removeAllSprites();
-        SpriteManager.update();
-
-        this.contentPanes.remove(0);
-        this.remove(this.currentContentPane);
-        this.currentContentPane = null;
-
-        this.repaint();
-        this.startNextContentPane();
-    }
-
-    public void startNextContentPane() {
-        if (this.contentPanes.size() == 0) {
-            return;
-        }
-
-        this.currentContentPane = this.contentPanes.get(0);
-        this.add(this.currentContentPane);
-        SpriteManager.setCurrentContentPane(this.currentContentPane);
-        SpriteManager.update();
-        this.currentContentPane.init();
-        this.repaint();
     }
 
     @Override

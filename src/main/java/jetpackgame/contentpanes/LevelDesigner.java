@@ -50,6 +50,11 @@ public class LevelDesigner extends ContentPane implements MouseListener, MouseMo
         ContentController.getCurrentController().setKeyPressedCallBack(this::keyEvent);
     }
 
+    @Override
+    public void dispose() {
+
+    }
+
     double getZoomOutDelta() {
         double denom = (double) Const.WORLD_HEIGHT + (2 * Const.BORDER_DIM);
         return (double)Const.WINDOW_HEIGHT / denom;

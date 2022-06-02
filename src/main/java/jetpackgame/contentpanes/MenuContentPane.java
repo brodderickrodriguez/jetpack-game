@@ -8,13 +8,15 @@ import java.util.Random;
 import javax.swing.Timer;
 
 public abstract class MenuContentPane extends ContentPane implements ActionListener {
-    private MenuView menu = new MenuView();
-    private Player player = new Player(50, Const.WINDOW_HEIGHT / 2);
+    private MenuView menu;
+    private Player player;
     private GasCan gasCan;
     private Timer timer;
 
     MenuContentPane() {
         this.timer = new Timer(Const.KEY_DELAY, this);
+        this.menu = new MenuView();
+        this.player = new Player(50, Const.WINDOW_HEIGHT / 2);
         this.gasCan = this.getNewGasCan();
     }
 
@@ -22,9 +24,6 @@ public abstract class MenuContentPane extends ContentPane implements ActionListe
     public void dispose() {
         this.timer.stop();
         this.timer = null;
-        this.player = null;
-        this.gasCan = null;
-        super.dispose();
     }
 
     private GasCan getNewGasCan() {
@@ -36,6 +35,7 @@ public abstract class MenuContentPane extends ContentPane implements ActionListe
     public void init() {
         this.add(this.menu, 0);
 
+        this.add(this.player);
         this.menu.init();
         this.timer.start();
     }

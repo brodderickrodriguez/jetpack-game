@@ -42,7 +42,7 @@ public class MainMenuContentPane extends MenuContentPane {
     }
 
     void creditsButtonAction() {
-
+        ContentController.setCurrentContentPaneStatic(new CreditsContentPane());
     }
 
     void quitButtonAction() {

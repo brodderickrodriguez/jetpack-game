@@ -4,7 +4,6 @@ import main.java.jetpackgame.contentpanes.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.*;
-import java.util.function.Function;
 
 public class ContentController extends JFrame implements KeyListener {
     private static ContentController currentController = null;

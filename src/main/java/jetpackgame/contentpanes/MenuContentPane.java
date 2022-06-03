@@ -16,7 +16,7 @@ public abstract class MenuContentPane extends ContentPane implements ActionListe
     MenuContentPane() {
         this.timer = new Timer(Const.KEY_DELAY, this);
         this.menu = new MenuView();
-        this.player = new Player(50, Const.WINDOW_HEIGHT / 2);
+        this.player = new Player(Const.WINDOW_WIDTH / 2, Const.WINDOW_HEIGHT / 2);
         this.gasCan = this.getNewGasCan();
     }
 

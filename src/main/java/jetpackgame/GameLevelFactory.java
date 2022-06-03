@@ -1,5 +1,6 @@
-package main.java.jetpackgame.contentpanes;
+package main.java.jetpackgame;
 
+import main.java.jetpackgame.contentpanes.Levels;
 import main.java.jetpackgame.sprites.*;
 import java.util.*;
 import java.util.concurrent.Callable;
@@ -10,7 +11,7 @@ public class GameLevelFactory {
             Levels.LEVEL_1, GameLevelFactory::buildLevel1
         );
 
-    static Player buildLevel(Levels level) {
+    public static Player buildLevel(Levels level) {
         Callable<Player> builder = GameLevelFactory.levelMap.get(level);
         try {
             return builder.call();

@@ -2,6 +2,7 @@ package main.java.jetpackgame.contentpanes;
 
 import main.java.jetpackgame.Const;
 import main.java.jetpackgame.ContentController;
+import main.java.jetpackgame.GameLevelFactory;
 import main.java.jetpackgame.SpriteManager;
 import main.java.jetpackgame.sprites.*;
 import javax.swing.*;

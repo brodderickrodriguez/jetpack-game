@@ -3,9 +3,6 @@ package main.java.jetpackgame.contentpanes;
 import main.java.jetpackgame.ContentController;
 import main.java.jetpackgame.contentpanes.subcontentpanes.MenuView;
 
-import javax.swing.*;
-import java.awt.*;
-
 public class HowToContentController extends MenuContentPane {
     public HowToContentController() {
         this.addComponents();

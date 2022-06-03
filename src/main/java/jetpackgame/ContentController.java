@@ -71,7 +71,9 @@ public class ContentController extends JFrame implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            Game.getCurrentGame().playPause();
+            if (this.currentContentPane != null) {
+                this.currentContentPane.escKeyPressed();
+            }
         } else {
             this.currentKeys.add(e.getKeyCode());
 

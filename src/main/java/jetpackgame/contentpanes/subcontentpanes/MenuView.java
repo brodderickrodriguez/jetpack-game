@@ -77,6 +77,14 @@ public class MenuView extends SubContentPane {
         this.add(label);
     }
 
+    public void addSpriteListItem(int fontSize) {
+        JLabel container = new JLabel();
+        container.setBounds(new Rectangle(0, 0, this.getWidth(), fontSize + 10));
+        container.setBackground(Color.orange);
+        this.add(container);
+    }
+
+
     public void addButton(String text, int fontSize, Runnable action) {
         JButton button = new JButton();
         button.setBounds(new Rectangle(PERIMETER, 50, this.getWidth() - (PERIMETER * 2), fontSize + 10));

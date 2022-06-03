@@ -16,6 +16,8 @@ public abstract class ContentPane extends JComponent implements Comparable<Conte
 
     abstract public void init();
 
+    abstract public void escKeyPressed();
+
     @Override
     public int compareTo(ContentPane o) {
         if (o == this) {

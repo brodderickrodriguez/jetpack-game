@@ -3,6 +3,9 @@ package main.java.jetpackgame.contentpanes;
 import main.java.jetpackgame.ContentController;
 import main.java.jetpackgame.contentpanes.subcontentpanes.MenuView;
 
+import javax.swing.*;
+import java.awt.*;
+
 public class HowToContentController extends MenuContentPane {
     public HowToContentController() {
         this.addComponents();
@@ -15,8 +18,13 @@ public class HowToContentController extends MenuContentPane {
 
         menu.addButton("Main Menu", 24, this::mainMenuButtonAction);
 
+        menu.addSpriteListItem(12);
     }
 
+    @Override
+    public void escKeyPressed() {
+        this.mainMenuButtonAction();
+    }
     private void mainMenuButtonAction() {
         ContentController.setCurrentContentPaneStatic(new MainMenuContentPane());
     }

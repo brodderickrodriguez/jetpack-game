@@ -37,6 +37,11 @@ public class PreviewLevel extends ContentPane implements ActionListener {
     }
 
     @Override
+    public void escKeyPressed() {
+        ContentController.setCurrentContentPaneStatic(new MainMenuContentPane());
+    }
+
+    @Override
     public void dispose() {
         this.timer.stop();
     }

@@ -30,13 +30,6 @@ public class Game extends ContentPane implements ActionListener {
         this.player = null;
     }
 
-    private void addPauseView() {
-        this.pausedGameView = new PausedGameView();
-        this.add(this.pausedGameView, 0);
-        this.pausedGameView.init();
-        this.repaint();
-    }
-
     @Override
     public void init() {
         Game.currentGame = this;
@@ -44,6 +37,11 @@ public class Game extends ContentPane implements ActionListener {
         this.player = GameLevelFactory.buildLevel(level);
         this.centerPlayer();
         this.add(this.mapView, 0);
+        this.playPause();
+    }
+
+    @Override
+    public void escKeyPressed() {
         this.playPause();
     }
 
@@ -65,7 +63,10 @@ public class Game extends ContentPane implements ActionListener {
     public void playPause() {
         if (this.isRunning()) {
             this.timer.stop();
-            this.addPauseView();
+            this.pausedGameView = new PausedGameView();
+            this.add(this.pausedGameView, 0);
+            this.pausedGameView.init();
+            this.repaint();
         } else {
             if (this.pausedGameView != null) {
                 this.remove(this.pausedGameView);

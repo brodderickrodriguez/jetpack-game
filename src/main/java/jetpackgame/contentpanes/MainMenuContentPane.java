@@ -20,6 +20,10 @@ public class MainMenuContentPane extends MenuContentPane {
         menu.addButton("quit", 24, this::quitButtonAction);
     }
 
+    @Override
+    public void escKeyPressed() {
+
+    }
 
     void playButtonAction() {
         ContentController.setCurrentContentPaneStatic(new PreviewLevel(Levels.LEVEL_1));

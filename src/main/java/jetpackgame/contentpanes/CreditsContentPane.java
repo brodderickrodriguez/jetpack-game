@@ -15,7 +15,8 @@ public class CreditsContentPane extends MenuContentPane {
 
         menu.addButton("Main Menu", 24, this::mainMenuButtonAction);
 
-        menu.addLabel("", 12);
+        menu.addSpacer(12);
+
         menu.addLabel("I created this", 24);
         menu.addLabel("- brodderick", 12);
     }

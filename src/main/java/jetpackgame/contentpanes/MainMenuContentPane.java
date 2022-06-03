@@ -35,7 +35,7 @@ public class MainMenuContentPane extends MenuContentPane {
     }
 
     void selectLevelButtonAction() {
-
+        ContentController.setCurrentContentPaneStatic(new SelectLevelContentPane());
     }
 
     void buildLevelButtonAction() {

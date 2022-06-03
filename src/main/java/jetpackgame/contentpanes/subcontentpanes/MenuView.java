@@ -77,6 +77,10 @@ public class MenuView extends SubContentPane {
         this.add(label);
     }
 
+    public void addSpacer(int size) {
+        this.addLabel("", size);
+    }
+
     public void addSpriteListItem(int fontSize) {
         JLabel container = new JLabel();
         container.setBounds(new Rectangle(0, 0, this.getWidth(), fontSize + 10));

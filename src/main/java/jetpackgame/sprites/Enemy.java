@@ -2,32 +2,27 @@ package main.java.jetpackgame.sprites;
 
 import main.java.jetpackgame.*;
 import main.java.jetpackgame.contentpanes.Game;
-import java.util.ArrayList;
-
+import java.util.List;
 
 interface EnemyHiveMind {
-    static ArrayList<Enemy> getAllEnemies() {
-        ArrayList<Enemy> enemies = new ArrayList<>();
-
-        for (Sprite sprite: SpriteManager.getSprites())
-            if (sprite instanceof Enemy)
-                enemies.add((Enemy) sprite);
-
-        return enemies;
+    static List<Enemy> getAllEnemies() {
+        return SpriteManager.getSprites()
+                .stream()
+                .filter(sprite -> sprite instanceof Enemy)
+                .map(Enemy.class::cast)
+                .toList();
     }
 
-    default ArrayList<Enemy> getFlockmates() {
-        ArrayList<Enemy> flockmates = new ArrayList<>();
+    default List<Enemy> getFlockmates() {
+        Enemy thisEnemy = (Enemy) this;
 
-        for (Enemy other: EnemyHiveMind.getAllEnemies()) {
-            if (((Enemy)this).distanceTo(other) < Const.ENEMY_VISION_RADIUS) {
-                flockmates.add(other);
-            }
-        }
-        return flockmates;
+        return EnemyHiveMind.getAllEnemies()
+                .stream()
+                .filter(other -> thisEnemy.distanceTo(other) < Const.ENEMY_VISION_RADIUS)
+                .toList();
     }
 
-    default Enemy getNearestFlockmate(ArrayList<Enemy> list) {
+    default Enemy getNearestFlockmate(List<Enemy> list) {
         double nearestDistance = Double.POSITIVE_INFINITY;
         Enemy nearestEnemy = null;
 
@@ -49,7 +44,7 @@ interface EnemyHiveMind {
         return this.getNearestFlockmate(this.getFlockmates());
     }
 
-    default Enemy getBestFlockmate(ArrayList<Enemy> list) {
+    default Enemy getBestFlockmate(List<Enemy> list) {
         Enemy bestFlockmate = (Enemy)this;
         long bestFlockmateTime = ((Enemy)this).getTimeOfLastPlayerContact();
 
@@ -77,7 +72,7 @@ interface EnemyHiveMind {
 
             couldFireBullet = true;
         } else {
-            ArrayList<Enemy> flockmates = this.getFlockmates();
+            List<Enemy> flockmates = this.getFlockmates();
 
             if (!flockmates.isEmpty()) {
                 Enemy bestFlockmate = this.getBestFlockmate(flockmates);

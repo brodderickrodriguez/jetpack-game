@@ -41,9 +41,7 @@ public class SpriteManager {
     }
 
     static void removeAllSprites() {
-        for (Sprite sprite: SpriteManager.getEverySprite()) {
-            SpriteManager.removeSprite(sprite);
-        }
+        SpriteManager.getEverySprite().forEach(SpriteManager::removeSprite);
     }
 
     public static void update() {

@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.HashMap;
 
 
-public abstract class ContentPane extends JComponent implements Comparable<ContentPane> {
+public abstract class ContentPane extends JComponent {
     ContentPane() {
         this.setBounds(new Rectangle(0, 0, Const.WINDOW_WIDTH, Const.WINDOW_HEIGHT));
         this.setOpaque(true);
@@ -17,14 +17,6 @@ public abstract class ContentPane extends JComponent implements Comparable<Conte
     abstract public void init();
 
     abstract public void escKeyPressed();
-
-    @Override
-    public int compareTo(ContentPane o) {
-        if (o == this) {
-            return 1;
-        }
-        return 0;
-    }
 
     public abstract void dispose();
 

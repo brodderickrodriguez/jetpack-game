@@ -10,7 +10,6 @@ public class ContentController extends JFrame implements KeyListener {
     private static ContentController currentController = null;
     private final HashSet<Integer> currentKeys = new HashSet<>();
     private ContentPane currentContentPane;
-    private Function<Integer, Void> keyPressedCallBack = null;
 
     ContentController() {
         ContentController.currentController = this;
@@ -76,10 +75,6 @@ public class ContentController extends JFrame implements KeyListener {
             }
         } else {
             this.currentKeys.add(e.getKeyCode());
-
-            if (this.keyPressedCallBack != null) {
-                this.keyPressedCallBack.apply(e.getKeyCode());
-            }
         }
     }
 

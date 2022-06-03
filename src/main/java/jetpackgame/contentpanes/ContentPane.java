@@ -18,6 +18,8 @@ public abstract class ContentPane extends JComponent {
 
     abstract public void escKeyPressed();
 
+    abstract public void enterKeyPressed();
+
     public abstract void dispose();
 
     public void centerContents() {

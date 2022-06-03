@@ -22,6 +22,12 @@ public class HowToContentController extends MenuContentPane {
     public void escKeyPressed() {
         this.mainMenuButtonAction();
     }
+
+    @Override
+    public void enterKeyPressed() {
+
+    }
+
     private void mainMenuButtonAction() {
         ContentController.setCurrentContentPaneStatic(new MainMenuContentPane());
     }

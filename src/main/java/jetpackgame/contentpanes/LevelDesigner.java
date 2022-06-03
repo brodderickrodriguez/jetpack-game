@@ -4,8 +4,12 @@ import main.java.jetpackgame.Const;
 import main.java.jetpackgame.ContentController;
 import main.java.jetpackgame.SpriteManager;
 import main.java.jetpackgame.sprites.*;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.HashSet;
+import java.util.Optional;
 
 
 enum ModState {
@@ -31,7 +35,8 @@ enum ModState {
     }
 }
 
-public class LevelDesigner extends ContentPane implements MouseListener, MouseMotionListener {
+public class LevelDesigner extends ContentPane implements MouseListener, MouseMotionListener, ActionListener {
+    private Timer timer;
     private ModState modState = ModState.ADD_PLATFORM;
     private Sprite currentSprite = null;
     private double zoomDelta;
@@ -47,12 +52,36 @@ public class LevelDesigner extends ContentPane implements MouseListener, MouseMo
 
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
-        ContentController.getCurrentController().setKeyPressedCallBack(this::keyEvent);
+
+        this.timer = new Timer(Const.KEY_DELAY, this);
+        this.timer.start();
+//        ContentController.getCurrentController().setKeyPressedCallBack(this::keyEvent);
+    }
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        HashSet<Integer> keys = ContentController.getCurrentController().getCurrentKeys();
+
+        if (keys.size() == 1) {
+            int key = keys.iterator().next();
+            ModState newModState = ModState.getModStateFromKeyCode(key);
+
+            if (newModState != this.modState) {
+                this.modState = ModState.getModStateFromKeyCode(key);
+                System.out.println("setting mod state to: " + this.modState);
+            }
+        }
     }
 
     @Override
     public void escKeyPressed() {
         ContentController.setCurrentContentPaneStatic(new MainMenuContentPane());
+    }
+
+    @Override
+    public void enterKeyPressed() {
+        System.out.println("pressed enter");
     }
 
     @Override
@@ -134,21 +163,6 @@ public class LevelDesigner extends ContentPane implements MouseListener, MouseMo
 
         this.currentSprite.setXY(e.getX(), e.getY());
         this.repaint();
-    }
-
-    public Void keyEvent(int keyCode) {
-        if (keyCode == KeyEvent.VK_ENTER) {
-            this.toStd();
-            return null;
-        }
-        
-        ModState newState = ModState.getModStateFromKeyCode(keyCode);
-
-        if (newState != null) {
-            this.modState = newState;
-            System.out.println("setting mod state to: " + this.modState);
-        }
-        return null;
     }
 
     @Override

@@ -25,6 +25,11 @@ public class MainMenuContentPane extends MenuContentPane {
 
     }
 
+    @Override
+    public void enterKeyPressed() {
+        this.playButtonAction();
+    }
+
     void playButtonAction() {
         ContentController.setCurrentContentPaneStatic(new PreviewLevel(Levels.LEVEL_1));
     }

@@ -45,6 +45,11 @@ public class Game extends ContentPane implements ActionListener {
         this.playPause();
     }
 
+    @Override
+    public void enterKeyPressed() {
+        this.playPause();
+    }
+
     public static Game getCurrentGame() {
         return Game.currentGame;
     }

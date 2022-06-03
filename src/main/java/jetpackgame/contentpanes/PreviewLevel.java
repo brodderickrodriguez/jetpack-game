@@ -39,8 +39,18 @@ public class PreviewLevel extends ContentPane implements ActionListener {
     }
 
     @Override
+    public void enterKeyPressed() {
+        this.reachedBottom();
+    }
+
+    @Override
     public void dispose() {
         this.timer.stop();
+    }
+
+    private void reachedBottom() {
+        this.dispose();
+        ContentController.setCurrentContentPaneStatic(new Game(Levels.LEVEL_1));
     }
 
     double getZoomOutDelta() {
@@ -96,8 +106,7 @@ public class PreviewLevel extends ContentPane implements ActionListener {
         if (this.lowestSprite.getBottomMostPoint() > Const.WINDOW_HEIGHT) {
             pan();
         } else {
-            this.dispose();
-            ContentController.setCurrentContentPaneStatic(new Game(Levels.LEVEL_1));
+            this.reachedBottom();
         }
     }
 }

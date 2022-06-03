@@ -61,10 +61,6 @@ public class ContentController extends JFrame implements KeyListener {
         return this.currentKeys;
     }
 
-    public void setKeyPressedCallBack(Function<Integer, Void> callable) {
-        this.keyPressedCallBack = callable;
-    }
-
     @Override
     public void keyTyped(KeyEvent e) { }
 
@@ -73,6 +69,10 @@ public class ContentController extends JFrame implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
             if (this.currentContentPane != null) {
                 this.currentContentPane.escKeyPressed();
+            }
+        } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (this.currentContentPane != null) {
+                this.currentContentPane.enterKeyPressed();
             }
         } else {
             this.currentKeys.add(e.getKeyCode());
